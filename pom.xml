@@ -11,6 +11,7 @@
     <modules>
         <module>concurrent-deep</module>
         <module>omen-sample</module>
+        <module>tes-common</module>
     </modules>
 
     <properties>

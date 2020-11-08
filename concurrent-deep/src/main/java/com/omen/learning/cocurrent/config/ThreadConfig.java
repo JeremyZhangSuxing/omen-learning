@@ -1,5 +1,6 @@
-package com.omen.learning.cocurrent;
+package com.omen.learning.cocurrent.config;
 
+import com.omen.learning.cocurrent.config.support.LocalThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +24,7 @@ public class ThreadConfig {
                 20,
                 1, TimeUnit.MINUTES,
                 new SynchronousQueue<>(),
+                new LocalThreadFactory("common_invoker_thread_"),
                 new ThreadPoolExecutor.CallerRunsPolicy());
 
     }
