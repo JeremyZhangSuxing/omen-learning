@@ -12,6 +12,7 @@
         <module>concurrent-deep</module>
         <module>omen-sample</module>
         <module>tes-common</module>
+        <module>k8s-learning</module>
     </modules>
 
     <properties>

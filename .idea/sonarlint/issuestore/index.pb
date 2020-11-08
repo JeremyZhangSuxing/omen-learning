@@ -10,8 +10,6 @@ G
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 s
 Comen-sample/src/main/java/com/omen/learning/sample/Application.java,9/9/99d1ef226fcdb1024b677a76dae9f0152b6cd048
-^
-.omen-sample/src/main/resources/application.yml,2/a/2ae4e0c0209b31268a60e90206c701552b2f1330
 O
 concurrent-deep/document/thread,6/6/66b6015ed4ac05534b78cf61c9fcba7ad949d101
 B

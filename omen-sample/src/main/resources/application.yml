@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: sample-application
+  profiles:
+    active: ${profileActive} #正在运行的环境
 
-
-
+---
+#文档块二（开发环境）
+server:
+  port: 8082
+spring:
+  profiles: dev

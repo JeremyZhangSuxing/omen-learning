@@ -1,0 +1,25 @@
+k8s 集群  CRI
+
+高可用集群副本数量 >=3 的奇数
+
+master:
+  api server: 统一入口
+  schedule:负责介绍任务，为pod分配资源
+  replication-controller:维持副本的期望
+  etcd: 键值对数据库，储存k8s集群所有重要信息（持久化）
+node：
+  kubelet  直接和容器引擎交互实现交互容易生命周期管理       kubelet-proxy:负责写入规则 IPVS 实现服务映射访问
+  pod：                                               pod:
+    container                                        container
+
+插件：
+core-dns  集群中的svc传建一个域名 ip 的mapping关系
+dashboard 给k8s提供一个b/s结构访问体系
+fedetation 跨集群中心的 多k8s统一管理功能
+elk 提供k8s日志统一分析平台
+prometheus k8s集群监控
+
+
+
+
+
