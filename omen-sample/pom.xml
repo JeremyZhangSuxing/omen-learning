@@ -50,21 +50,31 @@
                         </executions>
                     </plugin>
                 </plugins>
-                <!--加载指定目录的资源文件进行占位符替换 用于多环境配置使用-->
-                <resources>
-                    <resource>
-                        <directory>${basedir}/src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>application-${profileActive}.yml</include>
-                            <include>application.yml</include>
-                            <include>*.xml</include>
-                        </includes>
-                    </resource>
-
-                </resources>
             </build>
         </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>2.3.4.RELEASE</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
 
     </profiles>
 </project>
