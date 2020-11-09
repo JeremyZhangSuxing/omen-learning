@@ -25,4 +25,5 @@ hs_err_pid*
 # Default ignored files
 .idea
 *.iml
+*.lst
 
