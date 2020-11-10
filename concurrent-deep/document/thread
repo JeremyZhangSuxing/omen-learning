@@ -14,4 +14,14 @@ static 内部类 Cell 维护一个value
 扩容条件
 具体就是当前cells的元素个数小于当前机器CPU个数并且当前多个线程访问了cells中同一个元素
 
-concurrentHashMap  底层调用native方法   执行compx chg  指令
+concurrentHashMap
+cas 操作 底层调用native方法   执行compx chg  指令
+
+threadPool
+     *  提交任务时 不推荐使用invokeAll方式 通常使用submit方式
+     *  同步队列 LinkedBlockingQueue   SynchronizedQueue 选择
+     *  cpu密集型操作和io密集型操作对coreSize设置要规范来确定发挥线程池最大性能
+     *
+     core线程获取任务的方式是take
+     普通线程回去任务的方式是poll ?
+     ArrayBlockingQueue  选取blocking 方式来获取元素，异步去消费，FIFO
