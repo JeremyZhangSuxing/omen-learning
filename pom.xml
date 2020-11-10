@@ -22,7 +22,6 @@
         <lombok.version>1.18.10</lombok.version>
         <spring-boot.version>2.2.10.RELEASE</spring-boot.version>
         <spring-cloud-version>Hoxton.SR4</spring-cloud-version>
-        <junit-test-plugin></junit-test-plugin>
     </properties>
 
     <dependencyManagement>
