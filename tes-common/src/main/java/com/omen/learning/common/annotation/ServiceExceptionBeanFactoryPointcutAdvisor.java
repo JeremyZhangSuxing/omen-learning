@@ -9,6 +9,8 @@ import org.springframework.aop.support.StaticMethodMatcherPointcut;
  * @date 2020/11/10 22:28
  **/
 public class ServiceExceptionBeanFactoryPointcutAdvisor extends AbstractBeanFactoryPointcutAdvisor {
+
+
     private StaticMethodMatcherPointcut pc;
 
     public void setPc(StaticMethodMatcherPointcut pc) {
@@ -16,7 +18,7 @@ public class ServiceExceptionBeanFactoryPointcutAdvisor extends AbstractBeanFact
     }
 
     /**
-     * Get the Pointcut that drives this advisor.
+     * @return
      */
     @Override
     public Pointcut getPointcut() {

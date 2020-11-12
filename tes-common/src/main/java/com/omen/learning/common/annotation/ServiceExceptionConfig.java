@@ -13,6 +13,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @date 2020/11/10 21:53
  **/
 @Configuration
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class ServiceExceptionConfig implements ImportAware {
     private AnnotationAttributes enableCompensate;
 
@@ -25,7 +26,7 @@ public class ServiceExceptionConfig implements ImportAware {
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    public ServiceExceptionBeanFactoryPointcutAdvisor idempotentBeanFactoryPointcutAdvisor() {
+    public ServiceExceptionBeanFactoryPointcutAdvisor serviceExceptionBeanFactoryPointcutAdvisor() {
         ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
         advisor.setPc(new ServiceExceptionPointcut());
         advisor.setOrder(enableCompensate.<Integer>getNumber("order"));

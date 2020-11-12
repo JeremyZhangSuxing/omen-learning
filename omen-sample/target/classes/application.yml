@@ -4,11 +4,9 @@ spring:
   application:
     name: sample-application
   profiles:
-    active: dev #正在运行的环境
+    active: ${profileActive} #正在运行的环境
 
----
-#文档块二（开发环境）
-server:
-  port: 8082
-spring:
-  profiles: dev
+  redis:
+    host: 122.51.171.126
+    password: ak402507979
+

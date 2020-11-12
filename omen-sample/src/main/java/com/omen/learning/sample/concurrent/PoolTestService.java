@@ -1,6 +1,7 @@
 package com.omen.learning.sample.concurrent;
 
 import com.omen.learning.common.BillDTO;
+import com.omen.learning.common.annotation.ServiceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class PoolTestService {
     private final ExecutorService commonInvokeExecutor;
 
+    @ServiceException(code = 10)
     public List<String> batchGetBillInfo(List<BillDTO> billDTOS) {
         List<Future<String>> collect = billDTOS.stream()
                 .map(v -> commonInvokeExecutor.submit(() -> convertBillInfo(v)))
