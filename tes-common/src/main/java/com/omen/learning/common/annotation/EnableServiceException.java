@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  **/
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({ServiceExceptionConfig.class,AutoProxyRegistrar.class})
+@Import({ServiceExceptionConfig.class, AutoProxyRegistrar.class})
 public @interface EnableServiceException {
     /**
      * 切面执行顺序

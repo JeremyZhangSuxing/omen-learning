@@ -26,14 +26,16 @@
             <artifactId>tes-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+<!--        <dependency>-->
+<!--            <groupId>com.weweibuy.framework</groupId>-->
+<!--            <artifactId>idempotent-redis</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.weweibuy.framework</groupId>
-            <artifactId>idempotent-redis</artifactId>
+            <groupId>com.omen</groupId>
+            <artifactId>template-email</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-
     </dependencies>
 
     <profiles>
@@ -58,6 +60,13 @@
                         </executions>
                     </plugin>
                 </plugins>
+                <!--加载指定目录的资源文件进行占位符替换 用于多环境配置使用-->
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
             </build>
         </profile>
         <profile>
@@ -83,7 +92,5 @@
 
             </build>
         </profile>
-
-
     </profiles>
 </project>

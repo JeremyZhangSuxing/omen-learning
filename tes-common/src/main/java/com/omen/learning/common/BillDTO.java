@@ -1,6 +1,5 @@
 package com.omen.learning.common;
 
-import com.omen.learning.common.annotation.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,12 +17,7 @@ public class BillDTO {
     private Long id;
 
     public static List<BillDTO> buildParam() {
-        return Arrays.asList(new BillDTO("jere1", 1L), new BillDTO("jere2", 2L));
-    }
-
-    @ServiceException(code = 10)
-    public String get() {
-        return "jeremy";
+        return Arrays.asList(new BillDTO("jere1", 1L), new BillDTO("jere2", 1L));
     }
 
 }

@@ -13,6 +13,7 @@
         <module>omen-sample</module>
         <module>tes-common</module>
         <module>k8s-learning</module>
+        <module>template-email</module>
     </modules>
 
     <properties>
@@ -54,6 +55,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M3</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.nekohtml</groupId>
+                <artifactId>nekohtml</artifactId>
+                <version>1.9.22</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

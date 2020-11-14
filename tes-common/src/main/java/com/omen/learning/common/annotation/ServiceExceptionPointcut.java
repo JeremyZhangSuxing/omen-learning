@@ -13,6 +13,10 @@ public class ServiceExceptionPointcut extends StaticMethodMatcherPointcut {
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
         ServiceException annotation = method.getAnnotation(ServiceException.class);
-        return annotation != null;
+        boolean flag = annotation != null;
+        if (flag) {
+            System.out.println(method.getName()+method);
+        }
+        return flag;
     }
 }

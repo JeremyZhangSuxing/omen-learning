@@ -1,0 +1,4 @@
+导入bean的方式
+spring.factory.xml
+@Import
+自定义 scan BeanDefinition，参照springboot启动流程
