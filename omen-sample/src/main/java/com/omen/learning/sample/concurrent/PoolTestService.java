@@ -22,7 +22,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PoolTestService {
     private final ExecutorService commonInvokeExecutor;
-
+    //xiaoposun@163.com
+    //ericssion@icloud.com
     @ServiceException(code = 10)
     public List<String> batchGetBillInfo(List<BillDTO> billDTOS) {
         List<Future<String>> collect = billDTOS.stream()

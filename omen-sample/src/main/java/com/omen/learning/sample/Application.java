@@ -1,5 +1,6 @@
 package com.omen.learning.sample;
 
+import com.omen.learning.bean.test.annotattion.EnableBeanRegistry;
 import com.omen.learning.common.annotation.EnableServiceException;
 import com.omen.learning.email.annotation.EnableEmail;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableServiceException
 @EnableEmail
+@EnableBeanRegistry
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

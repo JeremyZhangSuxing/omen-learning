@@ -1,4 +1,4 @@
-package com.omen.learning.common.annotation;
+package com.omen.learning.common.support;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -16,6 +16,7 @@ public class ServiceExceptionAspect implements MethodInterceptor {
      */
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        //在此处可进行自定义逻辑处理
         Method method = methodInvocation.getMethod();
         System.out.println(method.getName());
         Object proceed;

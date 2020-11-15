@@ -1,5 +1,6 @@
-package com.omen.learning.common.annotation;
+package com.omen.learning.common.support;
 
+import com.omen.learning.common.annotation.ServiceException;
 import org.springframework.aop.support.StaticMethodMatcherPointcut;
 
 import java.lang.reflect.Method;

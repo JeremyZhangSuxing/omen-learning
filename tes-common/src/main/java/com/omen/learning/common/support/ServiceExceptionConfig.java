@@ -1,5 +1,6 @@
-package com.omen.learning.common.annotation;
+package com.omen.learning.common.support;
 
+import com.omen.learning.common.annotation.EnableServiceException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportAware;

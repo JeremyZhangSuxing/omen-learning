@@ -2,3 +2,15 @@
 spring.factory.xml
 @Import
 自定义 scan BeanDefinition，参照springboot启动流程
+这里主要分析 spring加载流程之ClassPathBeanDefinitionScanner,scanner的bean并不会直接注册进spring容器，会交由ConfigurationClassPostProcessor进行注册处理
+此处只会得到 Set<BeanDefinition>的持有者
+ClassPathBeanDefinitionScanner：https://blog.csdn.net/yu_kang/article/details/88075447
+核心方法： 1.带有 registerDefaultFilters() 的构造方法
+          使用的是ClassPathScanningCandidateComponentProvider中的方法 是为了注册过滤器，加载基于@component五种模板bean
+         2.doScan(...) 这个function中的basePackage 必须是要有路径的，不然会失败。但是springboot启动注解上是不会显示的加上包路径，随意在此之前有一步处理。
+         参照：ComponentScanAnnotationParser#parse();
+        简单factoryBean 创建
+
+
+
+

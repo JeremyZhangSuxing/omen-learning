@@ -1,2 +1,2 @@
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-###  com.omen.learning.common.annotation.ServiceExceptionConfig
+###  com.omen.learning.common.support.ServiceExceptionConfig

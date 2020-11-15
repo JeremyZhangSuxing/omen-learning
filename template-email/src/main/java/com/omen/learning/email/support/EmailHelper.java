@@ -29,7 +29,7 @@ public class EmailHelper {
         try {
             //获取生成的模板
             Map<String, String> dataMap = new HashMap<>();
-            dataMap.put("title", "用户名激活");
+            dataMap.put("title", "您好！这是一封来自jeremy的测试邮件！之后，您会不定=定收到类似的邮件，可选择取消订阅！感谢您的支持！");
             dataMap.put("url", "233");
             Context context = new Context();
             context.setVariables(Collections.unmodifiableMap(dataMap));

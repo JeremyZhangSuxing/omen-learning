@@ -1,5 +1,6 @@
 package com.omen.learning.common.annotation;
 
+import com.omen.learning.common.support.ServiceExceptionConfig;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.AutoProxyRegistrar;
 import org.springframework.context.annotation.Import;
@@ -20,8 +21,7 @@ import java.lang.annotation.Target;
 public @interface EnableServiceException {
     /**
      * 切面执行顺序
-     *
-     * @return
+     * 注解式切面
      */
     int order() default Ordered.LOWEST_PRECEDENCE;
 

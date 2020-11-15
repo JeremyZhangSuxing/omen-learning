@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/bean-test/bean-test.iml" filepath="$PROJECT_DIR$/bean-test/bean-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/concurrent-deep/concurrent-deep.iml" filepath="$PROJECT_DIR$/concurrent-deep/concurrent-deep.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idempotence/idempotence.iml" filepath="$PROJECT_DIR$/idempotence/idempotence.iml" />
       <module fileurl="file://$PROJECT_DIR$/k8s-learning/k8s-learning.iml" filepath="$PROJECT_DIR$/k8s-learning/k8s-learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/omen-learning.iml" filepath="$PROJECT_DIR$/.idea/omen-learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/omen-sample/omen-sample.iml" filepath="$PROJECT_DIR$/omen-sample/omen-sample.iml" />

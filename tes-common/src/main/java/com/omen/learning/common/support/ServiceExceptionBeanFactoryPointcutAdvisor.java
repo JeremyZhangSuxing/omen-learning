@@ -1,4 +1,4 @@
-package com.omen.learning.common.annotation;
+package com.omen.learning.common.support;
 
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor;

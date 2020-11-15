@@ -26,14 +26,19 @@
             <artifactId>tes-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.weweibuy.framework</groupId>-->
-<!--            <artifactId>idempotent-redis</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.weweibuy.framework</groupId>-->
+        <!--            <artifactId>idempotent-redis</artifactId>-->
+        <!--            <version>1.0-SNAPSHOT</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.omen</groupId>
             <artifactId>template-email</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.omen</groupId>
+            <artifactId>bean-test</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -44,7 +49,9 @@
             <properties>
                 <profileActive>rel</profileActive>
             </properties>
-            <activation><activeByDefault>true</activeByDefault></activation>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
