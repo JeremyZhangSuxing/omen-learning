@@ -9,7 +9,8 @@ ClassPathBeanDefinitionScanner：https://blog.csdn.net/yu_kang/article/details/8
           使用的是ClassPathScanningCandidateComponentProvider中的方法 是为了注册过滤器，加载基于@component五种模板bean
          2.doScan(...) 这个function中的basePackage 必须是要有路径的，不然会失败。但是springboot启动注解上是不会显示的加上包路径，随意在此之前有一步处理。
          参照：ComponentScanAnnotationParser#parse();
-        简单factoryBean 创建
+         简单factoryBean 创建流程
+         会在注入容器的时候，回调getObject方法，将代理bean注入到spring容器中去。
 
 
 
