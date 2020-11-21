@@ -4,7 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>userInfo</title>
 </head>
+<style type="text/css">
+    body{
+        font-family: "FZShuTi";
+    }
+
+
+</style>
+
 <body>
-title: <span th:text="${title}"></span>
+title: <span th:text="${titlle}"></span><br/>
+content <h1 th:text="${msg}" ></h1>
+<p>
+    <a th:href="@{http://www.baidu.com}" class="button">this is a button?</a>
+</p>
 </body>
 </html>
