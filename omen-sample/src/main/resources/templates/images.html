@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>会员资格证书</title>
+    <style>
+        @page {
+            size: 10.42in 7.42in;
+            margin: 0;
+            content: counter(page);
+            width: 100%;
+            height: 100%;
+        } /*不能随意修改这里 hongwei.lian*/
+
+        * {
+            margin:0;
+            padding:0;
+        }
+
+        html, body {
+            font-family:'SimSun';
+            font-size:14pt;
+            width: 100%;
+            height: 100%;
+            /*background:url(/data/App/ptoms.cfaoe.local/logo-bg.jpg);*/
+        }/*宋五*/
+
+        .vip {
+            position: relative;
+            margin: 0 auto;
+            width: 1000px;
+            height: 711px;
+            /* font-family: '宋体'; */
+            background: url(/data/App/ptoms.cfaoe.local/vip_bg.jpg) center center no-repeat;
+        }
+
+        div.vip-item {
+            position: absolute;
+            height: 30px;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .companyname {
+            padding: 0 4px;
+            top: 319px;
+            left: 365px;
+            width: 487px;
+            background: url(/data/App/ptoms.cfaoe.local/vip_input-bg1.jpg);
+        }
+
+        .vipnumber {
+            padding: 0 4px;
+            top: 450px;
+            left: 221px;
+            width: 277px;
+            background: url(/data/App/ptoms.cfaoe.local/vip_input-bg2.jpg);
+        }
+
+        .date {
+            padding: 0 4px;
+            top: 450px;
+            left: 608px;
+            width: 195px;
+            background: url(/data/App/ptoms.cfaoe.local/vip_input-bg3.jpg);
+        }
+    </style>
+</head>
+<body>
+<div class="vip">
+    <div class="vip-item companyname">
+        ${member.companyName}
+    </div>
+    <div class="vip-item vipnumber">
+        ${member.UserCode}
+    </div>
+    <div class="vip-item date">
+        ${today}
+    </div>
+</div>
+</body>
+</html>

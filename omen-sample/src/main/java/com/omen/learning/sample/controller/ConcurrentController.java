@@ -4,10 +4,9 @@ import com.omen.learning.common.BillDTO;
 import com.omen.learning.email.support.EmailHelper;
 import com.omen.learning.sample.concurrent.PoolTestService;
 import com.omen.learning.sample.scan.ScanService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,14 +30,20 @@ public class ConcurrentController {
     /**
      * 踩坑记录：热部署时静态文件没有更新，本地demo变更了配置一定要clear资源文件
      */
-    @GetMapping("email")
-    public String emailSend() {
-        emailHelper.sendHtml("2");
+    @PostMapping("email")
+    public String emailSend(@RequestBody Reque reque) {
+        emailHelper.sendHtml(reque.getSubject(), reque.getUrl());
         return "success";
     }
 
     @GetMapping("/scan")
-    public String scan(){
+    public String scan() {
         return scanService.test();
+    }
+
+    @Data
+    private static class Reque {
+        private String subject;
+        private String url;
     }
 }
