@@ -2,7 +2,6 @@ package com.omen.learning.email.support;
 
 import com.omen.learning.common.utils.PdfUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
@@ -16,12 +15,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author : Knight
@@ -35,11 +29,14 @@ public class EmailHelper {
     @Value("${spring.mail.username}")
     private String username;
     private static final String path = "/Users/suxingzhang/Desktop/pdf/001.pdf";
+    /**
+     * icon图标直接使用base64缓存在前端即可
+     * 大图片直接从url读取
+     */
     private static final String imgUrl = "/Users/suxingzhang/Desktop/images/img_1.png";
-    @Autowired
-    private PdfUtil pdfUtil;
 
-    public void sendHtml(String subject, String url) {
+
+    public void sendHtml(String subject) {
         try {
             //获取生成的模板
             Map<String, Object> dataMap = new HashMap<>();

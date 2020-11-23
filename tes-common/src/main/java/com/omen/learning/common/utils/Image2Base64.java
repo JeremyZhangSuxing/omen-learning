@@ -1,20 +1,19 @@
 package com.omen.learning.common.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FilenameUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 
 /**
  * @author zhang.suxing
  * @date 2020/11/22 17:40
  **/
+@Slf4j
 public class Image2Base64 {
 
     /***
@@ -49,34 +48,27 @@ public class Image2Base64 {
         return Base64.encodeBase64String(data.toByteArray());
     }
 
-
     /**
-     * 本地图片转换Base64的方法
-     *
-     * @param imgPath
+     * 本地图片转换Base64的方法  png格式
      */
-
-    private static void ImageToBase64(String imgPath) {
-        byte[] data = null;
+    private static String image2Base64Code(String imgPath) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        byte[] data;
         // 读取图片字节数组
-        try {
-            InputStream in = new FileInputStream(imgPath);
-            data = new byte[in.available()];
-            in.read(data);
-            in.close();
+        File file = new File(imgPath);
+        String extension = FilenameUtils.getExtension(file.getName());
+        try (InputStream in = new FileInputStream(imgPath)) {
+            data = new byte[1024];
+            int len;
+            while ((len = in.read(data)) != -1) {
+                stringBuilder.append(new String(data, 0, len));
+            }
+            return "data:image/" + extension + ";base64," + Base64.encodeBase64String(stringBuilder.toString().getBytes());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("图片转化未base64异常 ", e);
+            // 返回Base64编码过的字节数组字符串
+            return "";
         }
-        // 对字节数组Base64编码
-
-        // 返回Base64编码过的字节数组字符串
-        System.out.println("本地图片转换Base64:" + "data:image/png;base64," + Base64.encodeBase64String(Objects.requireNonNull(data)));
-    }
-
-    public static void main(String[] args) throws Exception {
-        String str = getImgStr("http://chuantu.xyz/t6/741/1605957578x1700340463.png");
-
-        ImageToBase64("D:/pdf/img_1.png");
     }
 
 }

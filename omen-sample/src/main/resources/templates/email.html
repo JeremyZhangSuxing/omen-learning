@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>userInfo</title>
 
     <style>
         @page {
-            /*size: 10.42in 7.42in;*/
+            size: 10.42in 7.42in;
             margin: 0;
-            /*content: counter(page);*/
+            content: counter(page);
             width: 100%;
             height: 100%;
         }
@@ -21,244 +21,41 @@
         }
 
         html, body {
-            font-family: "SimSun", serif;
+            font-family: 'SimSun', serif;
             font-size: 14pt;
             width: 100%;
             height: 100%;
             /*background:url(/data/App/ptoms.cfaoe.local/logo-bg.jpg);*/
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /*宋五*/
 
-        .layout {
-            display: flex;
-            justify-content: flex-start;
-            align-items: stretch;
+        .vip {
+            position: relative;
+            margin: 0 auto;
+            width: 1000px;
+            height: 711px;
+            /* font-family: '宋体'; */
+            background: url(http://chuantu.xyz/t6/741/1605957578x1700340463.png) center center no-repeat;
         }
-
-        .layout--center-items {
-            align-items: center;
-        }
-
-        .layout--center-justify {
-            justify-content: center;
-        }
-
-        .layout__flex {
-            flex: 1 1 0%;
-            min-width: 0px;
-            min-height: 0px;
-        }
-
-        .drivider {
-            height: 1px;
-            background-color: rgb(232, 232, 232);
-            margin: 16px 0;
-        }
-
-        .h2 {
-            color: rgb(43, 43, 51);
-            font-size: 32px;
-            font-weight: 600;
-        }
-
-        .h3 {
-            color: rgb(43, 43, 51);
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .h4 {
-            color: rgba(0, 0, 0, 0.85);
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .h5 {
-            color: rgba(0, 0, 0, 0.85);
-            font-size: 14px;
-            font-weight: normal;
-        }
-
-        .h6 {
-            color: rgba(0, 0, 0, 0.65);
-            font-size: 14px;
-            font-weight: normal;
-        }
-
-        .h8 {
-            margin: 10px 0px 0px 0px
-        }
-
-        .btn {
-            outline: 0;
-            color: #fff;
-            background: rgb(24, 144, 255);
-            border-color: rgb(24, 144, 255);
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, .12);
-            box-shadow: 0 2px 0 rgba(0, 0, 0, .045);
-            cursor: pointer;
-            height: 32px;
-            padding: 4px 15px;
-            font-size: 14px;
-            border-radius: 2px;
-            border: 1px solid rgb(24, 144, 255);
-        }
-
-        .main {
-            color: rgba(0, 0, 0, 0.85);
-            font-size: 14px;
-            line-height: 2.0;
-            min-width: 600px;
-            overflow: auto;
-        }
-
-        .header {
-            text-align: center;
-            height: 100px;
-            line-height: 100px;
-            border-bottom: 1px solid rgb(232, 232, 232);
-        }
-
-        .body {
-            padding: 24px;
-        }
-
-        .body__title {
-            margin-bottom: 16px;
-        }
-
-        .body__main {
-            background-color: #fafafa;
-            padding: 24px;
-        }
-
-        .body__content {
-            line-height: 2.3;
-        }
-
-        .item-icon {
-            background: rgb(255, 255, 255);
-            border-radius: 10px;
-            border: 1px solid rgb(232, 232, 232);
-            height: 64px;
-            width: 64px;
-            margin-right: 16px;
-        }
-
-        .item-icon > img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .footer {
-            text-align: center;
-        }
-
-        .footer > span {
-            margin-bottom: 16px;
-        }
-
     </style>
 </head>
-
 <body>
-<div class="main">
-    <div class="header">
-        <h3 class="h2">wework</h3>
-    </div>
-    <div class="body">
-        <div class="body__title">
-            <h3 class="h3">请确认您的订单</h3>
-            <span class="h8">您在 2020 年 09 月 23 日提交了订单：</span>
-        </div>
 
-        <div class="body__main">
-            <div class="body__block">
-                <h5 class="h4">订单信息</h5>
-                <div class="body__content">
-                    <div class="layout layout--center-items">
-                        <span class="h5">公司名称：</span>
-                        <span class="h6">乐融全景文化传媒（北京）有限公司</span>
-                    </div>
+<div class="vip">
 
-                    <div class="layout layout--center-items">
-                        <span class="h5">主会员名：</span>
-                        <span class="h6">陈丹青</span>
-                    </div>
+    我我我我: <span th:text="${titlle}"></span><br/>
+    content <h1 th:text="${msg}"></h1>
+    <p>
+        <a th:href="@{http://www.baidu.com}" class="button">确认</a>
+    </p>
+    <!--<img src=" http://chuantu.xyz/t6/741/1605957578x1700340463.png"/>-->
+    <!--<img th:src="|cid:img_1|"/>-->
+    <img style=" position: relative;margin: 0 auto; width: 1000px; height: 711px;" src="cid:img_1"/>
 
-                    <div class="layout layout--center-items">
-                        <span class="h5">联系方式：</span>
-                        <span class="h5">+86 15037258769</span>
-                    </div>
-
-                    <div class="layout layout--center-items">
-                        <span class="h5">楼宇：</span>
-                        <span class="h6">SHA-12 中海国际中心</span>
-                    </div>
-
-                    <div class="layout layout--center-items">
-                        <span class="h5">办公室：</span>
-                        <span class="h6">Office LD220</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="drivider"></div>
-
-            <div class="body__block">
-                <h5 class="h4">商品信息</h5>
-                <div class="body__content layout">
-                    <div class="item-icon layout layout--center-items layout--center-justify">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADyklEQVR4Ae2aK48UQRDH7+B4CF6OHAYBF/AYHIoEiwCNwyL4Cii+BwkgkCQEi0CAQRFICCeQhEe45AgXqFp2JzW/6Z7pmp3n7lTSt93V9fjXf7p67rW50Y8ck7SXZJybp/8in+9l7M/XK/txVSp7IuOnjL8YqtM9tVk5OSEVPZLBomNrtVWflZBtqeKdjFixMb36qO+o5bigfy0jVORn0T+fD52HbNRXY4xWHghyFvZJdNcDFalO92ivMUYpenz3ZNiCXsi6rLd1T22szy9Zj7IV7qGQr4mFaLFqa0nQWKOTl4K4bhEkT2ONTnYFsSXggqMCtbW+ekmOTn4LYlvEEUcFamt9NVYrstlK1P9BtQAr3lzL+tvc0fmh6M6abEwErMmDjpa59idgK0pNfOO8bF2RcThuEty5FdSmK6v8DyTUGxmtvjKvSYJ9GXpDD3EoNsWYLN4WuCuRjyZH795QsSnGZPEScDk5cn+GLozeb05+SF0nTW3PZP7HrO2UPfvUbibMU/31Hrtp4umv1k6ZdWPTsxLJ9r2SUSbWVude8fgrFmuvWJPE0wI7iPgR6z6XxEKsUWweAi4iyges+1wSC7FGsXkIIKtMGk3SwQaxEGsUwjIE8NhFk3SwQSytEMBjRdY7qDOagliINero2fDetPZWbvst4H1Deeqe2dZJ0CUBCtL7gGaFpd4B7Cn23CwYvugPJwux84Wu6tP62HnMj5iIOeiXSgB7ij0XCv7KKO3cqEun1sfOY07ERMxBv62gtqjcgYrJsD1b3pav9+cbD0MGFTqvf60TUIEh29Y/W9uevpPtDGeimCzGxynQ2myBlPxN2vBU8tQulavWDbtURr9znTdVUpbWAidl9xm5H1RKC/Ao8bLxQWzXmtiIvZA9hQC+TthrhaA9KoiN2AvQUgggi2S5ELRHBbERewFaCgFkkSwXgvaoIDZiL0BLIYAsMkkhaI8KYiP2WtDcN2utLM04Nf7GajxgM3WWRnE9sKoW4BHiJVOKpKdNYmQNOVhVBPASYY/lgg1kQYysIQezigCyR3ZzwQayIEbWkINZRQDZI7u5YANZECNryMGsIoDsMXgu2EAWrhNQhdl1o1YF62i/sTdXY4E6KtymSX5wZS3A48+jZRMObU6srCXDW0YAL48x9P+iMGJlLQu7jTICyBpZzYIMcEKsrCWDXEYAWSOrWZABToiVtSRBfitW9resY55rLUEp+xeZb+JxOug1PuV3gXwmBLusBdRpVUQfpltuiMeujDEffcWuNWgtk0wMTAxMDEwMTAyAgX8VfqetRGrUHQAAAABJRU5ErkJggg=="
-                             alt=""/>
-                    </div>
-                    <div>
-                        <span class="h6">IT机房额外供电– 120v 20A</span>
-                        <span class="h6">周期性 | 2020年11月22日 - 2020年12月24日</span>
-                        <div class="layout layout--center-items">
-                            <span class="h5">数量：</span>
-                            <span class="h6">29</span>
-                        </div>
-                        <div class="layout layout--center-items">
-                            <span class="h5">原单价（含税）：</span>
-                            <span class="h6">CNY 345.55</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="drivider"></div>
-
-            <div class="body__content">
-                <div class="layout layout--center-items h6">
-                    <span class="h5">原价（不含税）</span>
-<!--                    <div class="layout__flex"></div>-->
-                    <span>CNY 4,434.00</span>
-                </div>
-                <div class="layout layout--center-items h6">
-                    <span class="h5">税率（6%）</span>
-<!--                    <div class="layout__flex"></div>-->
-                    <span>CNY 4,434.00</span>
-                </div>
-                <div class="layout layout--center-items h4">
-                    <span>总金额</span>
-<!--                    <div class="layout__flex"></div>-->
-                    <span>CNY 4,434.00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>请确认以上订单信息正确无误，点击确认代表您认可下单</p>
-        <button class="btn" onclick="confirmOrder()">下单</button>
-    </div>
+    <!--<img src="sample.png" th:src="|cid:${imageResourceName}|" />-->
+    <!--<img src="F:/0404workspace/omen-learning\omen-sample/src/main/resources/images/images/img_1.png" alt="上海鲜花港 - 郁金香"/>-->
+    <!--<img src="http://chuantu.xyz/t6/741/1605957578x1700340463.png" />-->
 </div>
 </body>
 </html>
-
