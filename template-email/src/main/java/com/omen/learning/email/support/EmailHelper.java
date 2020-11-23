@@ -2,9 +2,9 @@ package com.omen.learning.email.support;
 
 import com.omen.learning.common.utils.PdfUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,7 +16,12 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author : Knight
@@ -29,6 +34,10 @@ public class EmailHelper {
     private final JavaMailSender javaMailSender;
     @Value("${spring.mail.username}")
     private String username;
+    private static final String path = "/Users/suxingzhang/Desktop/pdf/001.pdf";
+    private static final String imgUrl = "/Users/suxingzhang/Desktop/images/img_1.png";
+    @Autowired
+    private PdfUtil pdfUtil;
 
     public void sendHtml(String subject, String url) {
         try {
@@ -40,8 +49,8 @@ public class EmailHelper {
             Context context = new Context();
             context.setVariables(Collections.unmodifiableMap(dataMap));
             String emailText = templateEngine.process("email", context);
-            FileOutputStream fileOutputStream = new FileOutputStream("D:/pdf/orderItemUuid113.pdf");
-            PdfUtil.createPDF(fileOutputStream, emailText, url);
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
+            PdfUtil.convertHtml(fileOutputStream, emailText);
             //消息处理助手对象
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -49,13 +58,12 @@ public class EmailHelper {
             //设置发件人
             helper.setFrom(username);
             //设置收件人
-            helper.setTo("1264677205@qq.com");
+            helper.setTo("chang.zhang4@wework.com");
             //设置邮件标题
             helper.setSubject("主题：用户名激活");
             //设置邮件内容 ，true 表示发送html 格式
             helper.setText(emailText, true);
-            FileSystemResource resource = new FileSystemResource(new File("F:/0404workspace/omen-learning/omen-sample/src/main/resources/images/img_1.png"));
-            helper.addInline("img_1", resource);
+            helper.addAttachment("001.pdf", new File(path));
             javaMailSender.send(message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +71,7 @@ public class EmailHelper {
     }
 
     /**
-     * images resource 存放于message 中不通用
+     * images resource 存放于message
      */
     public void sendMailWithInline(final String recipientName, final String recipientEmail, final String imageResourceName,
                                    final byte[] imageBytes, final String imageContentType, final Locale locale)

@@ -4,7 +4,7 @@ spring:
   application:
     name: sample-application
   profiles:
-    active: ${profileActive} #正在运行的环境
+    active: rel #正在运行的环境
 
   redis:
     host: 122.51.171.126

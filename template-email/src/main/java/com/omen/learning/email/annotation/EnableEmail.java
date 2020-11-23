@@ -1,5 +1,7 @@
 package com.omen.learning.email.annotation;
 
+import com.omen.learning.common.utils.GeneratePdf;
+import com.omen.learning.common.utils.PdfUtil;
 import com.omen.learning.email.support.EmailHelper;
 import org.springframework.context.annotation.Import;
 
@@ -14,7 +16,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(EmailHelper.class)
+@Import({EmailHelper.class, GeneratePdf.class, PdfUtil.class})
 public @interface EnableEmail {
 
 }

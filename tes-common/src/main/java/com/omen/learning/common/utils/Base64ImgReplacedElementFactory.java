@@ -4,6 +4,8 @@ package com.omen.learning.common.utils;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.codec.Base64;
+import lombok.Getter;
+import lombok.Setter;
 import org.w3c.dom.Element;
 import org.xhtmlrenderer.extend.FSImage;
 import org.xhtmlrenderer.extend.ReplacedElement;
@@ -21,11 +23,15 @@ import java.io.IOException;
  * @author zhang.suxing
  * @date 2020/11/21 21:04
  **/
+@Getter
+@Setter
 public class Base64ImgReplacedElementFactory implements ReplacedElementFactory {
-
+    /**
+     * base64转码
+     */
     private String url;
 
-    Base64ImgReplacedElementFactory(String url) {
+    public Base64ImgReplacedElementFactory(String url) {
         this.url = url;
     }
 
@@ -40,15 +46,12 @@ public class Base64ImgReplacedElementFactory implements ReplacedElementFactory {
      * @return ReplacedElement
      */
     @Override
-    public ReplacedElement createReplacedElement(LayoutContext c, BlockBox box, UserAgentCallback uac,
-                                                 int cssWidth, int cssHeight) {
+    public ReplacedElement createReplacedElement(LayoutContext c, BlockBox box, UserAgentCallback uac, int cssWidth, int cssHeight) {
         Element e = box.getElement();
         if (e == null) {
             return null;
         }
         String nodeName = e.getNodeName();
-        String baseURL = uac.getBaseURL();
-        System.err.println(baseURL);
         // 找到img标签
         if (nodeName.equals("img")) {
             String attribute = e.getAttribute("src");
@@ -79,14 +82,10 @@ public class Base64ImgReplacedElementFactory implements ReplacedElementFactory {
     protected FSImage buildImage(String srcAttr, UserAgentCallback uac) throws IOException,
             BadElementException {
         FSImage fiImg;
-        srcAttr = this.url;
         if (srcAttr.toLowerCase().startsWith("data:image/")) {
-            String base64Code = srcAttr.substring(srcAttr.indexOf("base64,") + "base64,".length(),
-                    srcAttr.length());
+            String base64Code = srcAttr.substring(srcAttr.indexOf("base64,") + "base64,".length());
             // 解码
             byte[] decodedBytes = Base64.decode(base64Code);
-
-
             fiImg = new ITextFSImage(Image.getInstance(decodedBytes));
         } else {
             fiImg = uac.getImageResource(srcAttr).getImage();

@@ -21,7 +21,7 @@ public class Image2Base64 {
      *
      * 将图片转换为Base64<br>
      * 将base64编码字符串解码成img图片
-     * @param imgFile
+     * @param imgFile imgUrl
      * @return
      */
     public static String getImgStr(String imgFile) {
@@ -75,6 +75,7 @@ public class Image2Base64 {
 
     public static void main(String[] args) throws Exception {
         String str = getImgStr("http://chuantu.xyz/t6/741/1605957578x1700340463.png");
+
         ImageToBase64("D:/pdf/img_1.png");
     }
 
