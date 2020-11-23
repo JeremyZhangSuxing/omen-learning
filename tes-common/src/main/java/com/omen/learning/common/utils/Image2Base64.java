@@ -21,7 +21,6 @@ public class Image2Base64 {
      * 将图片转换为Base64<br>
      * 将base64编码字符串解码成img图片
      * @param imgFile imgUrl
-     * @return
      */
     public static String getImgStr(String imgFile) {
         ByteArrayOutputStream data = new ByteArrayOutputStream();
@@ -36,7 +35,7 @@ public class Image2Base64 {
             conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
             InputStream is = conn.getInputStream();
             // 将内容放到内存中
-            int len = -1;
+            int len;
             while ((len = is.read(by)) != -1) {
                 data.write(by, 0, len);
             }
