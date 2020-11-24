@@ -35,7 +35,6 @@ public class EmailHelper {
      */
     private static final String imgUrl = "/Users/suxingzhang/Desktop/images/img_1.png";
 
-
     public void sendHtml(String subject) {
         try {
             //获取生成的模板
@@ -45,7 +44,7 @@ public class EmailHelper {
             dataMap.put("orderId", "123");
             Context context = new Context();
             context.setVariables(Collections.unmodifiableMap(dataMap));
-            String emailText = templateEngine.process("email", context);
+            String emailText = templateEngine.process("orderSuer", context);
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             PdfUtil.convertHtml(fileOutputStream, emailText);
             //消息处理助手对象
@@ -54,7 +53,7 @@ public class EmailHelper {
             helper.setSubject(subject);
             //设置发件人
             helper.setFrom(username);
-            //设置收件人
+            //设置收件人  chang.zhang4@wework.com
             helper.setTo("chang.zhang4@wework.com");
             //设置邮件标题
             helper.setSubject("主题：用户名激活");
