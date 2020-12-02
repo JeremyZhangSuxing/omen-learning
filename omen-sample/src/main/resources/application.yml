@@ -27,3 +27,5 @@ spring:
     servlet:
       content-type: text/html
     mode: LEGACYHTML5
+test:
+  mock: jere,tom

@@ -5,7 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -56,6 +60,8 @@ public class Image2Base64 {
         // 读取图片字节数组
         File file = new File(imgPath);
         String extension = FilenameUtils.getExtension(file.getName());
+        String baseName = FilenameUtils.getBaseName(imgPath);
+        System.out.println(extension + baseName);
         try (InputStream in = new FileInputStream(imgPath)) {
             data = new byte[1024];
             int len;
@@ -70,4 +76,7 @@ public class Image2Base64 {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        image2Base64Code("/Users/suxingzhang/image/WechatIMG8.jpeg");
+    }
 }

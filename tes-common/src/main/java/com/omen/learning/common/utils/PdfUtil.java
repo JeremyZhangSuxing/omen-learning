@@ -14,8 +14,7 @@ import java.io.IOException;
  * @date : 2020/11/19 11:19 下午
  */
 public class PdfUtil {
-    private static final String FONT_PATH = "/Users/suxingzhang/Desktop/font/simsun.ttc";
-
+    private static final String FONT_PATH = "font/simsun.ttc";
 
     /**
      * html转化为pdf文件

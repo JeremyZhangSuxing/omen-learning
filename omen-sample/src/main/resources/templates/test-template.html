@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>userInfo</title>
+
+    <style>
+        /* size 可以指定邮件生成pdf每页对的大小
+           可以设定div的大小将一个div的内容固定在一个pdf页面上
+        */
+        @page  {
+            size: A4;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /*不能随意修改这里 hongwei.lian*/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            font-family: "SimSun", serif;
+            font-size: 14pt;
+            width: 100%;
+            height: 100%;
+            /*background:url(/data/App/ptoms.cfaoe.local/logo-bg.jpg);*/
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .layout {
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+        .layout--center-items {
+            align-items: center;
+        }
+
+        .layout--center-justify {
+            justify-content: center;
+        }
+
+        .layout__flex {
+            flex: 1 1 0%;
+            min-width: 0px;
+            min-height: 0px;
+        }
+
+        .drivider {
+            height: 1px;
+            background-color: rgb(232, 232, 232);
+            margin: 16px 0;
+        }
+
+        .h2 {
+            color: rgb(43, 43, 51);
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .h3 {
+            color: rgb(43, 43, 51);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .h4 {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .h5 {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .h6 {
+            color: rgba(0, 0, 0, 0.65);
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .h8 {
+            margin: 10px 0px 0px 0px
+        }
+
+        .main {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            line-height: 2.0;
+            min-width: 600px;
+            height: 1120px;
+            overflow: auto;
+        }
+
+        .header {
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            border-bottom: 1px solid rgb(232, 232, 232);
+        }
+
+        .body {
+            padding: 24px;
+        }
+
+        .body__title {
+            margin-bottom: 16px;
+        }
+
+        .body__main {
+            background-color: #fafafa;
+            padding: 24px;
+        }
+
+        .body__content {
+            line-height: 2.3;
+        }
+
+        .item-icon {
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            border: 1px solid rgb(232, 232, 232);
+            height: 64px;
+            width: 64px;
+            margin-right: 16px;
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        .footer > span {
+            margin-bottom: 16px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <h3 class="h2">WeWork</h3>
+    </div>
+    <div class="body">
+        <div class="body__title">
+            <h3 class="h3">Order Confirmation</h3>
+            <span th:class="h8">Your order was confirmed on</span>
+            <span class="h8" th:text="${extend}"></span>
+        </div>
+
+        <div class="body__main">
+            <div class="body__block">
+                <h5 class="h4">Order information:</h5>
+                <div class="body__content">
+                    <div class="layout layout--center-items">
+                        <span class="h5">Order No：</span>
+                        <span class="h6" th:text="${orderItemNo}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Company Name：</span>
+                        <span class="h6" th:text="${companyName}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Primary Member Name：</span>
+                        <span class="h6" th:text="${mainMemberName}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Primary Member Email：</span>
+                        <span class="h5" th:text="${mainMemberEmail}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Primary Member Phone：</span>
+                        <span class="h5" th:text="${mainMemberPhone}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Location Name：</span>
+                        <span class="h6" th:text="locationInfo"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">Office/Desk：</span>
+                        <span class="h6" th:text="${targetSkuName}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drivider"></div>
+
+            <div class="body__block">
+                <h5 class="h4">Item information</h5>
+                <div class="body__content layout">
+                    <div class="item-icon">
+                        <img style="width: 32px; height: 32px; margin: 16px;"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADyklEQVR4Ae2aK48UQRDH7+B4CF6OHAYBF/AYHIoEiwCNwyL4Cii+BwkgkCQEi0CAQRFICCeQhEe45AgXqFp2JzW/6Z7pmp3n7lTSt93V9fjXf7p67rW50Y8ck7SXZJybp/8in+9l7M/XK/txVSp7IuOnjL8YqtM9tVk5OSEVPZLBomNrtVWflZBtqeKdjFixMb36qO+o5bigfy0jVORn0T+fD52HbNRXY4xWHghyFvZJdNcDFalO92ivMUYpenz3ZNiCXsi6rLd1T22szy9Zj7IV7qGQr4mFaLFqa0nQWKOTl4K4bhEkT2ONTnYFsSXggqMCtbW+ekmOTn4LYlvEEUcFamt9NVYrstlK1P9BtQAr3lzL+tvc0fmh6M6abEwErMmDjpa59idgK0pNfOO8bF2RcThuEty5FdSmK6v8DyTUGxmtvjKvSYJ9GXpDD3EoNsWYLN4WuCuRjyZH795QsSnGZPEScDk5cn+GLozeb05+SF0nTW3PZP7HrO2UPfvUbibMU/31Hrtp4umv1k6ZdWPTsxLJ9r2SUSbWVude8fgrFmuvWJPE0wI7iPgR6z6XxEKsUWweAi4iyges+1wSC7FGsXkIIKtMGk3SwQaxEGsUwjIE8NhFk3SwQSytEMBjRdY7qDOagliINero2fDetPZWbvst4H1Deeqe2dZJ0CUBCtL7gGaFpd4B7Cn23CwYvugPJwux84Wu6tP62HnMj5iIOeiXSgB7ij0XCv7KKO3cqEun1sfOY07ERMxBv62gtqjcgYrJsD1b3pav9+cbD0MGFTqvf60TUIEh29Y/W9uevpPtDGeimCzGxynQ2myBlPxN2vBU8tQulavWDbtURr9znTdVUpbWAidl9xm5H1RKC/Ao8bLxQWzXmtiIvZA9hQC+TthrhaA9KoiN2AvQUgggi2S5ELRHBbERewFaCgFkkSwXgvaoIDZiL0BLIYAsMkkhaI8KYiP2WtDcN2utLM04Nf7GajxgM3WWRnE9sKoW4BHiJVOKpKdNYmQNOVhVBPASYY/lgg1kQYysIQezigCyR3ZzwQayIEbWkINZRQDZI7u5YANZECNryMGsIoDsMXgu2EAWrhNQhdl1o1YF62i/sTdXY4E6KtymSX5wZS3A48+jZRMObU6srCXDW0YAL48x9P+iMGJlLQu7jTICyBpZzYIMcEKsrCWDXEYAWSOrWZABToiVtSRBfitW9resY55rLUEp+xeZb+JxOug1PuV3gXwmBLusBdRpVUQfpltuiMeujDEffcWuNWgtk0wMTAxMDEwMTAyAgX8VfqetRGrUHQAAAABJRU5ErkJggg=="
+                             alt=""/>
+                    </div>
+                    <div>
+                        <span class="h6" th:text="${skuName}"></span>
+                        <span th:class="h6" th:text="${period}"> | </span>
+                        <span th:class="h6" th:text="${periodRegix}"></span>
+                        <div class="layout layout--center-items">
+                            <span class="h5">Quantity：</span>
+                            <span class="h6" th:text="${quantity}"></span>
+                        </div>
+                        <div class="layout layout--center-items">
+                            <span class="h5">Unit Price：</span>
+                            <span class="h6" th:text="originalSingleAmount"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drivider"></div>
+
+            <div th:class="body__content">
+                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                    <span class="h5" style="position: absolute; left: 0px;">原价（不含税）</span>
+                    <span style="position: absolute; right: 0px;" th:text="${originalAmount}"> </span>
+                </div>
+                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                    <span class="h5" style="position: absolute; left: 0px;">税率
+                        <span th:text="${taxRate}"></span>
+                    </span>
+                    <span style="position: absolute; right: 0px;" th:text="${totalTax}"></span>
+                </div>
+                <div class="h4" style="position: relative; height: 30px; line-height: 30px;">
+                    <span style="position: absolute; left: 0px;">总金额</span>
+                    <span style="position: absolute; right: 0px;" th:text="${totalAmount}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="header">
+        <h3 class="h2">WeWork</h3>
+    </div>
+    <div class="body">
+        <div class="body__title">
+            <h3 class="h3">您的訂單已確認</h3>
+            <span class="h8">您的訂單已在 </span>
+            <span class="h8" th:text="${year}"></span>
+            <span class="h8"> 年 </span>
+            <span class="h8" th:text="${month}"></span>
+            <span class="h8"> 月 </span>
+            <span class="h8" th:text="${day}"></span>
+            <span class="h8"> 日 確認</span>
+        </div>
+        <div class="body__main">
+            <div class="body__block">
+                <h5 class="h4">訂單信息</h5>
+                <div class="body__content">
+                    <div class="layout layout--center-items">
+                        <span class="h5">訂單編號：</span>
+                        <span class="h6" th:text="${orderItemNo}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">公司名稱：</span>
+                        <span class="h6" th:text="${companyName}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">主會員姓名：</span>
+                        <span class="h6" th:text="${mainMemberName}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">主會員郵箱：</span>
+                        <span class="h5" th:text="${mainMemberEmail}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">主會員電話：</span>
+                        <span class="h5" th:text="${mainMemberPhone}"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">樓宇信息：</span>
+                        <span class="h6" th:text="locationInfo"></span>
+                    </div>
+
+                    <div class="layout layout--center-items">
+                        <span class="h5">辦公室/工位：</span>
+                        <span class="h6" th:text="${targetSkuName}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drivider"></div>
+
+            <div class="body__block">
+                <h5 class="h4">商品信息</h5>
+                <div class="body__content layout">
+                    <div class="item-icon">
+                        <img style="width: 32px; height: 32px; margin: 16px;"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADyklEQVR4Ae2aK48UQRDH7+B4CF6OHAYBF/AYHIoEiwCNwyL4Cii+BwkgkCQEi0CAQRFICCeQhEe45AgXqFp2JzW/6Z7pmp3n7lTSt93V9fjXf7p67rW50Y8ck7SXZJybp/8in+9l7M/XK/txVSp7IuOnjL8YqtM9tVk5OSEVPZLBomNrtVWflZBtqeKdjFixMb36qO+o5bigfy0jVORn0T+fD52HbNRXY4xWHghyFvZJdNcDFalO92ivMUYpenz3ZNiCXsi6rLd1T22szy9Zj7IV7qGQr4mFaLFqa0nQWKOTl4K4bhEkT2ONTnYFsSXggqMCtbW+ekmOTn4LYlvEEUcFamt9NVYrstlK1P9BtQAr3lzL+tvc0fmh6M6abEwErMmDjpa59idgK0pNfOO8bF2RcThuEty5FdSmK6v8DyTUGxmtvjKvSYJ9GXpDD3EoNsWYLN4WuCuRjyZH795QsSnGZPEScDk5cn+GLozeb05+SF0nTW3PZP7HrO2UPfvUbibMU/31Hrtp4umv1k6ZdWPTsxLJ9r2SUSbWVude8fgrFmuvWJPE0wI7iPgR6z6XxEKsUWweAi4iyges+1wSC7FGsXkIIKtMGk3SwQaxEGsUwjIE8NhFk3SwQSytEMBjRdY7qDOagliINero2fDetPZWbvst4H1Deeqe2dZJ0CUBCtL7gGaFpd4B7Cn23CwYvugPJwux84Wu6tP62HnMj5iIOeiXSgB7ij0XCv7KKO3cqEun1sfOY07ERMxBv62gtqjcgYrJsD1b3pav9+cbD0MGFTqvf60TUIEh29Y/W9uevpPtDGeimCzGxynQ2myBlPxN2vBU8tQulavWDbtURr9znTdVUpbWAidl9xm5H1RKC/Ao8bLxQWzXmtiIvZA9hQC+TthrhaA9KoiN2AvQUgggi2S5ELRHBbERewFaCgFkkSwXgvaoIDZiL0BLIYAsMkkhaI8KYiP2WtDcN2utLM04Nf7GajxgM3WWRnE9sKoW4BHiJVOKpKdNYmQNOVhVBPASYY/lgg1kQYysIQezigCyR3ZzwQayIEbWkINZRQDZI7u5YANZECNryMGsIoDsMXgu2EAWrhNQhdl1o1YF62i/sTdXY4E6KtymSX5wZS3A48+jZRMObU6srCXDW0YAL48x9P+iMGJlLQu7jTICyBpZzYIMcEKsrCWDXEYAWSOrWZABToiVtSRBfitW9resY55rLUEp+xeZb+JxOug1PuV3gXwmBLusBdRpVUQfpltuiMeujDEffcWuNWgtk0wMTAxMDEwMTAyAgX8VfqetRGrUHQAAAABJRU5ErkJggg=="
+                             alt=""/>
+                    </div>
+                    <div>
+                        <span class="h6" th:text="${skuName}"></span>
+                        <span th:class="h6" th:text="${period}"> | </span>
+                        <span th:class="h6" th:text="${periodRegix}"></span>
+                        <div class="layout layout--center-items">
+                            <span class="h5">數量：</span>
+                            <span class="h6" th:text="${quantity}"></span>
+                        </div>
+                        <div class="layout layout--center-items">
+                            <span class="h5">原單價 (含稅): </span>
+                            <span class="h6" th:text="${originalSingleAmount}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drivider"></div>
+
+            <div th:class="body__content">
+                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                    <span class="h5" style="position: absolute; left: 0px;">原價 (不含稅)</span>
+                    <span style="position: absolute; right: 0px;" th:text="${originalAmount}"> </span>
+                </div>
+                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                    <span class="h5" style="position: absolute; left: 0px;">
+                        稅率
+                    <span th:text="${taxRate}"></span>
+                    </span>
+                    <span style="position: absolute; right: 0px;" th:text="${totalTax}"></span>
+                </div>
+                <div class="h4" style="position: relative; height: 30px; line-height: 30px;">
+                    <span style="position: absolute; left: 0px;">總金額</span>
+                    <span style="position: absolute; right: 0px;" th:text="${totalAmount}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
