@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>userInfo</title>
+
+    <style>
+        @page {
+            size: 10.42in 7.42in;
+            margin: 0;
+            content: counter(page);
+            width: 100%;
+            height: 100%;
+        }
+
+        /*不能随意修改这里 hongwei.lian*/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            font-family: 'SimSun', serif;
+            font-size: 14pt;
+            width: 100%;
+            height: 100%;
+            /*background:url(/data/App/ptoms.cfaoe.local/logo-bg.jpg);*/
+        }
+
+        /*宋五*/
+
+        .vip {
+            position: relative;
+            margin: 0 auto;
+            width: 1000px;
+            height: 711px;
+            /* font-family: '宋体'; */
+            background: url(http://chuantu.xyz/t6/741/1605957578x1700340463.png) center center no-repeat;
+        }
+    </style>
+</head>
+<body>
+
+    我我我我: <span th:text="${titlle}"></span><br/>
+    content <h1 th:text="${msg}"></h1>
+    <p>
+        <a th:href="@{http://www.baidu.com}" class="button">确认</a>
+        <a th:href="@{(${sitrue})}" class="button">确认</a>
+
+    </p>
+    <!--<img src=" http://chuantu.xyz/t6/741/1605957578x1700340463.png"/>-->
+    <!--<img th:src="|cid:img_1|"/>-->
+    <img style=" position: relative;margin: 0 auto; width: 1000px; height: 711px;" src="cid:img_1"/>
+
+    <!--<img src="sample.png" th:src="|cid:${imageResourceName}|" />-->
+    <!--<img src="F:/0404workspace/omen-learning\omen-sample/src/main/resources/images/images/img_1.png" alt="上海鲜花港 - 郁金香"/>-->
+    <!--<img src="http://chuantu.xyz/t6/741/1605957578x1700340463.png" />-->
+
+
+
+</body>
+</html>
