@@ -196,6 +196,7 @@
                     <div class="layout layout--center-items">
                         <span class="h5">Office/Desk：</span>
                         <span class="h6" th:text="${targetSkuName}"></span>
+                        <span th:text="${(quantity eq '一次' or quantity eq '壹次性')? '女':'男'}"></span>
                     </div>
                 </div>
             </div>
