@@ -1,0 +1,7 @@
+基于template 发布服务的项目 china-deploy-tool  china-deploy-java-backend-tool
+
+修改配置
+env  下yam 文件中对应项目的配置的tag 每次rebuild image 后要修手动修改image-tag
+helmFile 中找到对应项目的  base.yaml.gotmpl ,参照 building-info 修改即可
+
+借助于 backed-tool 发布 root 路径下 ./deploy.sh 按照提示操作即可

@@ -1,6 +1,6 @@
 package com.omen.learning.sample.config;
 
-import com.omen.learning.idempotence.config.annotation.IdempotenceProperties;
+import com.omen.learning.idempotence.config.IdempotenceProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

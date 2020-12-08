@@ -1,4 +1,4 @@
-package com.omen.learning.idempotence.config.annotation;
+package com.omen.learning.idempotence.annotation;
 
 /**
  * @author : Knight

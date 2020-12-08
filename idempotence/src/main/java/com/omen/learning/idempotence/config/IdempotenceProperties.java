@@ -1,4 +1,4 @@
-package com.omen.learning.idempotence.config.annotation;
+package com.omen.learning.idempotence.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
