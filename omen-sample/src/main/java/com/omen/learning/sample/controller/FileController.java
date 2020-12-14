@@ -1,6 +1,7 @@
 package com.omen.learning.sample.controller;
 
 import com.omen.learning.common.entity.FileInfo;
+import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,5 +47,9 @@ public class FileController {
         } catch (Exception e) {
             log.info("exception{}", e.getMessage());
         }
+    }
+    @GetMapping("/excel")
+    public void exportExcel(HttpServletResponse httpServletResponse){
+        ExcelKit.$Export();
     }
 }

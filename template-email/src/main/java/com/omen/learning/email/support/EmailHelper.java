@@ -50,7 +50,7 @@ public class EmailHelper {
             dataMap.put("msg", "您好！这是测试邮件的内容，请直接忽略即可！");
             dataMap.put("orderId", "123");
             dataMap.put("customerInfoList", CustomerInfoVO.buildList());
-            dataMap.put("sitrue","http://www.baidu.com");
+            dataMap.put("sitrue", "http://www.baidu.com");
             Context context = new Context();
             context.setVariables(Collections.unmodifiableMap(dataMap));
             String emailText = templateEngine.process("test-template", context);
@@ -125,5 +125,9 @@ public class EmailHelper {
         //设置邮件内容 ，true 表示发送html 格式
         helper.setText(html, true);
         javaMailSender.send(message);
+    }
+
+    public static void main(String[] args) {
+        System.out.println();
     }
 }
