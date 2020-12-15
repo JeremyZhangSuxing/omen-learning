@@ -27,5 +27,8 @@ spring:
     servlet:
       content-type: text/html
     mode: LEGACYHTML5
-test:
-  mock: jere,tom
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 10
+      max-file-size: 10

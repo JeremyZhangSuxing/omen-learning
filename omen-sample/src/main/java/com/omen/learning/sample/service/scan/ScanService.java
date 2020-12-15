@@ -1,4 +1,4 @@
-package com.omen.learning.sample.scan;
+package com.omen.learning.sample.service.scan;
 
 import com.omen.learning.bean.test.annotattion.ComponentBean;
 

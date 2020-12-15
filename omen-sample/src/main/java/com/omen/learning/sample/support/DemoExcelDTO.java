@@ -1,12 +1,14 @@
 package com.omen.learning.sample.support;
 
-import com.wuwenze.poi.annotation.ExcelField;
+import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
 @Data
 public class DemoExcelDTO {
-    @ExcelField(name = "用户名")
+    @ExcelProperty(value = "用户名", index = 0)
     private String username;
-    @ExcelField(value = "出生年月",dateFormat = "yyyy/MM/dd")
-    private String date;
+    @ExcelProperty(value = "发货日期", index = 1)
+    private Long dispatchDate;
+    @ExcelProperty(value = "单据类型", index = 2)
+    private BillType billType;
 }

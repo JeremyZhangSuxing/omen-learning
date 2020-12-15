@@ -3,7 +3,7 @@ package com.omen.learning.sample.controller;
 import com.omen.learning.common.BillDTO;
 import com.omen.learning.email.support.EmailHelper;
 import com.omen.learning.sample.concurrent.PoolTestService;
-import com.omen.learning.sample.scan.ScanService;
+import com.omen.learning.sample.service.scan.ScanService;
 import com.omen.learning.sample.test.TestService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
