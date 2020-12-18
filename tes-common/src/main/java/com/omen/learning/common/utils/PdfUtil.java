@@ -14,19 +14,22 @@ import java.io.IOException;
  * @date : 2020/11/19 11:19 下午
  */
 public class PdfUtil {
-    private static final String FONT_PATH = "font/simsun.ttc";
+    private static final String FONT_PATH = "font/PingFang-SC-Regular.ttf";
 
     /**
      * html转化为pdf文件
+     *
      * @param outputStream pdf流
-     * @param html html
-     * @throws IOException exception
+     * @param html         html
+     * @throws IOException       exception
      * @throws DocumentException DocumentException
      */
     public static void convertHtml(FileOutputStream outputStream, String html) throws IOException, DocumentException {
         ITextRenderer renderer = new ITextRenderer();
         ITextFontResolver fontResolver = renderer.getFontResolver();
-        fontResolver.addFont(FONT_PATH, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+//        String path = Optional.ofNullable(Objects.requireNonNull(ClassUtils.getDefaultClassLoader()).getResource(""))
+//                .orElseThrow(() -> new BusinessException(CommonCodeResponse.badRequestParam())).getPath();
+        fontResolver.addFont( FONT_PATH, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         renderer.setDocumentFromString(html);
         renderer.layout();
         renderer.createPDF(outputStream);

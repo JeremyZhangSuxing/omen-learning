@@ -26,11 +26,11 @@
             <artifactId>flying-saucer-pdf</artifactId>
             <version>9.0.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>core-renderer</artifactId>
-            <version>R8</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.xhtmlrenderer</groupId>-->
+<!--            <artifactId>core-renderer</artifactId>-->
+<!--            <version>R8</version>-->
+<!--        </dependency>-->
         <!--简提繁体转化-->
         <dependency>
             <groupId>com.github.stuxuhai</groupId>

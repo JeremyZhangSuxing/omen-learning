@@ -7,7 +7,6 @@ import com.omen.learning.sample.service.scan.ScanService;
 import com.omen.learning.sample.test.TestService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author : Knight
@@ -30,8 +28,6 @@ public class ConcurrentController {
     private final ScanService scanService;
     private final TestService testService;
 
-    @Value("${test.mock}")
-    private Set<String> mockList;
 
     @GetMapping("/bill")
     public List<String> getString() {
@@ -39,7 +35,7 @@ public class ConcurrentController {
     }
 
     /**
-     * 踩坑记录：热部署时静态文件没有更新，本地demo变更了配置一定要clear资源文件
+     * 踩坑记录：热部署时静态文件没有更新，本地demo变更了资源文件一定要clear资源文件
      */
     @GetMapping("email")
     public String emailSend() {

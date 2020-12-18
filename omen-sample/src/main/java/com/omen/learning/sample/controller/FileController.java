@@ -1,6 +1,12 @@
 package com.omen.learning.sample.controller;
 
+import com.alibaba.excel.EasyExcelFactory;
 import com.omen.learning.common.entity.FileInfo;
+import com.omen.learning.sample.file.FileService;
+import com.omen.learning.sample.support.DemoExcelDTO;
+import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
+import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * @author zhang.suxing
@@ -27,8 +34,10 @@ import java.io.OutputStream;
 @RestController
 @RequestMapping("/file")
 @Slf4j
+@RequiredArgsConstructor
 public class FileController {
     private static final String FOLDER = "F:\\MyTools\\java\\imooc-security\\imooc-security-demo\\src\\main\\java\\com\\imooc\\web";
+    private final FileService fileService;
 
     @PostMapping
     public FileInfo upload(MultipartFile multipartFile) throws IOException {
@@ -42,7 +51,7 @@ public class FileController {
     @GetMapping("/{name}")
     public void download(@PathVariable String name, HttpServletRequest request, HttpServletResponse response) {
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        String fileName = StringUtils.appendIfMissing(name,".xlsx","");
+        String fileName = StringUtils.appendIfMissing(name, ".xlsx", "");
         try ( //1593225958838
               InputStream inputStream = new FileInputStream(new File(FOLDER, fileName));
               OutputStream outputStream = response.getOutputStream()
@@ -56,8 +65,26 @@ public class FileController {
         }
     }
 
+    /**
+     * excel 无内存溢出
+     */
     @GetMapping("/excel")
-    public void exportExcel(HttpServletResponse httpServletResponse){
-//        ExcelKit.$Export();
+    public CommonCodeResponse exportExcel(HttpServletResponse response) throws IOException {
+
+        List<DemoExcelDTO> data = fileService.buildExcelData();
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        String fileName = "搬入搬出记录";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcelFactory.write(response.getOutputStream(), DemoExcelDTO.class).sheet("").doWrite(data);
+        return CommonDataResponse.success();
+    }
+
+    /**
+     * 流直接转化成file
+     */
+    @GetMapping("/stream2file")
+    public void exportExcel(MultipartFile multipartFile) throws IOException {
+        fileService.fileUpload(multipartFile.getInputStream());
     }
 }
