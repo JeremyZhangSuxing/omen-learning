@@ -8,12 +8,13 @@
         /* size 可以指定邮件生成pdf每页对的大小
            可以设定div的大小将一个div的内容固定在一个pdf页面上
         */
-        @page  {
+        @page {
             size: A4;
             margin: 0;
             width: 100%;
             height: 100%;
         }
+
         /*不能随意修改这里 hongwei.lian*/
 
         * {
@@ -22,7 +23,7 @@
         }
 
         html, body {
-            font-family: "PingFang SC",serif;
+            font-family: "PingFang SC", serif;
             font-size: 14pt;
             width: 100%;
             height: 100%;
@@ -93,6 +94,12 @@
 
         .h8 {
             margin: 10px 0px 0px 0px
+        }
+
+        .h9 {
+            position: relative;
+            height: 30px;
+            line-height: 30px;
         }
 
         .main {
@@ -231,11 +238,11 @@
             <div class="drivider"></div>
 
             <div th:class="body__content">
-                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                <div class="h6 h9">
                     <span class="h5" style="position: absolute; left: 0px;">原价（不含税）</span>
-                    <span style="position: absolute; right: 0px;" th:text="${originalAmount}"> </span>
+                    <span style="position: absolute; right: 0px;" th:text="${originalAmount}"> CNY 100000</span>
                 </div>
-                <div class="h6" style="position: relative; height: 30px; line-height: 30px;">
+                <div class="h6">
                     <span class="h5" style="position: absolute; left: 0px;">税率
                         <span th:text="${taxRate}"></span>
                     </span>
