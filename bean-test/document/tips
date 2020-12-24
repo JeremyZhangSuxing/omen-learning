@@ -1,2 +1,2 @@
 Mockito 小技巧
- Mockito.when  api中的 使用的入参和出餐严格遵循实际调用解救的入参和出参，否侧无法mock调用。
+ Mockito.when  api中的 使用的入参和出参严格遵循实际调用解救的入参和出参，否侧无法mock调用。

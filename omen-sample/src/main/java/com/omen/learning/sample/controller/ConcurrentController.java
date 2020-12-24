@@ -1,6 +1,6 @@
 package com.omen.learning.sample.controller;
 
-import com.omen.learning.common.BillDTO;
+import com.omen.learning.common.entity.BillDTO;
 import com.omen.learning.email.support.EmailHelper;
 import com.omen.learning.sample.concurrent.PoolTestService;
 import com.omen.learning.sample.service.scan.ScanService;

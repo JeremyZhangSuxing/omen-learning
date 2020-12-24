@@ -43,7 +43,7 @@ public class FileService {
     public void fileUpload(InputStream inputStream) throws IOException {
         String path = Optional.ofNullable(Objects.requireNonNull(ClassUtils.getDefaultClassLoader()).getResource(""))
                 .orElseThrow(() -> new BusinessException(CommonErrorCodeEum.BAD_REQUEST_PARAM)).getPath();
-        File file = new File(path+"su.pdf");
+        File file = new File(path+"we work 001.pdf");
         FileUtils.copyInputStreamToFile(inputStream, file);
         log.error("生成文件在磁盘上的全路径 {}" ,path +"su.pdf");
     }

@@ -1,7 +1,6 @@
 package com.omen.learning.email.support;
 
 import com.omen.learning.common.entity.CustomerInfoVO;
-import com.omen.learning.common.utils.PdfUtil;
 import com.weweibuy.framework.common.core.exception.BusinessException;
 import com.weweibuy.framework.common.core.model.eum.CommonErrorCodeEum;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,24 +42,26 @@ public class EmailHelper {
             dataMap.put("orderId", "123");
             dataMap.put("customerInfoList", CustomerInfoVO.buildList());
             dataMap.put("sitrue", "http://www.baidu.com");
+            String imageSource = "https://wework-chinaos.oss-cn-shanghai.aliyuncs.com/36f313e3-cf7c-4a24-9c84-a73f2a610c7e-1608776695386.png";
+            dataMap.put("imageResourceName", imageSource);
             Context context = new Context();
             context.setVariables(Collections.unmodifiableMap(dataMap));
-            String emailText = templateEngine.process("test-template", context);
+            String emailText = templateEngine.process("email", context);
             String path = buildFilePath() + "/order.pdf";
-            FileOutputStream fileOutputStream = new FileOutputStream(path);
-            PdfUtil.convertHtml(fileOutputStream, emailText);
+//            FileOutputStream fileOutputStream = new FileOutputStream(path);
+//            PdfUtil.convertHtml(fileOutputStream, emailText);
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setSubject(subject);
             //设置发件人
             helper.setFrom(username);
             //设置收件人  chang.zhang4@wework.com
-            helper.setTo("1264677205@qq.com");
+            helper.setTo("suxing.zhang3@wework.com");
             //设置邮件标题
             helper.setSubject("主题：测试邮件");
             //设置邮件内容 ，true 表示发送html 格式
             helper.setText(emailText, true);
-            helper.addAttachment("测试pdf.pdf", new File(path));
+//            helper.addAttachment("测试pdf.pdf", new File(path));
             javaMailSender.send(message);
             //send email  delete file
             FileUtils.deleteQuietly(new File(path));

@@ -1,6 +1,6 @@
 package com.omen.learning.sample.concurrent;
 
-import com.omen.learning.common.BillDTO;
+import com.omen.learning.common.entity.BillDTO;
 import com.omen.learning.common.annotation.ServiceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

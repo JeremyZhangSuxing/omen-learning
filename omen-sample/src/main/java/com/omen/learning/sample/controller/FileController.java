@@ -84,7 +84,7 @@ public class FileController {
      * 流直接转化成file
      */
     @GetMapping("/stream2file")
-    public void exportExcel(MultipartFile multipartFile) throws IOException {
+    public void fileUpload(MultipartFile multipartFile) throws IOException {
         fileService.fileUpload(multipartFile.getInputStream());
     }
 }

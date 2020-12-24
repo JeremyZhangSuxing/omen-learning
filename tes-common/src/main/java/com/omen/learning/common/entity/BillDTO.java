@@ -1,4 +1,4 @@
-package com.omen.learning.common;
+package com.omen.learning.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author : Knight
