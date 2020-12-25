@@ -37,51 +37,9 @@ public class ConcurrentController {
     /**
      * 踩坑记录：热部署时静态文件没有更新，本地demo变更了资源文件一定要clear资源文件
      */
-    @GetMapping("email")
+    @GetMapping("/email")
     public String emailSend() {
         emailHelper.sendHtml("test");
         return "success";
     }
-
-    @GetMapping("/scan")
-    public String scan() {
-        return scanService.test();
-    }
-
-    @GetMapping("job")
-    public String atomic() throws InterruptedException {
-
-        new Thread(() -> {
-            try {
-                testService.test();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-        new Thread(() -> {
-            try {
-                Thread.sleep(50);
-                testService.test();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-        return "成功";
-    }
-
-    @Data
-    private static class Reque {
-        private String subject;
-        private String url;
-        private String html;
-    }
-
-
-    @PostMapping("/html")
-    public String sendHtmlEmail(@RequestBody Reque reque) {
-        return "发送成功";
-    }
-
 }

@@ -12,29 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  **/
 @Service
 public class TestService {
-
-    AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-
-    public void test() throws InterruptedException {
-        if (!atomicBoolean.getAndSet(false)){
-            System.err.println("job has been scheduled");
-            return;
-        }
-
-        while (true) {
-            Thread.sleep(100);
-            System.out.println("this is answer");
-        }
-
-    }
-
-    public static void main(String[] args) {
-        timeToStr();
-    }
-
     public static void timeToStr(){
         LocalDateTime dateTime = LocalDateTime.now();
-
         //使用预定义实例来转换
         DateTimeFormatter fmt = DateTimeFormatter.ISO_LOCAL_DATE;
         String dateStr = dateTime.format(fmt);
