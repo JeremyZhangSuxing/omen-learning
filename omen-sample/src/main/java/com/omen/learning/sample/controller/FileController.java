@@ -1,9 +1,12 @@
 package com.omen.learning.sample.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
 import com.omen.learning.common.entity.FileInfo;
 import com.omen.learning.sample.file.FileService;
 import com.omen.learning.sample.support.DemoExcelDTO;
+import com.omen.learning.sample.support.DemoExcelUploadDTO;
+import com.omen.learning.sample.support.UploadDataListener;
 import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,17 +40,8 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class FileController {
-    private static final String FOLDER = "F:\\MyTools\\java\\imooc-security\\imooc-security-demo\\src\\main\\java\\com\\imooc\\web";
+    private static final String FOLDER = "/tem/local";
     private final FileService fileService;
-
-    @PostMapping
-    public FileInfo upload(MultipartFile multipartFile) throws IOException {
-        log.info("====== FileController upload param {},originName {}", multipartFile.getName(), multipartFile.getOriginalFilename());
-        File localFile = new File(FOLDER, System.currentTimeMillis() + ".xlsx");
-        multipartFile.transferTo(localFile);
-        //如果是上传到云服务器 则需要拿到文件的输入流进行操作  multipartFile.getInputStream()
-        return new FileInfo(localFile.getAbsolutePath());
-    }
 
     @GetMapping("/{name}")
     public void download(@PathVariable String name, HttpServletRequest request, HttpServletResponse response) {
@@ -68,7 +63,7 @@ public class FileController {
     /**
      * excel 无内存溢出
      */
-    @GetMapping("/excel")
+    @GetMapping("/excel/download")
     public CommonCodeResponse exportExcel(HttpServletResponse response) throws IOException {
 
         List<DemoExcelDTO> data = fileService.buildExcelData();
@@ -87,4 +82,21 @@ public class FileController {
     public void fileUpload(MultipartFile multipartFile) throws IOException {
         fileService.fileUpload(multipartFile.getInputStream());
     }
+
+    /**
+     * 文件上传
+     * <p>
+     * 1. 创建excel对应的实体对象 参照{@link com.omen.learning.sample.support.DemoExcelUploadDTO}
+     * <p>
+     * 2. 由于默认一行行的读取excel，所以需要创建excel一行一行的回调监听器，参照{@link UploadDataListener}
+     * <p>
+     * 3. 直接读即可
+     */
+    @PostMapping("/excel/upload")
+    @ResponseBody
+    public CommonCodeResponse upload(MultipartFile file) throws IOException {
+        EasyExcelFactory.read(file.getInputStream(), DemoExcelUploadDTO.class, new UploadDataListener()).sheet().doRead();
+        return CommonCodeResponse.success();
+    }
+
 }
