@@ -66,9 +66,11 @@ public class JackJsonProUtils {
         }
     }
 
+    /**
+     * 序列化为json 所有对象通用
+     */
     public static String convertToJson(Object clazz) {
         try {
-            objectMapper.writeValueAsString(clazz);
             return objectMapper.writeValueAsString(clazz);
         } catch (JsonProcessingException e) {
             log.error("javaObject 序列化为 jsonString失败 {}", e.getMessage());
