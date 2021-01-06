@@ -39,7 +39,6 @@ public class EmailHelper {
             Map<String, Object> dataMap = new HashMap<>();
             dataMap.put("title", "您好！这是一封来自jeremy的测试邮件！之后，您会不定=定收到类似的邮件，可选择取消订阅！感谢您的支持！");
             dataMap.put("msg", "您好！这是测试邮件的内容，请直接忽略即可！");
-            dataMap.put("orderId", "123");
             dataMap.put("customerInfoList", CustomerInfoVO.buildList());
             dataMap.put("sitrue", "http://www.baidu.com");
             String imageSource = "https://wework-chinaos.oss-cn-shanghai.aliyuncs.com/36f313e3-cf7c-4a24-9c84-a73f2a610c7e-1608776695386.png";

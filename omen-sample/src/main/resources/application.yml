@@ -6,10 +6,20 @@ spring:
   profiles:
     active: ${profileActive} #正在运行的环境
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://106.12.208.53:3306/webuy_learning?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+    username: user01
+    password: ak402507979
+  jackson: #全局使用jackson 驼峰
+    property-naming-strategy: SNAKE_CASE
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   redis:
     host: 122.51.171.126
     password: ak402507979
-  mail:
+  mail: #邮件相关配置
     host: smtp.163.com
     username: jeresuxing@163.com
     password: GEQNZJISXVMSACGQ
@@ -20,14 +30,14 @@ spring:
           starttls:
             enable: true
             require: true
-  thymeleaf:
+  thymeleaf: #html模板配置
     cache: false
     prefix: classpath:/templates/
     suffix: .html
     servlet:
       content-type: text/html
     mode: LEGACYHTML5
-  servlet:
+  servlet: #上传文件大小配置
     multipart:
       enabled: true
       max-request-size: 10MB
