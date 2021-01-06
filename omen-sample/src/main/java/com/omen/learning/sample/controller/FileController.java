@@ -1,9 +1,8 @@
 package com.omen.learning.sample.controller;
 
-import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
-import com.omen.learning.common.entity.FileInfo;
-import com.omen.learning.sample.file.FileService;
+import com.omen.learning.common.entity.StepPriceVO;
+import com.omen.learning.sample.service.file.CommonFileUploadService;
 import com.omen.learning.sample.support.DemoExcelDTO;
 import com.omen.learning.sample.support.DemoExcelUploadDTO;
 import com.omen.learning.sample.support.UploadDataListener;
@@ -17,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +41,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileController {
     private static final String FOLDER = "/tem/local";
-    private final FileService fileService;
+    private final CommonFileUploadService.FileService fileService;
 
     @GetMapping("/{name}")
     public void download(@PathVariable String name, HttpServletRequest request, HttpServletResponse response) {
@@ -97,6 +97,12 @@ public class FileController {
     public CommonCodeResponse upload(MultipartFile file) throws IOException {
         EasyExcelFactory.read(file.getInputStream(), DemoExcelUploadDTO.class, new UploadDataListener()).sheet().doRead();
         return CommonCodeResponse.success();
+    }
+
+    @PostMapping("/json")
+    public CommonDataResponse<StepPriceVO> testJackSon(@RequestBody StepPriceVO stepPriceVO) {
+        log.info("test data {}", stepPriceVO);
+        return CommonDataResponse.success(StepPriceVO.buildOneObject());
     }
 
 }

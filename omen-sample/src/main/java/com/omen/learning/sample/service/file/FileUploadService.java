@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author : Knight
@@ -16,9 +17,8 @@ import java.io.IOException;
 @Service
 public abstract class FileUploadService {
 
-    public String upload(MultipartFile multipartFile) throws IOException {
-        return generateFileName(multipartFile.getOriginalFilename());
-//        String contentType = getContentType(originalFilename);
+    public String upload(MultipartFile multipartFile) {
+        return generateFileName(Objects.requireNonNull(multipartFile.getOriginalFilename()));
     }
 
 
