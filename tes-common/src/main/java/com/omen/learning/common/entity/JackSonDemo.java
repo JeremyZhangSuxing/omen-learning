@@ -16,22 +16,19 @@ import java.util.List;
  * @since 2020/01/21
  */
 @Data
-public class StepPriceVO {
+public class JackSonDemo {
     private Long startTime;
 
     @JsonProperty("finishTime")
     @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date endTime;
-
     private BigDecimal grossPrice;
     private BigDecimal discountOff;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private LocalDateTime now;
 
-
-    public static StepPriceVO buildOneObject() {
-        StepPriceVO vo = new StepPriceVO();
+    public static JackSonDemo buildOneObject() {
+        JackSonDemo vo = new JackSonDemo();
         vo.setDiscountOff(BigDecimal.ONE);
         vo.setEndTime(new Date());
         vo.setStartTime(111L);
@@ -40,14 +37,14 @@ public class StepPriceVO {
         return vo;
     }
 
-    public static List<StepPriceVO> buildManyObject() {
-        StepPriceVO vo = new StepPriceVO();
+    public static List<JackSonDemo> buildManyObject() {
+        JackSonDemo vo = new JackSonDemo();
         vo.setDiscountOff(BigDecimal.ONE);
         vo.setEndTime(new Date());
         vo.setStartTime(111L);
         vo.setGrossPrice(BigDecimal.TEN);
         vo.setNow(LocalDateTime.now());
-        StepPriceVO vo1 = new StepPriceVO();
+        JackSonDemo vo1 = new JackSonDemo();
         BeanUtils.copyProperties(vo,vo1);
         return Arrays.asList(vo,vo1);
     }

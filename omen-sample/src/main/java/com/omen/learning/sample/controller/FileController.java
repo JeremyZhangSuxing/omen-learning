@@ -1,7 +1,8 @@
 package com.omen.learning.sample.controller;
 
 import com.alibaba.excel.EasyExcelFactory;
-import com.omen.learning.common.entity.StepPriceVO;
+import com.omen.learning.common.entity.JackSonDemo;
+import com.omen.learning.common.support.JackJsonProUtils;
 import com.omen.learning.sample.service.file.CommonFileUploadService;
 import com.omen.learning.sample.support.DemoExcelDTO;
 import com.omen.learning.sample.support.DemoExcelUploadDTO;
@@ -65,14 +66,13 @@ public class FileController {
      */
     @GetMapping("/excel/download")
     public CommonCodeResponse exportExcel(HttpServletResponse response) throws IOException {
-
         List<DemoExcelDTO> data = fileService.buildExcelData();
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         String fileName = "搬入搬出记录";
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         EasyExcelFactory.write(response.getOutputStream(), DemoExcelDTO.class).sheet("").doWrite(data);
-        return CommonDataResponse.success();
+        return CommonCodeResponse.success();
     }
 
     /**
@@ -100,9 +100,16 @@ public class FileController {
     }
 
     @PostMapping("/json")
-    public CommonDataResponse<StepPriceVO> testJackSon(@RequestBody StepPriceVO stepPriceVO) {
-        log.info("test data {}", stepPriceVO);
-        return CommonDataResponse.success(StepPriceVO.buildOneObject());
+    public CommonDataResponse<JackSonDemo> testJackSon(@RequestBody JackSonDemo jackSonDemo) {
+        log.info("test data {}", jackSonDemo);
+        return CommonDataResponse.success(JackSonDemo.buildOneObject());
     }
 
+    @GetMapping("/json/list")
+    public CommonDataResponse<List<JackSonDemo>> testJackSon1() {
+        String key = JackJsonProUtils.convertToJson(JackSonDemo.buildManyObject());
+        log.info("test data {}", key);
+        List<JackSonDemo> jackSonDemos = JackJsonProUtils.convertToList(key, JackSonDemo.class);
+        return CommonDataResponse.success(jackSonDemos);
+    }
 }

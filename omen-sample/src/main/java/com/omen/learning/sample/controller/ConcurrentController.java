@@ -3,13 +3,8 @@ package com.omen.learning.sample.controller;
 import com.omen.learning.common.entity.BillDTO;
 import com.omen.learning.email.support.EmailHelper;
 import com.omen.learning.sample.concurrent.PoolTestService;
-import com.omen.learning.sample.service.scan.ScanService;
-import com.omen.learning.sample.test.TestService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +20,7 @@ import java.util.List;
 public class ConcurrentController {
     private final PoolTestService poolTestService;
     private final EmailHelper emailHelper;
-    private final ScanService scanService;
-    private final TestService testService;
+
 
 
     @GetMapping("/bill")
