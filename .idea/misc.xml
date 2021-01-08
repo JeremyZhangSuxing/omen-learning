@@ -9,6 +9,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/k8s-learning/pom.xml" />
+        <option value="$PROJECT_DIR$/tes-entity/pom.xml" />
       </set>
     </option>
   </component>

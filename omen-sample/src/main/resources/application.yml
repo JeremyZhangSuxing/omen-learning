@@ -43,5 +43,6 @@ spring:
       enabled: true
       max-request-size: 10MB
       max-file-size: 10MB
-
+mybatis:
+  mapper-locations: classpath*:config/mybatis/mapper/**/*.xml
 
