@@ -91,6 +91,11 @@ public class FileController {
      * 2. 由于默认一行行的读取excel，所以需要创建excel一行一行的回调监听器，参照{@link UploadDataListener}
      * <p>
      * 3. 直接读即可
+     *
+     * 当服务通过docker部署到linux环境上时会出现excel为空 且字体nullException
+     * 在dockerfile 文件中加上  #安装字体
+     * RUN apk add --update font-adobe-100dpi ttf-dejavu fontconfig
+     * 其他的报错场景 如变更 @RestController--->@controller 已验证无需变动
      */
     @PostMapping("/excel/upload")
     @ResponseBody
