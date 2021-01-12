@@ -5,6 +5,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
@@ -23,6 +25,7 @@ import java.util.Date;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JwtUtils {
     /**
      * JWT 加解密类型
