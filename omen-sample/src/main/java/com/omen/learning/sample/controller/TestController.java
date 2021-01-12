@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestController {
     private final TestService testService;
+    private final HttpServletRequest httpServletRequest;
 
     @GetMapping("/orders")
     public CommonDataResponse<List<CmOrder>> queryList() {
@@ -39,7 +41,8 @@ public class TestController {
     }
 
     @GetMapping("jwtExpire")
-    public CommonDataResponse<String> validateTokenExpire(@RequestParam String token, @RequestParam String uuid) {
+    public CommonDataResponse<String> validateTokenExpire(@RequestParam String uuid) {
+        String token = httpServletRequest.getHeader("Authorization");
         log.info("token : {}", token);
         TokenState jeremy = JwtUtils.validateJWT(token, "jeremy", uuid);
         return CommonDataResponse.success(jeremy.toString());

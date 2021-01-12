@@ -1,7 +1,6 @@
 package com.omen.learning.sample.support;
 
 import com.omen.learning.common.enums.TokenState;
-import com.omen.learning.sample.config.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -37,19 +36,12 @@ public class JwtUtils {
     /**
      * JWT 添加至HTTP HEAD中的前缀
      */
-    private static final String JWT_SEPARATOR = "";
+    private static final String JWT_SEPARATOR = "X-CAT ";
 
     /**
      * 密钥：通过生成 JWT_ALG 和 JWT_RULE 加密生成
      */
     private static final Key SECRET = generateKey();
-
-    /**
-     * 默认jwt所面向的分组用户
-     */
-    private static final String DEFAULT_SUB = "system";
-
-    private final JwtProperties jwtProperties;
 
     /**
      * 生成秘钥
@@ -104,20 +96,17 @@ public class JwtUtils {
      * @param issUre 签发人
      * @return 校验结果
      */
-    public static TokenState validateJWT(String token, String issUre,String uuid) {
+    public static TokenState validateJWT(String token, String issUre, String uuid) {
         try {
             Claims claims = getClaimsFromToken(token);
             log.info("token param {}", claims.toString());
-            if (!claims.getIssuer().equals(issUre) || claims.getExpiration().before(new Date())) {
+            if (!claims.getIssuer().equals(issUre) || !claims.getId().equals(uuid) || claims.getExpiration().before(new Date())) {
                 return TokenState.INVALID;
             }
         } catch (ExpiredJwtException e) {
             // 仅仅是token过期异常直接返回false
             log.info("token expire {}", issUre);
             return TokenState.EXPIRED;
-        } catch (Exception e) {
-            log.warn("JWT验证出错，错误原因：{}", e.getMessage());
-            return TokenState.INVALID;
         }
         return TokenState.VALID;
     }
@@ -132,20 +121,10 @@ public class JwtUtils {
                 .getBody();
     }
 
-    public static String getJwtIssUre(String token) {
-        try {
-            Claims claims = getClaimsFromToken(token);
-            return claims.getId();
-        } catch (Exception e) {
-            log.warn("JWT验证出错，错误原因：{}", e.getMessage());
-            return null;
-        }
-    }
-
     /**
      * 有效期时间 15
      */
     private static long expireTime(Integer duration) {
-        return duration * 15 * 1000L;
+        return duration * 1500 * 1000L;
     }
 }
