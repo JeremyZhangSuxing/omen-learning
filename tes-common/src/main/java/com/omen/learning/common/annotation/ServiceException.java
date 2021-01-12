@@ -13,4 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface ServiceException {
     int code() default 0;
+
+    String jwtId() default "";
 }

@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +23,6 @@ import java.util.Date;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JwtUtils {
     /**

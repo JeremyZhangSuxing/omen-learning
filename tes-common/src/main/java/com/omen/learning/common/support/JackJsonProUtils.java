@@ -55,7 +55,7 @@ public class JackJsonProUtils {
      * @param jsonString JSON字符
      * @param clazz      目标对象
      * @param <T>        泛型
-     * @return javaObjectaa
+     * @return javaObject
      */
     public static <T> T convertToObject(String jsonString, Class<T> clazz) {
         try {

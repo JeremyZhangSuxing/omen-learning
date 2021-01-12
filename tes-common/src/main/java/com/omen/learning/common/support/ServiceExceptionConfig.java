@@ -3,6 +3,7 @@ package com.omen.learning.common.support;
 import com.omen.learning.common.annotation.EnableServiceException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -28,7 +29,18 @@ public class ServiceExceptionConfig implements ImportAware {
         ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
         advisor.setPc(new ServiceExceptionPointcut());
         advisor.setOrder(enableCompensate.<Integer>getNumber("order"));
-        advisor.setAdvice(new ServiceExceptionAspect());
+        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser()));
         return advisor;
+    }
+
+    @Bean
+    @DependsOn("jackJsonUtils")
+    public AnnotationMetaDataHolder tokenAnnotationMetaDataHolder() {
+        return new AnnotationMetaDataHolder();
+    }
+
+    @Bean
+    public TokenInfoParser tokenInfoParser() {
+        return new TokenInfoParser(new AnnotationMetaDataHolder());
     }
 }

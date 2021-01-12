@@ -16,8 +16,9 @@ import java.util.Set;
 public class ClassPathComponentBeanScanner extends ClassPathBeanDefinitionScanner {
     /**
      * 自定义scanner 不使用默认的过滤
-     * @param registry 注册器
-     * @param environment 环境变量
+     *
+     * @param registry       注册器
+     * @param environment    环境变量
      * @param resourceLoader 资源加载器
      */
     public ClassPathComponentBeanScanner(BeanDefinitionRegistry registry, Environment environment, ResourceLoader resourceLoader) {
@@ -33,14 +34,16 @@ public class ClassPathComponentBeanScanner extends ClassPathBeanDefinitionScanne
     }
 
     /**
-     * 判定beanDefinition是否是一个合格的bean
-≈     */
+     * 自定义规则判定beanDefinition是否是一个合格的bean
+     * 不能是接口、静态内部类、接口、抽象类
+     * ≈
+     */
     @Override
     protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
         boolean isCandidate = false;
         if (beanDefinition.getMetadata().isIndependent() && !beanDefinition.getMetadata().isAnnotation() &&
                 beanDefinition.getMetadata().isConcrete()) {
-            System.out.println("******注解的吗bean被注册*******");
+            System.err.println("******被注解的bean被注册*******");
             isCandidate = true;
         }
         return isCandidate;

@@ -17,9 +17,7 @@ public class ServiceExceptionBeanFactoryPointcutAdvisor extends AbstractBeanFact
         this.pc = pc;
     }
 
-    /**
-     * @return
-     */
+
     @Override
     public Pointcut getPointcut() {
         return pc;
