@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties({IdempotenceProperties.class})
+@EnableConfigurationProperties({IdempotenceProperties.class, JwtProperties.class})
 public class BaseConfig {
 
 }
