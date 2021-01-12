@@ -3,6 +3,7 @@ package com.omen.learning.common.support;
 import com.omen.learning.common.annotation.EnableServiceException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.context.annotation.Role;
@@ -13,6 +14,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author zhang.suxing
  * @date 2020/11/10 21:53
  **/
+@Configuration
 public class ServiceExceptionConfig implements ImportAware {
     private AnnotationAttributes enableCompensate;
 
