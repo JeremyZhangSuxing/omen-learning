@@ -11,7 +11,10 @@ import com.weweibuy.framework.common.core.model.eum.CommonErrorCodeEum;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.GenericTypeResolver;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -76,5 +79,12 @@ public class JackJsonProUtils {
             log.error("javaObject 序列化为 jsonString失败 {}", e.getMessage());
             throw Exceptions.system(CommonErrorCodeEum.JSON_WRITE_EXCEPTION, e);
         }
+    }
+
+    /**
+     * 获取通用的类
+     */
+    public static JavaType getJavaType(Type parameterType, Method method) {
+        return objectMapper.constructType(GenericTypeResolver.resolveType(parameterType, method.getReturnType()));
     }
 }

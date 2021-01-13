@@ -4,7 +4,6 @@ import com.omen.learning.common.annotation.EnableServiceException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -26,23 +25,23 @@ public class ServiceExceptionConfig implements ImportAware {
     }
 
     @Bean
-    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    public ServiceExceptionBeanFactoryPointcutAdvisor serviceExceptionBeanFactoryPointcutAdvisor() {
-        ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
-        advisor.setPc(new ServiceExceptionPointcut());
-        advisor.setOrder(enableCompensate.<Integer>getNumber("order"));
-        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser()));
-        return advisor;
+    public TokenInfoParser tokenInfoParser() {
+        return new TokenInfoParser(new AnnotationMetaDataHolder());
     }
 
     @Bean
-    @DependsOn("jackJsonUtils")
     public AnnotationMetaDataHolder tokenAnnotationMetaDataHolder() {
         return new AnnotationMetaDataHolder();
     }
 
     @Bean
-    public TokenInfoParser tokenInfoParser() {
-        return new TokenInfoParser(new AnnotationMetaDataHolder());
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    public ServiceExceptionBeanFactoryPointcutAdvisor serviceExceptionBeanFactoryPointcutAdvisor() {
+        ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
+        advisor.setPc(new ServiceExceptionPointcut(tokenAnnotationMetaDataHolder()));
+        advisor.setOrder(enableCompensate.<Integer>getNumber("order"));
+        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser()));
+        return advisor;
     }
+
 }

@@ -11,12 +11,20 @@ import java.lang.reflect.Method;
  **/
 public class ServiceExceptionPointcut extends StaticMethodMatcherPointcut {
 
+    private final AnnotationMetaDataHolder annotationMetaDataHolder;
+
+    public ServiceExceptionPointcut(AnnotationMetaDataHolder annotationMetaDataHolder) {
+        this.annotationMetaDataHolder = annotationMetaDataHolder;
+    }
+
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
         ServiceException annotation = method.getAnnotation(ServiceException.class);
         boolean flag = annotation != null;
         if (flag) {
-            System.out.println(method.getName()+method);
+            System.err.println(method.getName() + method);
+            annotationMetaDataHolder.putMetaData(method, annotation);
+
         }
         return flag;
     }

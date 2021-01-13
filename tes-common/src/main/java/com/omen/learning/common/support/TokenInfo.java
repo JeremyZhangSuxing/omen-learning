@@ -11,6 +11,16 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class TokenInfo {
+    /**
+     * token唯一业务约束参数名称
+     */
     private final String businessParam;
+    /**
+     * method返回类型
+     */
     private final JavaType javaType;
+    /**
+     * token唯一约束参数值
+     */
+    private final String jwtId;
 }

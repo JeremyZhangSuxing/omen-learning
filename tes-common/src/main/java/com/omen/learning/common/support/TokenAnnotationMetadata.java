@@ -13,14 +13,17 @@ public class TokenAnnotationMetadata {
     /**
      * 业务参数
      */
-    private final String businessParam;
+    private final String jwtId;
     /**
      * 方法返回类型
      */
     private final JavaType returnType;
 
+    /**
+     * 构造函数传入直接上的值
+     */
     public TokenAnnotationMetadata(ServiceException serviceException, JavaType javaType) {
-        businessParam = serviceException.jwtId();
+        jwtId = serviceException.jwtId();
         returnType = javaType;
     }
 }

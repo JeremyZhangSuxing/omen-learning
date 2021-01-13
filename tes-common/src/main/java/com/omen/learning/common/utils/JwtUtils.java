@@ -1,4 +1,4 @@
-package com.omen.learning.sample.support;
+package com.omen.learning.common.utils;
 
 import com.omen.learning.common.enums.TokenState;
 import io.jsonwebtoken.Claims;

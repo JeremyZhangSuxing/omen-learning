@@ -1,17 +1,25 @@
 package com.omen.learning.common.support;
 
+import com.omen.learning.common.enums.TokenState;
+import com.omen.learning.common.utils.JwtUtils;
+import com.weweibuy.framework.common.core.exception.Exceptions;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.lang.reflect.Method;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 /**
  * @author zhang.suxing
  * @date 2020/11/10 22:31
  **/
 public class ServiceExceptionAspect implements MethodInterceptor {
-
+    @Value("${jwt.token.key:jeremy}")
+    private String issuer;
     private final TokenInfoParser tokenParamInfoParse;
 
     public ServiceExceptionAspect(TokenInfoParser tokenParamInfoParse) {
@@ -24,17 +32,31 @@ public class ServiceExceptionAspect implements MethodInterceptor {
      */
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) Optional.ofNullable(RequestContextHolder.getRequestAttributes())
+                .orElseThrow(() -> Exceptions.system("401", "token 异常"));
+        HttpServletRequest httpServletRequest = attributes.getRequest();
+        String token = httpServletRequest.getHeader("Authorization");
         //在此处可进行自定义逻辑处理
         TokenInfo tokenInfo = tokenParamInfoParse.parseIdempotentInfo(methodInvocation);
-        System.out.println(tokenInfo);
-        Method method = methodInvocation.getMethod();
-        System.err.println("开始对被标记的类进行切面" + method.getName());
+        System.err.println("===token信息===" + tokenInfo);
+        tokenCondition(token, issuer, tokenInfo.getJwtId());
         Object proceed;
-        try {
-            proceed = methodInvocation.proceed();
-        } finally {
-            System.out.println("error");
-        }
+        proceed = methodInvocation.proceed();
         return proceed;
     }
+
+    /**
+     * t
+     */
+    private void tokenCondition(String token, String issuer, String uniqueValue) {
+        TokenState tokenState = JwtUtils.validateJWT(token, issuer, uniqueValue);
+        switch (tokenState) {
+            case EXPIRED:
+                throw Exceptions.business("401", "超时");
+            case INVALID:
+                throw Exceptions.business("405", "无效");
+            case VALID:
+        }
+    }
+
 }
