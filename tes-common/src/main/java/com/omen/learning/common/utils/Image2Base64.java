@@ -76,7 +76,4 @@ public class Image2Base64 {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        image2Base64Code("/Users/suxingzhang/image/WechatIMG8.jpeg");
-    }
 }
