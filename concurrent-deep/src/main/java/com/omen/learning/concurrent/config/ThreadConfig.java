@@ -19,7 +19,7 @@ public class ThreadConfig {
      * 此线程池用来提高非批量接口调用效率
      */
     @Bean
-    public ExecutorService commonInvokeExecutor() {
+    public ExecutorService commonInvokeExector() {
         return new ThreadPoolExecutor(10,
                 20,
                 1, TimeUnit.MINUTES,
