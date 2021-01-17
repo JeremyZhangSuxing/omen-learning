@@ -46,7 +46,7 @@ public class ServiceExceptionAspect implements MethodInterceptor {
     }
 
     /**
-     * t
+     * tokeCondition
      */
     private void tokenCondition(String token, String issuer, String uniqueValue) {
         TokenState tokenState = JwtUtils.validateJWT(token, issuer, uniqueValue);

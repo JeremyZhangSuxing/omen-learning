@@ -1,9 +1,10 @@
 package com.omen.learning.sample.controller;
 
 import com.alibaba.excel.EasyExcelFactory;
+import com.github.houbb.csv.util.CsvHelper;
 import com.omen.learning.common.entity.JackSonDemo;
 import com.omen.learning.common.support.JackJsonProUtils;
-import com.omen.learning.sample.service.file.CommonFileUploadService;
+import com.omen.learning.sample.service.file.FileService;
 import com.omen.learning.sample.support.DemoExcelDTO;
 import com.omen.learning.sample.support.DemoExcelUploadDTO;
 import com.omen.learning.sample.support.UploadDataListener;
@@ -11,6 +12,7 @@ import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -30,7 +32,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author zhang.suxing
@@ -42,7 +46,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileController {
     private static final String FOLDER = "/tem/local";
-    private final CommonFileUploadService.FileService fileService;
+    private final FileService fileService;
 
     @GetMapping("/{name}")
     public void download(@PathVariable String name, HttpServletRequest request, HttpServletResponse response) {
@@ -91,7 +95,7 @@ public class FileController {
      * 2. 由于默认一行行的读取excel，所以需要创建excel一行一行的回调监听器，参照{@link UploadDataListener}
      * <p>
      * 3. 直接读即可
-     *
+     * <p>
      * 当服务通过docker部署到linux环境上时会出现excel为空 且字体nullException
      * 在dockerfile 文件中加上  #安装字体
      * RUN apk add --update font-adobe-100dpi ttf-dejavu fontconfig
@@ -116,5 +120,23 @@ public class FileController {
         log.info("test data {}", key);
         List<JackSonDemo> jackSonDemos = JackJsonProUtils.convertToList(key, JackSonDemo.class);
         return CommonDataResponse.success(jackSonDemos);
+    }
+
+    @GetMapping("/csv/download")
+    public void exportCsv(HttpServletResponse response) throws IOException {
+        log.info("export csv --- star--{}", LocalDateTime.now());
+        String fileName = UUID.randomUUID().toString() + ".csv";
+        String path = "/Users/suxingzhang/Desktop/develop/moveInOut/" + fileName;
+        CsvHelper.write(fileService.buildCsvData(), path);
+        response.setHeader("Content-Disposition", "attachment; filename=" + "JEREMY.csv");
+        response.setContentType("application/csv; charset=utf-8");
+        File file = new File(path);
+        try (InputStream inputStream = new FileInputStream(file);
+             OutputStream outputStream = response.getOutputStream()) {
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.flush();
+        } finally {
+            FileUtils.deleteQuietly(file);
+        }
     }
 }
