@@ -18,12 +18,12 @@ import java.util.Optional;
  * @date 2020/11/10 22:31
  **/
 @Slf4j
-public class ServiceExceptionAspect implements MethodInterceptor {
+public class TokenValidateAspect implements MethodInterceptor {
 
     private final TokenInfoParser tokenParamInfoParse;
     private final String issuer;
 
-    public ServiceExceptionAspect(TokenInfoParser tokenParamInfoParse, String issuer) {
+    public TokenValidateAspect(TokenInfoParser tokenParamInfoParse, String issuer) {
         Assert.notNull(tokenParamInfoParse, "tokenParamInfoParse 不能为空");
         this.tokenParamInfoParse = tokenParamInfoParse;
         this.issuer = issuer;

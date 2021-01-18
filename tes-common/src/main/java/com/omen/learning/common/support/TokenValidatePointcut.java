@@ -9,11 +9,11 @@ import java.lang.reflect.Method;
  * @author zhang.suxing
  * @date 2020/11/10 22:20
  **/
-public class ServiceExceptionPointcut extends StaticMethodMatcherPointcut {
+public class TokenValidatePointcut extends StaticMethodMatcherPointcut {
 
     private final AnnotationMetaDataHolder annotationMetaDataHolder;
 
-    public ServiceExceptionPointcut(AnnotationMetaDataHolder annotationMetaDataHolder) {
+    public TokenValidatePointcut(AnnotationMetaDataHolder annotationMetaDataHolder) {
         this.annotationMetaDataHolder = annotationMetaDataHolder;
     }
 

@@ -1,2 +1,2 @@
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-###  com.omen.learning.common.support.ServiceExceptionConfig
+###  com.omen.learning.common.support.TokenValidateConfig

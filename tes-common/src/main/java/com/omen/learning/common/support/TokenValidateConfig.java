@@ -15,7 +15,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @date 2020/11/10 21:53
  **/
 @Configuration
-public class ServiceExceptionConfig implements ImportAware {
+public class TokenValidateConfig implements ImportAware {
     private AnnotationAttributes enableCompensate;
 
     @Value("${jwt.token.key:jeremy}")
@@ -39,11 +39,11 @@ public class ServiceExceptionConfig implements ImportAware {
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-    public ServiceExceptionBeanFactoryPointcutAdvisor serviceExceptionBeanFactoryPointcutAdvisor() {
-        ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
-        advisor.setPc(new ServiceExceptionPointcut(tokenAnnotationMetaDataHolder()));
+    public TokenValidateBeanFactoryPointcutAdvisor serviceExceptionBeanFactoryPointcutAdvisor() {
+        TokenValidateBeanFactoryPointcutAdvisor advisor = new TokenValidateBeanFactoryPointcutAdvisor();
+        advisor.setPc(new TokenValidatePointcut(tokenAnnotationMetaDataHolder()));
         advisor.setOrder(enableCompensate.<Integer>getNumber("order"));
-        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser(),issuer));
+        advisor.setAdvice(new TokenValidateAspect(tokenInfoParser(),issuer));
         return advisor;
     }
 

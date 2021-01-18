@@ -1,6 +1,6 @@
 package com.omen.learning.common.annotation;
 
-import com.omen.learning.common.support.ServiceExceptionConfig;
+import com.omen.learning.common.support.TokenValidateConfig;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  **/
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({ServiceExceptionConfig.class})
+@Import({TokenValidateConfig.class})
 public @interface EnableTokenValidate {
     /**
      * 切面执行顺序

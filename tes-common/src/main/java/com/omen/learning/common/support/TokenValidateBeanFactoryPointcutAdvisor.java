@@ -8,7 +8,7 @@ import org.springframework.aop.support.StaticMethodMatcherPointcut;
  * @author zhang.suxing
  * @date 2020/11/10 22:28
  **/
-public class ServiceExceptionBeanFactoryPointcutAdvisor extends AbstractBeanFactoryPointcutAdvisor {
+public class TokenValidateBeanFactoryPointcutAdvisor extends AbstractBeanFactoryPointcutAdvisor {
 
 
     private StaticMethodMatcherPointcut pc;
