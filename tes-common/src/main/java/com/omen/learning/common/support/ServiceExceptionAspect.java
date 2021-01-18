@@ -35,7 +35,7 @@ public class ServiceExceptionAspect implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         ServletRequestAttributes attributes = (ServletRequestAttributes) Optional.ofNullable(RequestContextHolder.getRequestAttributes())
-                .orElseThrow(() -> Exceptions.system("401", "token 异常"));
+                .orElseThrow(() -> Exceptions.system("99999", "token 异常"));
         HttpServletRequest httpServletRequest = attributes.getRequest();
         String token = httpServletRequest.getHeader("Authorization");
         //toke你解析处理
