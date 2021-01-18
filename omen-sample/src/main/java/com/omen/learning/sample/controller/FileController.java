@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcelFactory;
 import com.github.houbb.csv.util.CsvHelper;
 import com.omen.learning.common.entity.JackSonDemo;
 import com.omen.learning.common.support.JackJsonProUtils;
+import com.omen.learning.common.utils.CommonFileUtils;
 import com.omen.learning.sample.service.file.FileService;
 import com.omen.learning.sample.support.DemoExcelDTO;
 import com.omen.learning.sample.support.DemoExcelUploadDTO;
@@ -128,7 +129,9 @@ public class FileController {
         String fileName = UUID.randomUUID().toString() + ".csv";
         String path = "/Users/suxingzhang/Desktop/develop/moveInOut/" + fileName;
         CsvHelper.write(fileService.buildCsvData(), path);
-        response.setHeader("Content-Disposition", "attachment; filename=" + "JEREMY.csv");
+        //必须有本地变量
+        String name = "测试文件";
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + CommonFileUtils.standardFileName(name) + ".csv");
         response.setContentType("application/csv; charset=utf-8");
         File file = new File(path);
         try (InputStream inputStream = new FileInputStream(file);
