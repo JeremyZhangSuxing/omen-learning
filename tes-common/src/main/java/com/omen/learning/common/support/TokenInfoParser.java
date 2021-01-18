@@ -1,7 +1,6 @@
 package com.omen.learning.common.support;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Method;
@@ -26,9 +25,15 @@ public class TokenInfoParser extends CommonExpressionEvaluator {
      */
     public TokenInfo parseIdempotentInfo(MethodInvocation methodInvocation) {
         Method method = methodInvocation.getMethod();
+        Object[] arguments = methodInvocation.getArguments();
+        Object target = methodInvocation.getThis();
+        //spel 解析参数
         TokenAnnotationMetadata metaData = annotationMetaDataHolder.getMetaData(method);
-        String jwtId = Optional.ofNullable(metaData.getJwtId()).orElse(StringUtils.EMPTY);
-        Assert.isTrue(StringUtils.equals(jwtId, StringUtils.EMPTY), "解析token的必要参数为null");
+        String jwtIdParam = Optional.ofNullable(metaData.getJwtId()).orElse(null);
+        Assert.notNull(jwtIdParam, "解析token的必要参数为null");
+        String jwtId = evaluatorExpressionStr(metaData.getJwtId(), target, target.getClass(), method, arguments);
+
+        //spel 表达式 获取业务参数值
         return new TokenInfo(metaData.getJwtId(), metaData.getReturnType(), jwtId);
     }
 

@@ -1,6 +1,7 @@
 package com.omen.learning.common.support;
 
-import com.omen.learning.common.annotation.EnableServiceException;
+import com.omen.learning.common.annotation.EnableTokenValidate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,16 +18,18 @@ import org.springframework.core.type.AnnotationMetadata;
 public class ServiceExceptionConfig implements ImportAware {
     private AnnotationAttributes enableCompensate;
 
+    @Value("${jwt.token.key:jeremy}")
+    private String issuer;
 
     @Override
     public void setImportMetadata(AnnotationMetadata importMetadata) {
         enableCompensate = AnnotationAttributes.fromMap(
-                importMetadata.getAnnotationAttributes(EnableServiceException.class.getName(), false));
+                importMetadata.getAnnotationAttributes(EnableTokenValidate.class.getName(), false));
     }
 
     @Bean
     public TokenInfoParser tokenInfoParser() {
-        return new TokenInfoParser(new AnnotationMetaDataHolder());
+        return new TokenInfoParser(tokenAnnotationMetaDataHolder());
     }
 
     @Bean
@@ -40,7 +43,7 @@ public class ServiceExceptionConfig implements ImportAware {
         ServiceExceptionBeanFactoryPointcutAdvisor advisor = new ServiceExceptionBeanFactoryPointcutAdvisor();
         advisor.setPc(new ServiceExceptionPointcut(tokenAnnotationMetaDataHolder()));
         advisor.setOrder(enableCompensate.<Integer>getNumber("order"));
-        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser()));
+        advisor.setAdvice(new ServiceExceptionAspect(tokenInfoParser(),issuer));
         return advisor;
     }
 

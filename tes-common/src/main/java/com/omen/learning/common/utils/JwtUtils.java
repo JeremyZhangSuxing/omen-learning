@@ -123,9 +123,9 @@ public class JwtUtils {
     }
 
     /**
-     * 有效期时间 15
+     * 有效期时间 默认最小周期60秒
      */
     private static long expireTime(Integer duration) {
-        return duration * 1500 * 1000L;
+        return duration * 60 * 1000L;
     }
 }

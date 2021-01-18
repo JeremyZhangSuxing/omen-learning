@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Import({ServiceExceptionConfig.class})
-public @interface EnableServiceException {
+public @interface EnableTokenValidate {
     /**
      * 切面执行顺序
      * 注解式切面

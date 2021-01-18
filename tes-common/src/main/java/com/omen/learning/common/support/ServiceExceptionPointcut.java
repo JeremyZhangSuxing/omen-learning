@@ -1,6 +1,6 @@
 package com.omen.learning.common.support;
 
-import com.omen.learning.common.annotation.ServiceException;
+import com.omen.learning.common.annotation.TokenValidate;
 import org.springframework.aop.support.StaticMethodMatcherPointcut;
 
 import java.lang.reflect.Method;
@@ -19,12 +19,11 @@ public class ServiceExceptionPointcut extends StaticMethodMatcherPointcut {
 
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
-        ServiceException annotation = method.getAnnotation(ServiceException.class);
+        TokenValidate annotation = method.getAnnotation(TokenValidate.class);
         boolean flag = annotation != null;
         if (flag) {
             System.err.println(method.getName() + method);
             annotationMetaDataHolder.putMetaData(method, annotation);
-
         }
         return flag;
     }

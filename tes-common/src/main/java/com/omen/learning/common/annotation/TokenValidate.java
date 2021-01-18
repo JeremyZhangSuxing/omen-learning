@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  **/
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ServiceException {
+public @interface TokenValidate {
     int code() default 0;
 
     String jwtId() default "";

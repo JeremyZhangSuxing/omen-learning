@@ -1,7 +1,7 @@
 package com.omen.learning.common.support;
 
 import com.fasterxml.jackson.databind.JavaType;
-import com.omen.learning.common.annotation.ServiceException;
+import com.omen.learning.common.annotation.TokenValidate;
 import lombok.Getter;
 
 /**
@@ -22,8 +22,8 @@ public class TokenAnnotationMetadata {
     /**
      * 构造函数传入直接上的值
      */
-    public TokenAnnotationMetadata(ServiceException serviceException, JavaType javaType) {
-        jwtId = serviceException.jwtId();
+    public TokenAnnotationMetadata(TokenValidate tokenValidate, JavaType javaType) {
+        jwtId = tokenValidate.jwtId();
         returnType = javaType;
     }
 }

@@ -61,7 +61,7 @@ public class Image2Base64 {
         File file = new File(imgPath);
         String extension = FilenameUtils.getExtension(file.getName());
         String baseName = FilenameUtils.getBaseName(imgPath);
-        System.out.println(extension + baseName);
+        log.info(extension + baseName);
         try (InputStream in = new FileInputStream(imgPath)) {
             data = new byte[1024];
             int len;

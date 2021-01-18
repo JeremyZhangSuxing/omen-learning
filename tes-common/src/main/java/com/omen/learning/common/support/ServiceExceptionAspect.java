@@ -3,9 +3,9 @@ package com.omen.learning.common.support;
 import com.omen.learning.common.enums.TokenState;
 import com.omen.learning.common.utils.JwtUtils;
 import com.weweibuy.framework.common.core.exception.Exceptions;
+import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -17,14 +17,16 @@ import java.util.Optional;
  * @author zhang.suxing
  * @date 2020/11/10 22:31
  **/
+@Slf4j
 public class ServiceExceptionAspect implements MethodInterceptor {
-    @Value("${jwt.token.key:jeremy}")
-    private String issuer;
-    private final TokenInfoParser tokenParamInfoParse;
 
-    public ServiceExceptionAspect(TokenInfoParser tokenParamInfoParse) {
+    private final TokenInfoParser tokenParamInfoParse;
+    private final String issuer;
+
+    public ServiceExceptionAspect(TokenInfoParser tokenParamInfoParse, String issuer) {
         Assert.notNull(tokenParamInfoParse, "tokenParamInfoParse 不能为空");
         this.tokenParamInfoParse = tokenParamInfoParse;
+        this.issuer = issuer;
     }
 
     /**
@@ -36,9 +38,10 @@ public class ServiceExceptionAspect implements MethodInterceptor {
                 .orElseThrow(() -> Exceptions.system("401", "token 异常"));
         HttpServletRequest httpServletRequest = attributes.getRequest();
         String token = httpServletRequest.getHeader("Authorization");
-        //在此处可进行自定义逻辑处理
+        //toke你解析处理
         TokenInfo tokenInfo = tokenParamInfoParse.parseIdempotentInfo(methodInvocation);
-        System.err.println("===token信息===" + tokenInfo);
+        log.info("===token信息===" + tokenInfo);
+        //token验证处理
         tokenCondition(token, issuer, tokenInfo.getJwtId());
         Object proceed;
         proceed = methodInvocation.proceed();
@@ -52,9 +55,9 @@ public class ServiceExceptionAspect implements MethodInterceptor {
         TokenState tokenState = JwtUtils.validateJWT(token, issuer, uniqueValue);
         switch (tokenState) {
             case EXPIRED:
-                throw Exceptions.business("401", "超时");
+                throw Exceptions.business("401", "token已经过期");
             case INVALID:
-                throw Exceptions.business("405", "无效");
+                throw Exceptions.business("405", "token无效，请检查");
             case VALID:
         }
     }
