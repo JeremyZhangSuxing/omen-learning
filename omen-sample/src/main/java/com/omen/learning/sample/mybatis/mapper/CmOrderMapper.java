@@ -2,10 +2,9 @@ package com.omen.learning.sample.mybatis.mapper;
 
 import com.omen.learning.sample.mybatis.example.CmOrderExample;
 import com.omen.learning.sample.mybatis.po.CmOrder;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface CmOrderMapper {

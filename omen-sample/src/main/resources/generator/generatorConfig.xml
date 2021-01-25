@@ -86,5 +86,19 @@
             <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
             <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
         </table>
+
+        <table tableName="upload_record" domainObjectName="UploadRecord" >
+            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
+
+        <table tableName="upload_rule" domainObjectName="UploadRule" >
+            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+        </table>
+
+
+
     </context>
 </generatorConfiguration>
