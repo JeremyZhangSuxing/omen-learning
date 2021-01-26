@@ -5,6 +5,7 @@ import com.omen.learning.common.annotation.EnableTokenValidate;
 import com.omen.learning.email.annotation.EnableEmail;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author : Knight
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableTokenValidate
 @EnableEmail
 @EnableBeanRegistry
+@EnableCaching
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
