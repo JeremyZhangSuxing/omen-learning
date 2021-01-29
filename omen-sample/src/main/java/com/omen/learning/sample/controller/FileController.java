@@ -16,12 +16,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +43,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -58,7 +69,6 @@ public class FileController {
               OutputStream outputStream = response.getOutputStream()
         ) {
             response.setHeader("Content-Disposition", "attachment; filename=test.txt");
-            log.info("");
             IOUtils.copy(inputStream, outputStream);
             outputStream.flush();
         } catch (Exception e) {
@@ -141,5 +151,35 @@ public class FileController {
         } finally {
             FileUtils.deleteQuietly(file);
         }
+    }
+
+    @PostMapping("/pdf")
+    public CommonDataResponse<String> uploadPdf(@RequestParam MultipartFile multipartFile) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        String result = "";
+        try {
+            ByteArrayBody byteArrayBody = new ByteArrayBody(multipartFile.getBytes(), ContentType.MULTIPART_FORM_DATA, multipartFile.getOriginalFilename());
+            MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+            HttpPost httpPost = new HttpPost("url");
+            HttpEntity entity = entityBuilder.addPart("multipartFile", byteArrayBody).build();
+            httpPost.setEntity(entity);
+            httpPost.addHeader("Authorization", "X-CAT ");
+            HttpResponse response = httpClient.execute(httpPost);
+            // 执行提交
+            HttpEntity responseEntity = response.getEntity();
+            if (responseEntity != null) {
+                // 将响应内容转换为字符串
+                result = EntityUtils.toString(responseEntity, Charset.forName("UTF-8"));
+            }
+        } catch (Exception fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } finally {
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return CommonDataResponse.success(result);
     }
 }

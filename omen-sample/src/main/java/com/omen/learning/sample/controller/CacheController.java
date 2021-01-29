@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/cache")
 @RequiredArgsConstructor
+@Cacheable(cacheNames = "order",cacheManager = "caffeineCacheManager")
 public class CacheController {
     private final TestService testService;
 
@@ -27,4 +28,6 @@ public class CacheController {
     public CommonDataResponse<List<CmOrder>> query(@RequestParam String id) {
         return CommonDataResponse.success(testService.listOrders());
     }
+
+
 }
