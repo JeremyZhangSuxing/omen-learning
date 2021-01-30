@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8080
 spring:
   application:
     name: sample-application
@@ -17,9 +17,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-  redis:
-    host: 122.51.171.126
-    password: ak402507979
+#  redis:
+#    host: 122.51.171.126
+#    password: ak402507979
   mail: #邮件相关配置
     host: smtp.163.com
     username: jeresuxing@163.com

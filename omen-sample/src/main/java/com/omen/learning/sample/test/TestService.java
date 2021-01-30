@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * @author zhang.suxing
  * @date 2020/11/12 21:41
@@ -19,10 +17,17 @@ import java.util.List;
 public class TestService {
     private final CmOrderMapper cmOrderMapper;
 
-    public List<CmOrder> listOrders() {
-        log.info("签名校验通过，开始执行业务逻辑");
+    public CmOrder listOrders(Long id) {
         CmOrderExample example = new CmOrderExample();
-        example.createCriteria().andIdGreaterThan(1L);
-        return cmOrderMapper.selectByExample(example);
+        example.createCriteria().andIdEqualTo(1L);
+        return cmOrderMapper.selectOneByExample(example);
+    }
+
+
+    public CmOrder updateOrder(CmOrder cmOrder) {
+        CmOrderExample example = new CmOrderExample();
+        example.createCriteria().andIdEqualTo(1L);
+        cmOrderMapper.updateByExampleSelective(cmOrder ,example);
+        return cmOrderMapper.selectOneByExample(example);
     }
 }

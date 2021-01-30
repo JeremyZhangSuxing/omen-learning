@@ -14,4 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({IdempotenceProperties.class})
 public class BaseConfig {
 
+//    @Bean
+//    public StringHttpMessageConverter stringHttpMessageConverter(){
+//        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
+//        stringHttpMessageConverter.setDefaultCharset(Charset.defaultCharset());
+//        stringHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
+//        return stringHttpMessageConverter;
+//    }
+
+
 }

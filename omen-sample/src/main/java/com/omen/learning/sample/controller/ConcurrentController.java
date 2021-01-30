@@ -34,6 +34,6 @@ public class ConcurrentController {
     @GetMapping("/email")
     public String emailSend() {
         emailHelper.sendHtml("test");
-        return "success";
+        return "成功";
     }
 }
