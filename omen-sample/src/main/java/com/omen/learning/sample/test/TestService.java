@@ -30,4 +30,11 @@ public class TestService {
         cmOrderMapper.updateByExampleSelective(cmOrder ,example);
         return cmOrderMapper.selectOneByExample(example);
     }
+
+
+    public CmOrder saveOrder(CmOrder cmOrder){
+        log.info("数据库入库成功");
+        return cmOrder;
+
+    }
 }
