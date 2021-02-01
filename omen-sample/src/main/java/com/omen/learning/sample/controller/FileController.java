@@ -2,10 +2,9 @@ package com.omen.learning.sample.controller;
 
 import com.alibaba.excel.EasyExcelFactory;
 import com.github.houbb.csv.util.CsvHelper;
-import com.omen.learning.common.entity.JackSonDemo;
-import com.omen.learning.common.support.JackJsonProUtils;
 import com.omen.learning.common.utils.CommonFileUtils;
 import com.omen.learning.sample.service.file.FileService;
+import com.omen.learning.sample.support.DemoCsvDTO;
 import com.omen.learning.sample.support.DemoExcelDTO;
 import com.omen.learning.sample.support.DemoExcelUploadDTO;
 import com.omen.learning.sample.support.UploadDataListener;
@@ -26,23 +25,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -61,7 +48,7 @@ public class FileController {
     private final FileService fileService;
 
     @GetMapping("/{name}")
-    public void download(@PathVariable String name, HttpServletRequest request, HttpServletResponse response) {
+    public void download(@PathVariable String name, HttpServletResponse response) {
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         String fileName = StringUtils.appendIfMissing(name, ".xlsx", "");
         try ( //1593225958838
@@ -119,25 +106,12 @@ public class FileController {
         return CommonCodeResponse.success();
     }
 
-    @PostMapping("/json")
-    public CommonDataResponse<JackSonDemo> testJackSon(@RequestBody JackSonDemo jackSonDemo) {
-        log.info("test data {}", jackSonDemo);
-        return CommonDataResponse.success(JackSonDemo.buildOneObject());
-    }
-
-    @GetMapping("/json/list")
-    public CommonDataResponse<List<JackSonDemo>> testJackSon1() {
-        String key = JackJsonProUtils.convertToJson(JackSonDemo.buildManyObject());
-        log.info("test data {}", key);
-        List<JackSonDemo> jackSonDemos = JackJsonProUtils.convertToList(key, JackSonDemo.class);
-        return CommonDataResponse.success(jackSonDemos);
-    }
 
     @GetMapping("/csv/download")
     public void exportCsv(HttpServletResponse response) throws IOException {
         log.info("export csv --- star--{}", LocalDateTime.now());
         String fileName = UUID.randomUUID().toString() + ".csv";
-        String path = "/Users/suxingzhang/Desktop/develop/moveInOut/" + fileName;
+        String path = "/test" + fileName;
         CsvHelper.write(fileService.buildCsvData(), path);
         //必须有本地变量
         String name = "测试文件";
@@ -152,6 +126,15 @@ public class FileController {
             FileUtils.deleteQuietly(file);
         }
     }
+
+    @PutMapping("/csv/read")
+    public CommonCodeResponse readCsv() {
+        log.info("-----read csv start----");
+        String filePath = "F:\\test\\测试文件.csv";
+        List<DemoCsvDTO> userList = CsvHelper.read(filePath, DemoCsvDTO.class);
+        return CommonCodeResponse.success();
+    }
+
 
     @PostMapping("/pdf")
     public CommonDataResponse<String> uploadPdf(@RequestParam MultipartFile multipartFile) {
