@@ -6,10 +6,7 @@ import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cache")
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "order",cacheManager = "caffeineCacheManager")
+@CacheConfig(cacheNames = "order", cacheManager = "caffeineCacheManager")
 public class CacheController {
     private final TestService testService;
 
@@ -40,15 +37,31 @@ public class CacheController {
 
     @DeleteMapping
     @CacheEvict(key = "#id")
-    public CommonCodeResponse delete(@RequestParam Long id){
+    public CommonCodeResponse delete(@RequestParam Long id) {
         log.info("清除缓存，数据库数据状态变更");
         return CommonCodeResponse.success();
     }
 
+    @DeleteMapping
+    @CacheEvict(beforeInvocation = true, allEntries = true)
+    public CommonCodeResponse deleteAll(@RequestParam Long id) {
+        log.info("清除缓存，数据库数据状态变更");
+        return CommonCodeResponse.success();
+    }
+
+
     @PostMapping
     @CachePut(key = "#cmOrder.id")
-    public CommonDataResponse<CmOrder> save(@RequestBody CmOrder cmOrder){
+    public CommonDataResponse<CmOrder> save(@RequestBody CmOrder cmOrder) {
         log.info("数据新增并刷新缓存");
+        return CommonDataResponse.success(testService.saveOrder(cmOrder));
+    }
+
+    @Caching(
+            cacheable = {@Cacheable(cacheNames = "order", key = "cmOrder.id"), @Cacheable(cacheNames = "order", key = "cmOrder.orderNo")}
+    )
+    public CommonDataResponse<CmOrder> select(CmOrder cmOrder) {
+        log.info("--数据库查询--");
         return CommonDataResponse.success(testService.saveOrder(cmOrder));
     }
 }
