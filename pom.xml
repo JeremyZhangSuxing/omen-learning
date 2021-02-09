@@ -12,7 +12,6 @@
         <module>concurrent-deep</module>
         <module>omen-sample</module>
         <module>tes-common</module>
-        <module>template-email</module>
         <module>idempotence</module>
         <module>bean-test</module>
         <module>omen-web</module>
