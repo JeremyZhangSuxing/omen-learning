@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/idempotence/idempotence.iml" filepath="$PROJECT_DIR$/idempotence/idempotence.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/omen-learning.iml" filepath="$PROJECT_DIR$/.idea/omen-learning.iml" />
       <module fileurl="file://$PROJECT_DIR$/omen-sample/omen-sample.iml" filepath="$PROJECT_DIR$/omen-sample/omen-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/omen-web/omen-web.iml" filepath="$PROJECT_DIR$/omen-web/omen-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/template-email/template-email.iml" filepath="$PROJECT_DIR$/template-email/template-email.iml" />
       <module fileurl="file://$PROJECT_DIR$/tes-common/tes-common.iml" filepath="$PROJECT_DIR$/tes-common/tes-common.iml" />
     </modules>

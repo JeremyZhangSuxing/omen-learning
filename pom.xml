@@ -15,6 +15,7 @@
         <module>template-email</module>
         <module>idempotence</module>
         <module>bean-test</module>
+        <module>omen-web</module>
     </modules>
 
     <properties>
