@@ -42,7 +42,7 @@ public class CacheController {
         return CommonCodeResponse.success();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/all")
     @CacheEvict(beforeInvocation = true, allEntries = true)
     public CommonCodeResponse deleteAll(@RequestParam Long id) {
         log.info("清除缓存，数据库数据状态变更");

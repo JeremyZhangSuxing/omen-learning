@@ -1,7 +1,6 @@
 package com.omen.learning.sample.controller;
 
 import com.omen.learning.common.entity.BillDTO;
-import com.omen.learning.email.support.EmailHelper;
 import com.omen.learning.sample.concurrent.PoolTestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConcurrentController {
     private final PoolTestService poolTestService;
-    private final EmailHelper emailHelper;
-
-
 
     @GetMapping("/bill")
     public List<String> getString() {
@@ -33,7 +29,6 @@ public class ConcurrentController {
      */
     @GetMapping("/email")
     public String emailSend() {
-        emailHelper.sendHtml("test");
         return "成功";
     }
 }

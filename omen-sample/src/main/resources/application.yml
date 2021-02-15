@@ -1,11 +1,12 @@
 server:
   port: 8080
+  servlet:
+    context-path: /app #设置应用名
 spring:
   application:
     name: sample-application
   profiles:
     active: ${profileActive} #正在运行的环境
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -16,21 +17,9 @@ spring:
 #    property-naming-strategy: SNAKE_CASE
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-
 #  redis:
 #    host: 122.51.171.126
 #    password: ak402507979
-  mail: #邮件相关配置
-    host: smtp.163.com
-    username: jeresuxing@163.com
-    password: GEQNZJISXVMSACGQ
-    default-encoding: UTF-8
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
-            require: true
   thymeleaf: #html模板配置
     cache: false
     prefix: classpath:/templates/

@@ -4,6 +4,7 @@ import com.omen.learning.idempotence.config.IdempotenceProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author : Knight
@@ -12,15 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 @EnableConfigurationProperties({IdempotenceProperties.class})
+
 public class BaseConfig {
-
-//    @Bean
-//    public StringHttpMessageConverter stringHttpMessageConverter(){
-//        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
-//        stringHttpMessageConverter.setDefaultCharset(Charset.defaultCharset());
-//        stringHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
-//        return stringHttpMessageConverter;
-//    }
-
 
 }
