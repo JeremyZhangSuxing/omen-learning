@@ -35,3 +35,6 @@ spring:
 mybatis:
   mapper-locations: classpath*:config/mybatis/mapper/**/*.xml
 
+logging:
+  level:
+    com.omen.learning.sample.client.OrderFeignClient: debug
