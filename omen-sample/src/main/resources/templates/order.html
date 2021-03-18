@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>userInfo</title>
+
+    <style>
+        /*不能随意修改这里 hongwei.lian*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            background: #fafafa;
+        }
+        html, body {
+            font-family: "PingFang SC";
+            font-size: 14pt;
+            width: 100%;
+            height: 100%;
+            background: #fafafa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .layout {
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+        .layout--center-items {
+            align-items: center;
+        }
+
+        .layout--center-justify {
+            justify-content: center;
+        }
+
+        .layout__flex {
+            flex: 1 1 0%;
+            min-width: 0px;
+            min-height: 0px;
+        }
+
+        .drivider {
+            height: 1px;
+            background-color: rgb(232, 232, 232);
+            margin: 16px 0;
+        }
+
+        .h2 {
+            color: rgb(43, 43, 51);
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .h3 {
+            color: rgb(43, 43, 51);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .h4 {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .h5 {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .h6 {
+            color: rgba(0, 0, 0, 0.65);
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .h8 {
+            margin: 10px 0px 0px 0px
+        }
+
+        .main {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            line-height: 2.0;
+            width: 600px;
+            /*min-height: 1100px;*/
+            overflow: auto;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        .header {
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+        }
+
+        .body {
+            padding: 0 40px 0px 40px;
+        }
+
+        .body__title {
+            margin-bottom: 16px;
+        }
+
+        .body__main {
+            background-color: #fafafa;
+            padding: 24px;
+        }
+
+        .body__content {
+            line-height: 2.3;
+        }
+
+        .item-icon {
+            background: rgb(255, 255, 255);
+            border-radius: 10px;
+            border: 1px solid rgb(232, 232, 232);
+            height: 64px;
+            width: 64px;
+            margin-right: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 0 40px 80px 40px;
+
+        }
+
+        .footer > span {
+            margin-bottom: 16px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="main">
+        <div style="text-align: center; padding: 95px 0 80px 0;">
+            <img src="https://wework-chinaos.oss-cn-shanghai.aliyuncs.com/33dd89c2-6ca1-41de-a538-78aeac812fd5-1608787131375.png"/>
+        </div>
+        <div class="body">
+            <div class="body__title">
+                <div>
+                    <h3 class="h3" style="display: inline-block; width: 70%;">请确认您的订单</h3>
+
+                    <div style="display: inline-block; width: 28%; text-align: right;">
+                        <span style="display: inline-block; height: 22px; width: 40px; border-radius: 4px; border: 1px solid rgba(38, 38, 38, 0.65); line-height: 22px; text-align: center;">中文</span>
+                    </div>
+                </div>
+
+
+                <span class="h8">您在 </span>
+                <span class="h8">2021</span>
+                <span class="h8"> 年 </span>
+                <span class="h8">02</span>
+                <span class="h8"> 月 </span>
+                <span class="h8">08</span>
+                <span class="h8"> 日 提交了订单</span>
+            </div>
+            <div class="body__main">
+                <div class="body__block">
+                    <h5 class="h4">订单信息</h5>
+                    <div class="body__content">
+                        <div class="layout layout--center-items">
+                            <span class="h5">订单编号：</span>
+                            <span class="h6">20210208775171</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">公司名称：</span>
+                            <span class="h6">巨量引擎（上海）計算機科技有限公司</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">主会员名：</span>
+                            <span class="h6">Gao Xian，Wangdi</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">主会员邮箱：</span>
+                            <span class="h6">jinghua.wang6@wework.com</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">主会员电话：</span>
+                            <span class="h6">86 13818382906</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">楼宇：</span>
+                            <span class="h6">利豐廣場</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">办公室：</span>
+                            <span class="h6"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drivider"></div>
+
+                <div class="body__block">
+                    <h5 class="h4">商品信息</h5>
+                    <div class="body__content layout">
+                        <div class="item-icon">
+                            <img style="width: 32px; height: 32px; margin: 16px;"
+                                 src="https://wework-chinaos.oss-cn-shanghai.aliyuncs.com/4d6402ca-b6f8-472a-8d80-2127e8753577-1608778853830.png"
+                                 alt=""/>
+                        </div>
+                        <div>
+                            <div class="layout layout--center-items">
+                                <span class="h4">購買積分包</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h6">一次性</span> |
+                                <span class="h6">2021年02月08日 - 2021年02月08日</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h5">数量：</span>
+                                <span class="h6">2</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h5">原单价（含税）：</span>
+                                <span class="h6">CNY 200.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drivider"></div>
+                <table style="width: 100%;">
+                    <tr>
+                        <td>原价（不含税）</td>
+                        <td style="text-align: right;">CNY 377.36</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            税率
+                            <span>（6%）</span>
+                        </td>
+                        <td style="text-align: right;">CNY 22.64</td>
+                    </tr>
+
+                    <tr style="color: rgba(0, 0, 0, 0.85); font-size: 16px; font-weight: 500;">
+                        <td>总金额</td>
+                        <td style="text-align: right;">CNY 400.00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <div style="margin: 30px 0 16px 0;">
+                <span>点击“确认”即表明您声明您已获得适当授权代表</span>
+                <span>巨量引擎（上海）計算機科技有限公司</span>
+                <span>确认本订单并代表</span>
+                <span>巨量引擎（上海）計算機科技有限公司</div>
+            <a href="https://www-dev.wework.cn/order/approval?orderItemUuid=6020a94f769d120001fc6849"
+               style="cursor: pointer; height: 32px; padding: 4px 15px; border-radius: 2px; border: 1px solid rgb(24, 144, 255); font-size: 14px; color: #fff; background: rgb(24, 144, 255); border-color: rgb(24, 144, 255);">
+                确认</a>
+        </div>
+
+        <div style="height: 1px; background-color: rgb(232, 232, 232); margin: 80px 0 36px;"></div>
+
+
+        <div class="body">
+            <div class="body__title">
+                <div>
+                    <h3 class="h3" style="display: inline-block; width: 70%;">Order Confirmation</h3>
+
+                    <div style="display: inline-block; width: 28%; text-align: right;">
+                        <span style="display: inline-block; height: 22px; width: 40px; border-radius: 4px; border: 1px solid rgba(38, 38, 38, 0.65); line-height: 22px; text-align: center;">EN</span>
+                    </div>
+                </div>
+
+                <span class="h8">The order is created on</span>
+                <span class="h8">2021</span>
+                <span class="h8"> / </span>
+                <span class="h8">02</span>
+                <span class="h8"> / </span>
+                <span class="h8">08</span>
+                <span class="h8" >.</span>
+            </div>
+            <div class="body__main">
+                <div class="body__block">
+                    <h5 class="h4">Order information:</h5>
+                    <div class="body__content">
+                        <div class="layout layout--center-items">
+                            <span class="h5">Order No：</span>
+                            <span class="h6">20210208775171</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Company Name：</span>
+                            <span class="h6">巨量引擎（上海）計算機科技有限公司</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Primary Member Name：</span>
+                            <span class="h6">Gao Xian，Wangdi</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Primary Member Email：</span>
+                            <span class="h5">jinghua.wang6@wework.com</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Primary Member Phone：</span>
+                            <span class="h5">86 13818382906</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Location Name：</span>
+                            <span class="h6">Li &amp; Fung Plaza</span>
+                        </div>
+
+                        <div class="layout layout--center-items">
+                            <span class="h5">Office/Desk：</span>
+                            <span class="h6"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drivider"></div>
+
+                <div class="body__block">
+                    <h5 class="h4">Item information</h5>
+                    <div class="body__content layout">
+                        <div class="item-icon">
+                            <img style="width: 32px; height: 32px; margin: 16px;"
+                                 src="https://wework-chinaos.oss-cn-shanghai.aliyuncs.com/4d6402ca-b6f8-472a-8d80-2127e8753577-1608778853830.png"
+                                 alt=""/>
+                        </div>
+                        <div>
+                            <div class="layout layout--center-items">
+                                <span class="h4">Purchased Credit</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h6">One time</span> |
+                                <span class="h6">2021/02/08 - 2021/02/08</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h5">Quantity：</span>
+                                <span class="h6">2</span>
+                            </div>
+                            <div class="layout layout--center-items">
+                                <span class="h5">Unit Price (tax-inclusive)：</span>
+                                <span class="h6">CNY 200.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drivider"></div>
+
+                <table style="width: 100%;">
+                    <tr>
+                        <td>Net price (tax-exclusive)</td>
+                        <td style="text-align: right;">CNY 377.36</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Tax rate
+                            <span>（6%）</span>
+                        </td>
+                        <td style="text-align: right;">CNY 22.64</td>
+                    </tr>
+
+                    <tr style="color: rgba(0, 0, 0, 0.85); font-size: 16px; font-weight: 500;">
+                        <td>Total Price</td>
+                        <td style="text-align: right;">CNY 400.00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footer">
+            <div style="margin: 15px 0 16px 0;">
+                <span>By clicking "CONFIRM" you represent that you have the proper authority to confirm this Order on behalf of</span>
+                <span>巨量引擎（上海）計算機科技有限公司</span>
+                and incur the obligations in this Order on behalf of
+                <span>巨量引擎（上海）計算機科技有限公司</span>.
+            </div>
+            <a href="https://www-dev.wework.cn/order/approval?orderItemUuid=6020a94f769d120001fc6849"
+               style="cursor: pointer; height: 32px; padding: 4px 15px; border-radius: 2px; border: 1px solid rgb(24, 144, 255); font-size: 14px; color: #fff; background: rgb(24, 144, 255); border-color: rgb(24, 144, 255);">
+                Confirm
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

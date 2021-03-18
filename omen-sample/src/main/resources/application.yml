@@ -1,7 +1,7 @@
 server:
   port: 8080
-  servlet:
-    context-path: /app #设置应用名
+#  servlet:
+#    context-path: /app #设置应用名
 spring:
   application:
     name: sample-application

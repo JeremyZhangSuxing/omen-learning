@@ -10,6 +10,7 @@ import com.omen.learning.sample.support.DemoExcelUploadDTO;
 import com.omen.learning.sample.support.UploadDataListener;
 import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -25,11 +26,23 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -164,5 +177,36 @@ public class FileController {
             }
         }
         return CommonDataResponse.success(result);
+    }
+
+
+//    /**
+//     * 文件下载 私有文件
+//     */
+//    @GetMapping("/{test}")
+//    public void downloadPrivateFile(HttpServletResponse response, @PathVariable String test, @RequestParam String url) throws IOException {
+//        OSSObject object = ossClientPro.getObject(ossProperties.getBucket(), url.substring(ossProperties.getAccessBasePath().length()));
+//        OutputStream outputStream = response.getOutputStream();
+//        org.apache.commons.compress.utils.IOUtils.copy(object.getObjectContent(), response.getOutputStream());
+//        outputStream.flush();
+//        //设置相应类型让浏览器知道用什么打开  用application/octet-stream也可以，看是什么浏览器
+//        response.setContentType("application/x-msdownload");
+//        String ossFileName = url.substring(url.lastIndexOf("/") + 1);
+//        String fileName = URLEncoder.encode(ossFileName, "UTF-8").replace("\\+", "%20");
+//        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName);
+//    }
+
+    @PostMapping("/ossUpload")
+    public String uploadFilePro(@RequestBody TestBody testBody) {
+        return testBody.getMultipartFile().getOriginalFilename();
+    }
+
+    @Data
+    static class TestBody {
+        private MultipartFile multipartFile;
+        private String url;
+        String businessType;
+        String fileType;
+        String directory;
     }
 }

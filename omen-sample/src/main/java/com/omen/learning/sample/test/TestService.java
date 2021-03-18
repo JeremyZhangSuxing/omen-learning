@@ -23,18 +23,15 @@ public class TestService {
         return cmOrderMapper.selectOneByExample(example);
     }
 
-
     public CmOrder updateOrder(CmOrder cmOrder) {
         CmOrderExample example = new CmOrderExample();
         example.createCriteria().andIdEqualTo(1L);
-        cmOrderMapper.updateByExampleSelective(cmOrder ,example);
+        cmOrderMapper.updateByExampleSelective(cmOrder, example);
         return cmOrderMapper.selectOneByExample(example);
     }
 
-
-    public CmOrder saveOrder(CmOrder cmOrder){
+    public CmOrder saveOrder(CmOrder cmOrder) {
         log.info("数据库入库成功");
         return cmOrder;
-
     }
 }
