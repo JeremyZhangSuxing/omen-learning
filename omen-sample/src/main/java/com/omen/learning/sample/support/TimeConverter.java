@@ -31,6 +31,6 @@ public class TimeConverter implements Converter<Long> {
 
     @Override
     public CellData<String> convertToExcelData(Long value, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        return new CellData<>("2020-01-02");
+        return new CellData("");
     }
 }
