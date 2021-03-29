@@ -21,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-        log.info("preHandle --->>> {}", request);
+        log.info("preHandle --->>> {}", requestURI);
         //可以在此处对request 做预处理 比如是否登录。。。
         String token = request.getHeader("token");
         if (token.equals(knight)) {
@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
-        log.info("postHandle --->>> 请求处理完后到mvc ", request.getRequestURI());
+        log.info("postHandle --->>> 请求处理完后到mvc  {} ", request.getRequestURI());
     }
 
     @Override

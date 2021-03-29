@@ -6,6 +6,7 @@ import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -36,6 +37,7 @@ public class CacheController {
     @Cacheable(key = "#id")
     public CommonDataResponse<CmOrder> query(@RequestParam Long id) {
         log.info("查询数据from db");
+        log.info("接口请求的token ----- {}", MDC.get("token"));
         return CommonDataResponse.success(testService.listOrders(id));
     }
 
