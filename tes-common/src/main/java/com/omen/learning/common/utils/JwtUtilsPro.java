@@ -4,6 +4,7 @@ import com.omen.learning.common.support.JwtHolder;
 import com.weweibuy.framework.common.core.exception.BusinessException;
 import com.weweibuy.framework.common.core.model.eum.CommonErrorCodeEum;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -80,5 +81,18 @@ public class JwtUtilsPro {
         }
     }
 
+
+    public Claims parseToken(String jwt) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(publicKey)
+                    .parseClaimsJws(jwt)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            log.info("token expire {}", "");
+            throw new BusinessException(CommonErrorCodeEum.UNAUTHORIZED);
+
+        }
+    }
 
 }
