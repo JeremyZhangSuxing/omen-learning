@@ -1,10 +1,8 @@
 package com.omen.learning.sample.config;
 
-import com.omen.learning.idempotence.config.IdempotenceProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * @author : Knight
@@ -12,8 +10,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties({IdempotenceProperties.class})
-
+@EnableConfigurationProperties
 public class BaseConfig {
 
 }

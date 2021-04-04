@@ -1,6 +1,8 @@
 package com.omen.learning.sample.servlet;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
+import com.omen.learning.common.enums.CustomException;
+import com.omen.learning.common.enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 
@@ -12,7 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -29,11 +30,17 @@ public class LocalFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("---- LocalFilter doFilter start here----");
-        doSyncHeader((HttpServletRequest) request, (HttpServletResponse) response);
-        chain.doFilter(request, response);
-        log.info("---- LocalFilter doFilter end here-l---");
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+        try {
+            log.info("---- LocalFilter doFilter start here----");
+            doSyncHeader((HttpServletRequest) request, (HttpServletResponse) response);
+            //测试代码  filter 的异常 会被ErrController 处理 但很少这样字用
+//            int a = 1 / 0;
+            chain.doFilter(request, response);
+            log.info("---- LocalFilter doFilter end here-l---");
+        } catch (Exception e) {
+            throw new CustomException(ResultEnum.ZERO_EXCEPTION);
+        }
     }
 
     /**

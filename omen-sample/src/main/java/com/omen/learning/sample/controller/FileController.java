@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -165,7 +166,7 @@ public class FileController {
             HttpEntity responseEntity = response.getEntity();
             if (responseEntity != null) {
                 // 将响应内容转换为字符串
-                result = EntityUtils.toString(responseEntity, Charset.forName("UTF-8"));
+                result = EntityUtils.toString(responseEntity, Charset.forName(StandardCharsets.UTF_8.name()));
             }
         } catch (Exception fileNotFoundException) {
             fileNotFoundException.printStackTrace();
