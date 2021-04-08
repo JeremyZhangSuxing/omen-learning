@@ -4,7 +4,6 @@ import com.omen.learning.common.entity.BillDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -21,7 +20,7 @@ import org.springframework.web.util.UrlPathHelper;
 @EnableConfigurationProperties
 public class BaseConfig {
     //1、WebMvcConfigurer定制化SpringMVC的功能
-    @Bean
+//    @Bean
     public WebMvcConfigurer webMvcConfigurer() {
         return new WebMvcConfigurer() {
             @Override

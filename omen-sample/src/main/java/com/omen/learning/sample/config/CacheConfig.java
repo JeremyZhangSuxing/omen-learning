@@ -18,10 +18,6 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CacheConfig {
 
-    /**
-     *
-     * @return
-     */
     @Bean
     @Primary
     public CacheManager caffeineCacheManager() {

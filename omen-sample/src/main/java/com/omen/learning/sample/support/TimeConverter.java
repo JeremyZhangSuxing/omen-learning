@@ -31,6 +31,6 @@ public class TimeConverter implements Converter<Long> {
 
     @Override
     public CellData<String> convertToExcelData(Long value, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        return new CellData("");
+        return new CellData<>("");
     }
 }

@@ -46,3 +46,29 @@ mybatis:
 logging:
   level:
     com.omen.learning.sample.client.OrderFeignClient: debug
+#指标监控
+management:
+  server:
+    port: 8081 #指定健康检查的端口
+  endpoints:
+    enabled-by-default: true #暴露所有端点信息
+    web:
+      exposure:
+        include: '*'  #以web方式暴露
+  #默认先开启所有健康检查，再手动去关闭不需要开启的端点
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  #关闭某些健康检查的选项
+  health:
+    redis:
+      enabled: false
+    elasticsearch:
+      enabled: false
+info:
+  appName: boot-admin
+  version: 2.0.1
+  mavenProjectName: @project.artifactId@  #使用@@可以获取maven的pom文件值
+  mavenProjectVersion: @project.version@
+
