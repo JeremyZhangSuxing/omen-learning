@@ -2,8 +2,12 @@ package com.omen.learning.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -13,6 +17,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class BillDTO {
     private String orderNo;
     private Long id;
@@ -32,7 +37,7 @@ public class BillDTO {
         System.out.println(map);
         System.out.println(map.get(""));
         List<BillDTO> dtoList = buildParam();
-        dtoList.stream().collect(Collectors.toMap(key -> key.getId(), value -> value.getOrderNo(), (o,n) -> n));
+        dtoList.stream().collect(Collectors.toMap(key -> key.getId(), value -> value.getOrderNo(), (o, n) -> n));
 //        Map<String,BillDTO> newMap = new HashMap<>();
 //        for (BillDTO billDTO : dtoList) {
 //            newMap.put(billDTO.getOrderNo(),map.get(billDTO.getOrderNo()));

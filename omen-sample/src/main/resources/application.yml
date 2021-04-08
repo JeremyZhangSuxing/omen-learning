@@ -7,6 +7,14 @@ spring:
     name: sample-application
   profiles:
     active: ${profileActive} #正在运行的环境
+  mvc:
+    static-path-pattern: /**
+  # html 资源缓存时间
+  resources:
+    cache:
+      cachecontrol:
+        cache-public: true
+        max-age: 11100
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
