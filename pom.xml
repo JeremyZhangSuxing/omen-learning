@@ -9,10 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>concurrent-deep</module>
+        <module>omen-common</module>
         <module>omen-sample</module>
-        <module>tes-common</module>
-        <module>bean-test</module>
+        <module>omen-spring</module>
+        <module>omen-java</module>
         <module>omen-web</module>
     </modules>
 
