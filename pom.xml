@@ -14,6 +14,7 @@
         <module>omen-spring</module>
         <module>omen-java</module>
         <module>omen-web</module>
+        <module>omen-admin</module>
     </modules>
 
     <properties>

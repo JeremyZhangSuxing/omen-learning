@@ -9,6 +9,7 @@ spring:
     active: ${profileActive} #正在运行的环境
   mvc:
     static-path-pattern: /**
+
   # html 资源缓存时间
   resources:
     cache:
@@ -40,6 +41,14 @@ spring:
       enabled: true
       max-request-size: 10MB
       max-file-size: 10MB
+  #admin 监控相关配置
+  boot:
+    admin:
+      client:
+        url: http://localhost:8082
+        instance:
+          prefer-ip: true
+
 mybatis:
   mapper-locations: classpath*:config/mybatis/mapper/**/*.xml
 
