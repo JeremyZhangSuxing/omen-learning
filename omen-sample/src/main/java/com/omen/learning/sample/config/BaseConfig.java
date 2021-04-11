@@ -1,15 +1,20 @@
 package com.omen.learning.sample.config;
 
 import com.omen.learning.common.entity.BillDTO;
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.binder.MeterBinder;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.util.UrlPathHelper;
+
+import java.util.Queue;
 
 /**
  * @author : Knight
@@ -30,6 +35,7 @@ public class BaseConfig {
                 urlPathHelper.setRemoveSemicolonContent(false);
                 configurer.setUrlPathHelper(urlPathHelper);
             }
+
             //对于定制化需求可这样操作，一般意义不大
             @Override
             public void addFormatters(FormatterRegistry registry) {
@@ -45,5 +51,13 @@ public class BaseConfig {
                 });
             }
         };
+    }
+
+    /**
+     * 对某一项目指标进行监控
+     */
+    @Bean
+    MeterBinder queueSize(Queue queue) {
+        return (registry) -> Gauge.builder("queueSize", queue::size).register(registry);
     }
 }

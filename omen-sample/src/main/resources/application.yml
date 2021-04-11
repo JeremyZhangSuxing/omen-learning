@@ -55,17 +55,23 @@ management:
     web:
       exposure:
         include: '*'  #以web方式暴露
-  #默认先开启所有健康检查，再手动去关闭不需要开启的端点
+  #默认先开启所有健康检查，再手动去关闭不需要开启的端点 展示详细信息
   endpoint:
     health:
       enabled: true
       show-details: always
+    info:
+      enabled: true
+    beans:
+      enabled: true
+
   #关闭某些健康检查的选项
   health:
     redis:
       enabled: false
     elasticsearch:
       enabled: false
+
 info:
   appName: boot-admin
   version: 2.0.1

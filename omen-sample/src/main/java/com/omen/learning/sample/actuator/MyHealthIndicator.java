@@ -1,10 +1,13 @@
-package com.omen.learning.sample.config;
+package com.omen.learning.sample.actuator;
 
 import com.weweibuy.framework.common.core.exception.Exceptions;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Knigt
+ */
 @Component("knightHealthIndicator")
 public class MyHealthIndicator implements HealthIndicator {
 
