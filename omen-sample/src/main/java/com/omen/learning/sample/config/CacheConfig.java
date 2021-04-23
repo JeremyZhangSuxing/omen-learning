@@ -20,6 +20,7 @@ public class CacheConfig {
 
     @Bean
     @Primary
+    //此处需要指定类型manager
     public CacheManager caffeineCacheManager() {
         return buildCacheManager(100, 2000, 1, TimeUnit.DAYS);
     }
@@ -27,7 +28,7 @@ public class CacheConfig {
 
     private CaffeineCacheManager buildCacheManager(Integer initSize, Integer maxSize, long duration, TimeUnit unit) {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-        Caffeine caffeine = Caffeine.newBuilder()
+        Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
                 .initialCapacity(initSize)
                 .maximumSize(maxSize)
                 .expireAfterWrite(duration, unit);
