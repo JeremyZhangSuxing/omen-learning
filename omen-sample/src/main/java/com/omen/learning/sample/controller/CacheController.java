@@ -73,7 +73,7 @@ public class CacheController {
     @Caching(
             cacheable = {@Cacheable(cacheNames = "order", key = "cmOrder.id"), @Cacheable(cacheNames = "order", key = "cmOrder.orderNo")}
     )
-    public CommonDataResponse<CmOrder> select(CmOrder cmOrder) {
+    public CommonDataResponse<CmOrder> saveAll(CmOrder cmOrder) {
         log.info("--数据库查询--");
         return CommonDataResponse.success(testService.saveOrder(cmOrder));
     }
