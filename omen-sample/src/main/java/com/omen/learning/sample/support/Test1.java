@@ -2,6 +2,8 @@ package com.omen.learning.sample.support;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author : Knight
@@ -20,7 +22,14 @@ public class Test1 {
         System.out.println(betweenMONTHS);
         System.out.println(between1YEARS);
         System.out.println(between1DAYS);
+
+
+        List<String> strings = Arrays.asList("anna.tsai@wework.cn", "we-cn-00879@wework.cn", "jessie.liu@themetathink.com");
+        strings.forEach(v -> System.out.println(v));
+
+        System.out.println("当前线程的状态---");
     }
+
 
 
 }

@@ -55,4 +55,7 @@ public class Test {
         System.out.println("头尾月金额：" + firstMonth.add(secondMonth).setScale(2, RoundingMode.HALF_UP));
         return firstMonth.add(secondMonth);
     }
+
+
+
 }
