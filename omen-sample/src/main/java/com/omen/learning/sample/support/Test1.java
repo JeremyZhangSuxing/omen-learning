@@ -22,14 +22,11 @@ public class Test1 {
         System.out.println(betweenMONTHS);
         System.out.println(between1YEARS);
         System.out.println(between1DAYS);
-
-
         List<String> strings = Arrays.asList("anna.tsai@wework.cn", "we-cn-00879@wework.cn", "jessie.liu@themetathink.com");
-        strings.forEach(v -> System.out.println(v));
-
+        strings.forEach(System.out::println);
         System.out.println("当前线程的状态---");
-    }
 
+    }
 
 
 }

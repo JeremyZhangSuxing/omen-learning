@@ -5,7 +5,6 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class CacheConfig {
 
     @Bean
-    @Primary
+//    @Primary
     //此处需要指定类型manager
     public CacheManager caffeineCacheManager() {
         return buildCacheManager(100, 2000, 1, TimeUnit.DAYS);
