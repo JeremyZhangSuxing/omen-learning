@@ -1,0 +1,17 @@
+### get token
+GET {{common_prefix}}/test/jwt?iss={{iss}}&uuid={{uuid}}
+Content-Type: application/json
+
+
+> {% client.global.set("auth_token", response.body.data); %}
+
+###
+POST http://{{common_prefix}}/cache
+Content-Type: application/json
+Authorization: {{auth_token}}
+
+{
+  "orderStatus": "DELIVERY",
+  "orderNo": "ORDER_DISPATCH_OO1"
+}
+

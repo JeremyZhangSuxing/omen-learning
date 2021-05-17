@@ -9,7 +9,8 @@ spring:
     active: ${profileActive} #正在运行的环境
   mvc:
     static-path-pattern: /**
-
+  flyway:
+    enabled: false
   # html 资源缓存时间
   resources:
     cache:

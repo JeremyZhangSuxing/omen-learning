@@ -67,6 +67,7 @@ public class CacheController {
     @CachePut(key = "#cmOrder.id")
     public CommonDataResponse<CmOrder> save(@RequestBody CmOrder cmOrder) {
         log.info("数据新增并刷新缓存");
+        log.info("接口请求的token ----- {}", MDC.get("token"));
         return CommonDataResponse.success(testService.saveOrder(cmOrder));
     }
 

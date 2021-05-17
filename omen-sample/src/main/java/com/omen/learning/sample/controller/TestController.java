@@ -3,7 +3,6 @@ package com.omen.learning.sample.controller;
 import com.omen.learning.common.annotation.TokenValidate;
 import com.omen.learning.common.enums.TokenState;
 import com.omen.learning.common.utils.JwtUtils;
-import com.omen.learning.sample.test.TestService;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/test")
 @RequiredArgsConstructor
 public class TestController {
-    private final TestService testService;
     private final HttpServletRequest httpServletRequest;
 
     /**
