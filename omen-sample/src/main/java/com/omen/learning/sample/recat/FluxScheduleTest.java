@@ -11,10 +11,9 @@ import java.time.Duration;
  * @date : 2021/5/17 2:39 下午
  */
 public class FluxScheduleTest {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Flux.interval(Duration.ofMillis(300), Schedulers.newParallel("test..."))
                 .subscribe(v -> System.out.println(Thread.currentThread().getName() + "---> " + v));
-
 
         Scheduler s = Schedulers.newParallel("parallel-scheduler", 4);
         final Flux<String> flux = Flux

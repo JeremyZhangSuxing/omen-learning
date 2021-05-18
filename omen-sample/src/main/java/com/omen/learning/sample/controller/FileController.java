@@ -10,7 +10,6 @@ import com.omen.learning.sample.support.DemoExcelUploadDTO;
 import com.omen.learning.sample.support.UploadDataListener;
 import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -30,7 +29,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -120,7 +118,6 @@ public class FileController {
         return CommonCodeResponse.success();
     }
 
-
     @GetMapping("/csv/download")
     public void exportCsv(HttpServletResponse response) throws IOException {
         log.info("export csv --- star--{}", LocalDateTime.now());
@@ -142,14 +139,17 @@ public class FileController {
     }
 
     @PutMapping("/csv/read")
-    public CommonCodeResponse readCsv() {
+    public CommonDataResponse<List<DemoCsvDTO>> readCsv() {
         log.info("-----read csv start----");
         String filePath = "F:\\test\\测试文件.csv";
         List<DemoCsvDTO> userList = CsvHelper.read(filePath, DemoCsvDTO.class);
-        return CommonCodeResponse.success();
+        return CommonDataResponse.success(userList);
     }
 
-
+    /**
+     * 向第三方服务 同步文件时使用httpClient请求
+     * 另外可以封装成一个FeignClient请求的方式是代码的风格统一化
+     */
     @PostMapping("/pdf")
     public CommonDataResponse<String> uploadPdf(@RequestParam MultipartFile multipartFile) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -165,7 +165,7 @@ public class FileController {
             // 执行提交
             HttpEntity responseEntity = response.getEntity();
             if (responseEntity != null) {
-                // 将响应内容转换为字符串
+                //将响应内容转换为字符串
                 result = EntityUtils.toString(responseEntity, Charset.forName(StandardCharsets.UTF_8.name()));
             }
         } catch (Exception fileNotFoundException) {
@@ -180,34 +180,17 @@ public class FileController {
         return CommonDataResponse.success(result);
     }
 
-
-//    /**
-//     * 文件下载 私有文件
-//     */
-//    @GetMapping("/{test}")
-//    public void downloadPrivateFile(HttpServletResponse response, @PathVariable String test, @RequestParam String url) throws IOException {
-//        OSSObject object = ossClientPro.getObject(ossProperties.getBucket(), url.substring(ossProperties.getAccessBasePath().length()));
-//        OutputStream outputStream = response.getOutputStream();
-//        org.apache.commons.compress.utils.IOUtils.copy(object.getObjectContent(), response.getOutputStream());
-//        outputStream.flush();
-//        //设置相应类型让浏览器知道用什么打开  用application/octet-stream也可以，看是什么浏览器
-//        response.setContentType("application/x-msdownload");
-//        String ossFileName = url.substring(url.lastIndexOf("/") + 1);
-//        String fileName = URLEncoder.encode(ossFileName, "UTF-8").replace("\\+", "%20");
-//        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName);
-//    }
-
-    @PostMapping("/ossUpload")
-    public String uploadFilePro(@RequestBody TestBody testBody) {
-        return testBody.getMultipartFile().getOriginalFilename();
-    }
-
-    @Data
-    static class TestBody {
-        private MultipartFile multipartFile;
-        private String url;
-        String businessType;
-        String fileType;
-        String directory;
+    @GetMapping("/preview")
+    public void commonDownloadFile(HttpServletResponse response, @RequestParam(required = false) String url) throws IOException {
+        //这一行代码永不决定是预览还是下载
+        //        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + "Name");
+        File file = new File("/Users/suxingzhang/Desktop/uploadTest/1A.jpg");
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        OutputStream outputStream;
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            outputStream = response.getOutputStream();
+            IOUtils.copy(fileInputStream, outputStream);
+        }
+        outputStream.flush();
     }
 }
