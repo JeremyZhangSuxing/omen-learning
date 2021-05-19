@@ -22,7 +22,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <lombok.version>1.18.10</lombok.version>
-        <spring-boot.version>2.2.10.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.10.RELEASE</spring-boot.version>
         <spring-cloud-version>Hoxton.SR4</spring-cloud-version>
         <apache.common.lang.version>3.9</apache.common.lang.version>
         <commons-collections4.version>4.1</commons-collections4.version>

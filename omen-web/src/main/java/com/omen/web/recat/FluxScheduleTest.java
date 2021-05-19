@@ -1,4 +1,4 @@
-package com.omen.learning.sample.recat;
+package com.omen.web.recat;
 
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;

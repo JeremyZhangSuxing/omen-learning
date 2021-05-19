@@ -1,6 +1,5 @@
-package com.omen.learning.sample.recat;
+package com.omen.web.recat;
 
-import com.weweibuy.framework.common.core.exception.Exceptions;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
@@ -15,7 +14,7 @@ public class ReactTest {
                 .just("foo", "bar", "foobar")
                 .map(v -> {
                     if (v.startsWith("b")) {
-                        throw Exceptions.badRequestParam();
+                        throw new RuntimeException();
                     } else {
                         return v + "---> the success one";
                     }

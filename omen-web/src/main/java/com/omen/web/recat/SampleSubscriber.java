@@ -1,4 +1,4 @@
-package com.omen.learning.sample.recat;
+package com.omen.web.recat;
 
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;
