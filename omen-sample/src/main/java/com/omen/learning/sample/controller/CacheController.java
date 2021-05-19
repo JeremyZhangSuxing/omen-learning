@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class CacheController {
 
     @GetMapping
     @Cacheable(key = "#id")
-    public CommonDataResponse<CmOrder> query(@RequestParam Long id) {
+    public CommonDataResponse<CmOrder> query(@Validated @RequestParam Long id) {
         log.info("查询数据from db");
         log.info("接口请求的token ----- {}", MDC.get("token"));
         return CommonDataResponse.success(testService.listOrders(id));
