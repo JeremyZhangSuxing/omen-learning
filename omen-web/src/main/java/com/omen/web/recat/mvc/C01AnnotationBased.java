@@ -2,17 +2,18 @@ package com.omen.web.recat.mvc;
 
 import com.omen.web.domain.Book;
 import com.omen.web.support.InMemoryDataSource;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RequestMapping("/annotated")
 @RestController
@@ -23,23 +24,7 @@ public class C01AnnotationBased {
     }
 
     @PostMapping("book")
-    public Mono<ResponseEntity<?>> create(@Valid @RequestBody Book book,
-                                          BindingResult bindingResult,
-                                          UriComponentsBuilder ucb)
-            throws MethodArgumentNotValidException {
-//        只有在spring-boot-starter-web被引入的情况下，才有用
-        Optional<Book> theBook = InMemoryDataSource.findBookById(book.getIsbn());
-        if (theBook.isPresent()) {
-            bindingResult.rejectValue("isbn", "already.exists", "already exists");
-        }
-        if (bindingResult.hasErrors()) {
-            throw (new MethodArgumentNotValidException(
-                    // https://stackoverflow.com/questions/442747/getting-the-name-of-the-currently-executing-method
-                    new MethodParameter(new Object() {
-                    }.getClass().getEnclosingMethod(), 0),
-                    bindingResult));
-
-        }
+    public Mono<ResponseEntity<?>> create(@Valid @RequestBody Book book, UriComponentsBuilder ucb) {
         InMemoryDataSource.saveBook(book);
         return Mono.just(ResponseEntity.created(ucb.path("/annotated/book/")
                 .path(book.getIsbn())
@@ -83,4 +68,5 @@ public class C01AnnotationBased {
 //        InMemoryDataSource.removeBook(book.get());
 //        return Mono.just(ResponseEntity.ok().build());
 //    }
+
 }
