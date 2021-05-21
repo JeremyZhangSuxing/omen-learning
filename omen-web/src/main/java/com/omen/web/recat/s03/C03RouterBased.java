@@ -33,6 +33,8 @@ public class C03RouterBased {
                 .POST(PATH_PREFIX + "book", this::create)
                 .GET(PATH_PREFIX + "book", this::findAll)
                 .GET(PATH_PREFIX + "book" + PATH_PARAM, this::findOne)
+                .PUT(PATH_PREFIX + "book", this::update)
+                .DELETE(PATH_PREFIX + "book" + PATH_PARAM, this::delete)
                 .build();
 
     }
@@ -65,5 +67,22 @@ public class C03RouterBased {
     private Mono<ServerResponse> findAll(ServerRequest request) {
         Collection<Book> allBooks = InMemoryDataSource.findAllBooks();
         return ServerResponse.ok().bodyValue(allBooks);
+    }
+
+    private Mono<ServerResponse> update(ServerRequest request) {
+        String isbn = request.pathVariable("isbn");
+        return InMemoryDataSource.findBookMonoById(isbn)
+                .map(InMemoryDataSource::saveBook)
+                .flatMap(monoBook -> ServerResponse.ok().bodyValue(monoBook))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    private Mono<ServerResponse> delete(ServerRequest request) {
+        String isbn = request.pathVariable("isbn");
+        return InMemoryDataSource.findBookMonoById(isbn)
+                .flatMap(book -> {
+                    InMemoryDataSource.removeBook(book);
+                    return ServerResponse.ok().build();
+                }).switchIfEmpty(ServerResponse.notFound().build());
     }
 }
