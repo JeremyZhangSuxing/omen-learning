@@ -5,8 +5,8 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @date 2021-05
  * @author suxing.zhang
+ * @date 2021-05
  */
 public class SimplifyReentrantLockDemo {
 
@@ -35,6 +35,7 @@ public class SimplifyReentrantLockDemo {
                 System.out.println("thread1 ---- 已经被唤醒 的当前值是： ---" + i);
 
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 e.printStackTrace();
             }
             lock.unlock();

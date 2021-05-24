@@ -31,10 +31,10 @@ public class C03RouterBased {
     public RouterFunction<ServerResponse> routers() {
         return RouterFunctions.route()
                 .POST(PATH_PREFIX + "book", this::create)
-                .GET(PATH_PREFIX + "book", this::findAll)
-                .GET(PATH_PREFIX + "book" + PATH_PARAM, this::findOne)
-                .PUT(PATH_PREFIX + "book", this::update)
-                .DELETE(PATH_PREFIX + "book" + PATH_PARAM, this::delete)
+                .GET(PATH_PREFIX + "books", this::findAll)
+                .GET(PATH_PREFIX + "book/" + PATH_PARAM, this::findOne)
+                .PUT(PATH_PREFIX + "book/" + PATH_PARAM, this::update)
+                .DELETE(PATH_PREFIX + "book/" + PATH_PARAM, this::delete)
                 .build();
 
     }
