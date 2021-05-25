@@ -1,4 +1,4 @@
-package com.omen.learning.concurrent.config.support;
+package com.omen.learning.java.support;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

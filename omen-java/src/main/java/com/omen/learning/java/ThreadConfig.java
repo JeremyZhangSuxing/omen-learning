@@ -1,6 +1,6 @@
-package com.omen.learning.concurrent.config;
+package com.omen.learning.java;
 
-import com.omen.learning.concurrent.config.support.LocalThreadFactory;
+import com.omen.learning.java.support.LocalThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.omen.learning.concurrent.config.ThreadConfig
+  com.omen.learning.java.ThreadConfig
