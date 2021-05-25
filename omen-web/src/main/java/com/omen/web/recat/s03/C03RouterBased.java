@@ -5,6 +5,7 @@ import com.omen.web.support.InMemoryDataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.Validator;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
@@ -15,6 +16,7 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuples;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author : Knight
@@ -26,6 +28,7 @@ public class C03RouterBased {
     private static final String PATH_PREFIX = "/routed/";
     private static final String PATH_PARAM = "{isbn}";
     private final Validator validator;
+    private AtomicInteger atomicInteger = new AtomicInteger(0);
 
     @Bean
     public RouterFunction<ServerResponse> routers() {
@@ -36,10 +39,12 @@ public class C03RouterBased {
                 .PUT(PATH_PREFIX + "book/" + PATH_PARAM, this::update)
                 .DELETE(PATH_PREFIX + "book/" + PATH_PARAM, this::delete)
                 .build();
-
     }
 
     private Mono<ServerResponse> create(ServerRequest request) {
+        if (atomicInteger.getAndIncrement() > 3) {
+            return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
         return C04ReactiveControllerHelper.requestBodyToMono(request, validator,
                 (t, errors) -> InMemoryDataSource.findBookMonoById(t.getIsbn())
                         .map((book -> {

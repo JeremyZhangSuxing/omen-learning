@@ -7,6 +7,7 @@ import com.weweibuy.framework.common.core.utils.IdWorker;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author suxing.zhang
@@ -21,8 +22,8 @@ public class MultipartFileNameNode implements OssFileNode {
         UploadRecord record = new UploadRecord();
         String originalFilename = fileContext.getMultipartFile().getOriginalFilename();
         record.setFileName(originalFilename);
-        String fileName = IdWorker.nextStringId() + originalFilename
-                .substring(originalFilename.lastIndexOf("."), originalFilename.length());
+        String fileName = IdWorker.nextStringId() + Objects.requireNonNull(originalFilename)
+                .substring(originalFilename.lastIndexOf("."));
         fileContext.setOssFileName(fileName);
         record.setCreatedBy("jeremy");
         record.setCreatedTime(LocalDateTime.now());
