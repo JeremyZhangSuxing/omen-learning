@@ -1,6 +1,6 @@
 package com.omen.web.domain;
 
-import com.sun.istack.internal.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,14 +10,16 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Data
 @Builder
 @Table("book")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
     @Id
     @NotEmpty

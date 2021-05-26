@@ -56,14 +56,15 @@ public class ReactProgram01 {
     }
 
     /**
-     * 与stream流不同 flatmap 可以从一个pipeline进入另一个pipeline
+     * 参照 optional #flatmap
+     * 可以从一个pipeline进入另一个pipeline
      */
     private static void mapVsFlatMap() {
         Flux<String> map = Flux.just(1, 2, 3, 4)
                 .map(element -> "map id #" + element);
         subscribeFlux("fluxMap", map);
-        Flux<String> flatMap = Flux.just(1, 2, 3, 4)
-                .flatMap(v -> Mono.just(" flatMap id # " + v));
+        Flux<Mono<String>> flatMap = Flux.just(1, 2, 3, 4)
+                .map(v -> Mono.just(" flatMap id # " + v));
         subscribeFlux("fluxFlatMap", flatMap);
     }
 
