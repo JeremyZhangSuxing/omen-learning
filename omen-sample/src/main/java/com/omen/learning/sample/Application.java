@@ -4,11 +4,14 @@ import com.omen.learning.bean.test.annotattion.EnableBeanRegistry;
 import com.omen.learning.common.annotation.EnableTokenValidate;
 import com.omen.learning.sample.mybatis.mapper.UploadRecordMapper;
 import com.weweibuy.framework.rocketmq.annotation.EnableRocket;
+import com.weweibuy.framework.rocketmq.config.RocketMqProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -24,7 +27,12 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableRocket
 public class Application {
+    //邮件
+    private  static ApplicationContext applicationContext;
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ConfigurableApplicationContext run = SpringApplication.run(Application.class, args);
+        RocketMqProperties bean = run.getBean(RocketMqProperties.class);
+        RocketMqProperties.Producer producer = bean.getProducer();
+        System.out.println(producer.toString());
     }
 }

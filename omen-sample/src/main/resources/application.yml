@@ -108,6 +108,7 @@ rocket-mq:
       topic: TEST_SAMPLE_BATCH_01
     batch-foreach-sample-provider:
       topic: TEST_SAMPLE_BATCH_02
+    sendMessageTimeout:  300000
   consumer:
     sample-consumer:
       trace: false
