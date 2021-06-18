@@ -10,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -27,9 +26,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableRocket
 public class Application {
-    //邮件
-    private  static ApplicationContext applicationContext;
     public static void main(String[] args) {
+        //获取spring容器
         ConfigurableApplicationContext run = SpringApplication.run(Application.class, args);
         RocketMqProperties bean = run.getBean(RocketMqProperties.class);
         RocketMqProperties.Producer producer = bean.getProducer();
