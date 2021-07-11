@@ -52,6 +52,7 @@ public class C03RouterBased {
                             return Tuples.of(book, errors);
                         })), Book.class)
                 .map(InMemoryDataSource::saveBook)
+                //使用flatmap 从上一个管道--->下一个管道
                 .flatMap(book -> ServerResponse.created(UriComponentsBuilder.fromHttpRequest(request.exchange()
                         .getRequest())
                         .path("/")
