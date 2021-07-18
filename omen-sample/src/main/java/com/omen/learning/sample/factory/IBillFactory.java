@@ -10,14 +10,16 @@ import com.omen.learning.sample.pipeline.Pipeline;
  **/
 public interface IBillFactory {
     /**
-     * @param param
-     * @return
+     * pipeline 入口
+     * @param param pipeline 入口
+     * @return 构建pipeline
      */
     Pipeline build(Object param);
 
     /**
-     * @param condition
-     * @return
+     * 适配规则
+     * @param condition PipeLineFactory 适配规则
+     * @return 适配结果
      */
     boolean matchByCondition(BeanMatchCondition condition);
 }

@@ -2,19 +2,19 @@
 package com.omen.learning.sample.factory;
 
 import com.omen.learning.sample.pipeline.Pipeline;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * @author :
+ * @author : knight-tes
  * @since : 2020/1/17, Fri
  **/
 @Component
+@RequiredArgsConstructor
 public class PipelineBuilder {
-    @Autowired
-    private List<IBillFactory> billFactories;
+    private final List<IBillFactory> billFactories;
 
     public Pipeline buildPipeline(BeanMatchCondition condition) {
         for (IBillFactory billFactory : billFactories) {
@@ -22,7 +22,6 @@ public class PipelineBuilder {
                 return billFactory.build(condition);
             }
         }
-//        throw new ClientException("no pipeline for condition: " + condition);
         return null;
     }
 

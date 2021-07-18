@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  **/
 public abstract class AbstractPipeFactory implements IBillFactory {
     @Autowired
-    private Map<String, Valve> valves;
+    protected Map<String, Valve> valves;
 
     protected <T extends Pipeline> T buildBillPipe(Supplier<T> supplier, String... valveNames) {
         T pipeline = supplier.get();
