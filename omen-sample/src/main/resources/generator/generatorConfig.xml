@@ -5,29 +5,51 @@
 
 <generatorConfiguration>
     <context id="testTables" targetRuntime="MyBatis3">
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.LombokPlugin"/>-->
+<!--        &lt;!&ndash;<plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin">&ndash;&gt;-->
+<!--            &lt;!&ndash;<property name="allowMultiQueries" value="true"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;</plugin>&ndash;&gt;-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>-->
+<!--        &lt;!&ndash;<plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>&ndash;&gt;-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">-->
+<!--            <property name="targetPackage" value="com.omen.learning.sample.mybatis.example"/>-->
+<!--        </plugin>-->
+<!--&lt;!&ndash;        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectOneByExampleForUpdatePlugin"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <plugin type="com.weweibuy.framework.mybatis.plugin.OverwrittenMapperXmlPlugin"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectByExampleForUpdatePlugin"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectByExampleWithLimitPlugin"/>&ndash;&gt;-->
+<!--        <plugin type="com.itfsw.mybatis.generator.plugins.CommentPlugin">-->
+<!--            &lt;!&ndash; 自定义模板路径 &ndash;&gt;-->
+<!--            <property name="template" value="src/main/resources/generator/mybatis-generator-comment.ftl" />-->
+<!--        </plugin>-->
+
+<!--        &lt;!&ndash; Mapper注解插件 &ndash;&gt;-->
+<!--        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>-->
+
         <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.LombokPlugin"/>
-        <!--<plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin">-->
-            <!--<property name="allowMultiQueries" value="true"/>-->
-        <!--</plugin>-->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>
-        <!--<plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>-->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
-            <property name="targetPackage" value="com.omen.learning.sample.mybatis.example"/>
+            <property name="targetPackage" value="com.weweibuy.framework.samples.mybatis.plugin.model.example"/>
         </plugin>
-        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectOneByExampleForUpdatePlugin"/>
         <plugin type="com.weweibuy.framework.mybatis.plugin.OverwrittenMapperXmlPlugin"/>
-        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectByExampleForUpdatePlugin"/>
         <plugin type="com.weweibuy.framework.mybatis.plugin.SelectByExampleWithLimitPlugin"/>
         <plugin type="com.itfsw.mybatis.generator.plugins.CommentPlugin">
             <!-- 自定义模板路径 -->
-            <property name="template" value="src/main/resources/generator/mybatis-generator-comment.ftl" />
+            <property name="template" value="src/main/resources/generator/mybatis-generator-comment.ftl"/>
         </plugin>
-
         <!-- Mapper注解插件 -->
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin">
+            <!-- 通过配置startPage影响Example中的page方法开始分页的页码，默认分页从0开始 -->
+            <property name="startPage" value="0"/>
+        </plugin>
+        <plugin type="com.weweibuy.framework.mybatis.plugin.SelectForUpdatePlugin"/>
 
-
+        <!--<plugin type="com.weweibuy.framework.mybatis.plugin.ImplementsInterfacePlugin">-->
+        <!--<property name="interfaces" value="java.io.Serializable,com.weweibuy.framework.common.db.model.CommonPo"/>-->
+        <!--</plugin>-->
 
 
         <commentGenerator>
@@ -35,10 +57,11 @@
             <property name="suppressAllComments" value="false"/>
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://106.12.208.53:3306/webuy_learning?characterEncoding=UTF-8"
                         userId="user01"
                         password="ak402507979">
+            <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
@@ -82,23 +105,32 @@
 <!--            <columnOverride column="id_no"  typeHandler="com.weweibuy.framework.common.db.type.EncryptTypeHandler"/>-->
 <!--        </table>-->
 
-        <table tableName="cm_order" domainObjectName="CmOrder" >
+<!--        <table tableName="cm_order" domainObjectName="CmOrder" >-->
+<!--            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>-->
+<!--            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="upload_record" domainObjectName="UploadRecord" >-->
+<!--            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>-->
+<!--            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>-->
+<!--        </table>-->
+
+
+<!--        <table tableName="upload_rule" domainObjectName="UploadRule" >-->
+<!--            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>-->
+<!--            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>-->
+<!--        </table>-->
+
+
+        <table tableName="dispatch_bill_info" domainObjectName="DispatchBillInfo" >
             <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
-            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+            <columnOverride column="is_deleted"  property="deleted"  javaType="Boolean"/>
         </table>
 
-        <table tableName="upload_record" domainObjectName="UploadRecord" >
+        <table tableName="dispatch_bill_detail" domainObjectName="DispatchBillDetail" >
             <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
-            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
+            <columnOverride column="is_deleted"  property="deleted"  javaType="Boolean"/>
         </table>
-
-
-        <table tableName="upload_rule" domainObjectName="UploadRule" >
-            <generatedKey identity="true" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
-            <columnOverride column="is_delete"  property="deleted"  javaType="Boolean"/>
-        </table>
-
-
 
     </context>
 </generatorConfiguration>

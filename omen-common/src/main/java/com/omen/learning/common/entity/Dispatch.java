@@ -25,7 +25,7 @@ public class Dispatch {
     /**
      * 业务流水号
      */
-    private String BizFlowNo;
+    private String bizFlowNo;
     /**
      * 业务类型
      */
