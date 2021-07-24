@@ -17,10 +17,11 @@ public class DispatchPipeFactory extends AbstractPipeFactory {
     public Pipeline build(Object param) {
         return buildBillPipe(DispatchPipeline::new,
                 "dispatchIdempotentHandler",
-                "bwJitValidator",
-                "dispatchBillCreatePreparation",
-                "dispatchBillCreateHandler",
-                "dispatchBillTaskHandler");
+//                "bwJitValidator",
+//                "dispatchBillCreatePreparation",
+                "dispatchBillCreateHandler"
+//                "dispatchBillTaskHandler"
+        );
     }
 
     @Override
