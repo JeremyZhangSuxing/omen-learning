@@ -79,7 +79,7 @@
     id, bill_no, order_no, sku, size_code, size_name, price, pay_amount, physical_occupy_no, 
     occupy_amout, created_time, created_by, updated_time, is_deleted
   </sql>
-  <select id="selectByExample" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,7 +101,7 @@
       </if>
     </if>
   </select>
-  <select id="selectByExampleForUpdate" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample" resultMap="BaseResultMap">
+  <select id="selectByExampleForUpdate" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -158,7 +158,7 @@
     delete from dispatch_bill_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample">
+  <delete id="deleteByExample" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample">
     delete from dispatch_bill_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -267,7 +267,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample" resultType="java.lang.Long">
     select count(*) from dispatch_bill_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -405,7 +405,7 @@
       is_deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectOneByExample" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from dispatch_bill_detail
@@ -417,7 +417,7 @@
     </if>
     limit 1
   </select>
-  <select id="selectOneByExampleForUpdate" parameterType="com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample" resultMap="BaseResultMap">
+  <select id="selectOneByExampleForUpdate" parameterType="com.omen.learning.sample.mybatis.example.DispatchBillDetailExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from dispatch_bill_detail

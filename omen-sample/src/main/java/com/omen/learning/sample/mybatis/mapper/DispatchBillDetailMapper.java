@@ -1,7 +1,7 @@
 package com.omen.learning.sample.mybatis.mapper;
 
 import com.omen.learning.sample.mybatis.po.DispatchBillDetail;
-import com.weweibuy.framework.samples.mybatis.plugin.model.example.DispatchBillDetailExample;
+import com.omen.learning.sample.mybatis.example.DispatchBillDetailExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
