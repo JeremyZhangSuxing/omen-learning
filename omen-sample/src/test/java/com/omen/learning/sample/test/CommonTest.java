@@ -1,13 +1,13 @@
 package com.omen.learning.sample.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.Times;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 
@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author : Knight
  * @date : 2021/7/14 4:52 下午
  */
-@RunWith(MockitoJUnitRunner.class)
-public class CommonTest {
+@ExtendWith(MockitoExtension.class)
+class CommonTest {
 
     @Mock
     HashMap<String, Integer> hashMap;
