@@ -18,7 +18,7 @@ public class DispatchPipeFactory extends AbstractPipeFactory {
         return buildBillPipe(DispatchPipeline::new,
                 "dispatchIdempotentHandler",
 //                "bwJitValidator",
-//                "dispatchBillCreatePreparation",
+                "dispatchBillCreatePreparation",
                 "dispatchBillCreateHandler"
 //                "dispatchBillTaskHandler"
         );

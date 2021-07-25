@@ -1,11 +1,13 @@
 package com.omen.learning.common.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author suxing.zhang
@@ -13,6 +15,8 @@ import java.util.Date;
  **/
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Dispatch {
     /**
      * 发货单号 ods 自己生成
@@ -30,6 +34,8 @@ public class Dispatch {
      * 业务类型
      */
     private String bizType;
+
+
 
     private Long id;
     /**
@@ -51,19 +57,21 @@ public class Dispatch {
     /**
      * 预计到达时间
      */
-    private Date expectArrivalTime;
+    private LocalDateTime expectArrivalTime;
     /**
      * 下发时间
      */
-    private Date departureTime;
+    private LocalDateTime departureTime;
     /**
      * 上游订单创建时间(oms订单创建时间)
      */
-    private Date billDate;
+    private LocalDateTime billDate;
+
+    private String billSource;
     /**
      * 平台订单下发时间
      */
-    private Date orderTime;
+    private LocalDateTime orderTime;
     /**
      * 收件人姓名
      */

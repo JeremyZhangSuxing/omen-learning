@@ -1,5 +1,10 @@
 package com.omen.learning.common.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -7,6 +12,10 @@ import java.math.BigDecimal;
  * @author suxing.zhang
  * @date 2021/7/18 15:21
  **/
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DispatchItem {
     private Long id;
     /**
