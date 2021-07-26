@@ -92,7 +92,9 @@ info:
   mavenProjectName: @project.artifactId@  #使用@@可以获取maven的pom文件值
   mavenProjectVersion: @project.version@
 
-
+orderService:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 rocket-mq:
   name-server: 122.51.171.126:9876
   producer:
