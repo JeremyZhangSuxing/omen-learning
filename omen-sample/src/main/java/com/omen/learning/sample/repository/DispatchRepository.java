@@ -18,7 +18,7 @@ public class DispatchRepository {
     private final DispatchInfoRepository dispatchInfoRepository;
     private final DispatchDetailRepository dispatchDetailRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveDispatch(DispatchBillInfo dispatchBillInfo, List<DispatchBillDetail> details) {
         dispatchInfoRepository.save(dispatchBillInfo);
         dispatchDetailRepository.saveAll(details);

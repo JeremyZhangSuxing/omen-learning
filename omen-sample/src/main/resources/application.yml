@@ -17,18 +17,14 @@ spring:
       uris: 106.12.208.53:9200
       username: elastic
       password: ak402507979
-  # html 资源缓存时间
-  resources:
-    cache:
-      cachecontrol:
-        cache-public: true
-        max-age: 11100
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://106.12.208.53:3306/webuy_learning?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
-    username: user01
-    password: ak402507979
+#    url: jdbc:mysql://106.12.208.53:3306/webuy_learning?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+
+    username: root  #user01
+    password: admin #ak402507979
     hikari:
       connection-timeout: 50000
   jackson: #全局默认使用jackson 驼峰
@@ -122,7 +118,6 @@ rocket-mq:
     batchForeachSampleConsumer:
       topic: TEST_SAMPLE_BATCH_02
       group: TEST_SAMPLE_BATCH_02_C_GROUP
-
 
   provider:
     sample-provider:

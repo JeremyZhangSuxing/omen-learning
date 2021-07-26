@@ -24,6 +24,9 @@ public class DispatchDetailRepository {
         SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
         try {
             for (DispatchBillDetail detail : details) {
+                if (detail.getSku().equals("2")) {
+                    detail.setSku(null);
+                }
                 dispatchBillDetailMapper.insertSelective(detail);
             }
             sqlSession.commit();

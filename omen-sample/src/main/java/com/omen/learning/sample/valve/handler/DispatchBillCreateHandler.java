@@ -40,6 +40,7 @@ public class DispatchBillCreateHandler implements Handler {
             detail.setCreatedTime(LocalDateTime.now());
             detail.setUpdatedTime(LocalDateTime.now());
             detail.setCreatedBy("system");
+            detail.setSku(item.getBarCode());
             items.add(detail);
         }
         dispatchRepository.saveDispatch(dispatchBillInfo, items);
