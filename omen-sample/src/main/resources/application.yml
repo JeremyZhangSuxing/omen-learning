@@ -124,3 +124,8 @@ rocket-mq:
   provider:
     sample-provider:
       topic': TEST_SAMPLE_01
+
+
+javadaily:
+  swagger:
+    enabled: true

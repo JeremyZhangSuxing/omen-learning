@@ -15,6 +15,7 @@
         <module>omen-java</module>
         <module>omen-web</module>
         <module>omen-admin</module>
+        <module>omen-swagger</module>
     </modules>
 
     <properties>
