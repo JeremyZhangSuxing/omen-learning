@@ -129,6 +129,7 @@ rocket-mq:
 javadaily:
   swagger:
     enabled: true
+
 omen:
   log:
     enabled: true
