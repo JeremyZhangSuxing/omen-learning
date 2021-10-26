@@ -14,8 +14,9 @@ public class RedissonConfiguration {
     private Config createConfig() {
         Config config = new Config();
         config.useSingleServer()
-                .setAddress("redis://127.0.0.1:6379")
-                .setDatabase(1);
+                .setAddress("redis://127.0.0.1:6379");
+
+
         JsonJacksonCodec jsonJacksonCodec = new JsonJacksonCodec(ObjectMapperBuilder.build());
         config.setCodec(jsonJacksonCodec);
         return config;

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author : Knight
@@ -62,8 +61,6 @@ public class TestController {
     public void redisson(@RequestParam String key) throws InterruptedException {
         RLock lock = redissonClient.getLock(key);
         lock.lock();
-        TimeUnit.SECONDS.sleep(100);
-        lock.unlock();
     }
 
 

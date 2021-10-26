@@ -20,11 +20,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://106.12.208.53:3306/webuy_learning?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
-    url: jdbc:mysql://127.0.0.1:3306/mulan_order?useSSL=false&useTimezone=true&serverTimezone=GMT%2B8&characterEncoding=utf-8
+    url: jdbc:mysql://106.12.208.53:3306/webuy_learning?useUnicode=true&characterEncoding=UTF-8&allowMutiQueries=true&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://127.0.0.1:3306/mulan_order?useSSL=false&useTimezone=true&serverTimezone=GMT%2B8&characterEncoding=utf-8
 
-    username: root  #user01
-    password: pass #ak402507979
+    username: user01
+    password: ak402507979
     hikari:
       connection-timeout: 50000
   jackson: #全局默认使用jackson 驼峰
@@ -66,7 +66,7 @@ management:
   server:
     port: 8081 #指定健康检查的端口
   endpoints:
-    enabled-by-default: true #暴露所有端点信息
+    enabled-by-default: false #暴露所有端点信息
     web:
       exposure:
         include: '*'  #以web方式暴露
@@ -78,7 +78,7 @@ management:
     info:
       enabled: true
     beans:
-      enabled: true
+      enabled: false
 
   #关闭某些健康检查的选项
   health:
