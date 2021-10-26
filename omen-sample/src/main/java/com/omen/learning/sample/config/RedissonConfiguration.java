@@ -21,6 +21,9 @@ public class RedissonConfiguration {
         return config;
     }
 
+    /**
+     * destroy 不可乱用 这里是 shutdown 一个 redissonClient instance
+     */
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redissonClient() {
         return Redisson.create(createConfig());
