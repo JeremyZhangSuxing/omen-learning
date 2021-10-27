@@ -43,5 +43,21 @@ public class RedissonConfiguration {
         return redisScript;
     }
 
+    @Bean
+    public RedisScript<Long> reentrantLockScript() {
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptSource(new ResourceScriptSource(
+                new ClassPathResource("META-INF/script/reentrant_lock.lua")));
+        redisScript.setResultType(Long.class);
+        return redisScript;
+    }
 
+    @Bean
+    public RedisScript<Long> reentrantUnlockScript() {
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptSource(new ResourceScriptSource(
+                new ClassPathResource("META-INF/script/reentrant_unlock.lua")));
+        redisScript.setResultType(Long.class);
+        return redisScript;
+    }
 }
