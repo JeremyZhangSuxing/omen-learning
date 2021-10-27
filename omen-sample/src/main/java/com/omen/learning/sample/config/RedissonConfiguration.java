@@ -7,6 +7,10 @@ import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
+import org.springframework.scripting.support.ResourceScriptSource;
 
 @Configuration
 public class RedissonConfiguration {
@@ -29,5 +33,15 @@ public class RedissonConfiguration {
     public RedissonClient redissonClient() {
         return Redisson.create(createConfig());
     }
+
+    @Bean
+    public RedisScript<String> unlockScript() {
+        DefaultRedisScript<String> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptSource(new ResourceScriptSource(
+                new ClassPathResource("META-INF/script/unlock.lua")));
+        redisScript.setResultType(String.class);
+        return redisScript;
+    }
+
 
 }

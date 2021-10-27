@@ -62,6 +62,4 @@ public class TestController {
         RLock lock = redissonClient.getLock(key);
         lock.lock();
     }
-
-
 }

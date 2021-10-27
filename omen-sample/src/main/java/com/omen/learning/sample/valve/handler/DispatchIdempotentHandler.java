@@ -31,6 +31,7 @@ public class DispatchIdempotentHandler implements Handler, Cleanup {
 
     @Override
     public void handle(Object param) {
+        // 使用分布式 IdWorker 中的id
         String reqId = UUID.randomUUID().toString();
         DispatchContext context = (DispatchContext) param;
         context.setReqId(reqId);
