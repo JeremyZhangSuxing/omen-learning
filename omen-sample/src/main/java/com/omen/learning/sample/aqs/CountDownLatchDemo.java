@@ -33,7 +33,8 @@ public class CountDownLatchDemo {
             countDownLatch.countDown();
         }
     }
-
+    
+    //static
     public static void main(String[] args) {
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         CountDownLatch countDownLatch = new CountDownLatch(integers.size());

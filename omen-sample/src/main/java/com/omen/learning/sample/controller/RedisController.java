@@ -1,8 +1,12 @@
 package com.omen.learning.sample.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -13,14 +17,35 @@ import java.util.UUID;
  * @author : Knight
  * @date : 2021/10/27 4:51 下午
  */
-@RestController("/redis")
+@RequestMapping("/redis")
 @RequiredArgsConstructor
+@RestController
 public class RedisController {
-    private final RedisScript<String> unlockScript;
-    private final RedisTemplate<String, String> redisTemplate;
-    private final RedisScript<Long> reentrantLock;
-    private final RedisScript<Long> reentrantUnlock;
-    //todo add a test about unlock lua
+    private final RedisTemplate<String, Object> redisTemplate;
+    private final @Qualifier("reentrantLockScript")
+    RedisScript<Long> reentrantLockScript;
+    private final @Qualifier("reentrantUnlockScript")
+    RedisScript<Long> reentrantUnlockScript;
+
+
+    /**
+     * 自己实现一把分布式锁
+     * 【加锁】
+     */
+    @PutMapping("/lock")
+    public String reentrantLock(@RequestParam String lockName, @RequestParam String releaseTime) {
+        return tryLock(lockName, Long.parseLong(releaseTime));
+    }
+
+    /**
+     * 自己实现一把分布式锁
+     * 【解锁】
+     */
+    @PutMapping("/unlock")
+    public String reentrantUnlock(@RequestParam String lockName, @RequestParam String key) {
+        unlock(lockName, key);
+        return "unlock success!!!";
+    }
 
     /**
      * 获取锁
@@ -31,12 +56,11 @@ public class RedisController {
 
         // 执行脚本
         Long execute = redisTemplate.execute(
-                reentrantLock,
+                reentrantLockScript,
                 Collections.singletonList(lockName),
                 // hash value
                 key + Thread.currentThread().getId(),
                 releaseTime);
-
         if (Objects.requireNonNull(execute).intValue() == 1) {
             return key;
         } else {
@@ -46,14 +70,13 @@ public class RedisController {
 
     /**
      * 解锁
-     *
-     * @param lockName
-     * @param key
      */
     public void unlock(String lockName, String key) {
-        redisTemplate.execute(unlockScript,
+        redisTemplate.execute(reentrantUnlockScript,
                 Collections.singletonList(lockName),
                 key + Thread.currentThread().getId()
         );
     }
+
+
 }
