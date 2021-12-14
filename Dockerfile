@@ -8,8 +8,8 @@ RUN mvn package -Dmaven.test.skip=true --projects $MODULE
 
 #FROM openjdk:8-jre-alpine
 #ENV LANG zh_CN.UTF-8
-#ENV MODULE="mulan-order-core"
-#ENV jarName="mulan-order-core.jar"
+#ENV MODULE="omen-learning-sample"
+#ENV jarName="omen-learning-sample.jar"
 #ENV TZ=Asia/Shanghai
 #RUN ln -snf /usr/share/zoneinfo/TZ /etc/localtime && echo TZ /etc/localtime && echo TZ > /etc/timezone
 #COPY --from=builder /app/$MODULE/target/$jarName /
