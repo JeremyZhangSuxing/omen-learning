@@ -79,4 +79,11 @@ public class CacheController {
         log.info("--数据库查询--");
         return CommonDataResponse.success(testService.saveOrder(cmOrder));
     }
+
+    @GetMapping("/cache")
+    public CommonCodeResponse loadCache() {
+        testService.loadDataIntoCache();
+        return CommonCodeResponse.success();
+    }
+
 }
