@@ -43,7 +43,7 @@ public class ClassPathComponentBeanScanner extends ClassPathBeanDefinitionScanne
         boolean isCandidate = false;
         if (beanDefinition.getMetadata().isIndependent() && !beanDefinition.getMetadata().isAnnotation() &&
                 beanDefinition.getMetadata().isConcrete()) {
-            System.err.println("******被注解的bean被注册*******");
+            logger.info("******被注解的bean被注册*******");
             isCandidate = true;
         }
         return isCandidate;

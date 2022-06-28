@@ -58,8 +58,7 @@ public class TestController {
     }
 
     @GetMapping
-    public void redisson(@RequestParam String key) throws InterruptedException {
+    public void redisson(@RequestParam String key)  {
         RLock lock = redissonClient.getLock(key);
-        lock.lock();
     }
 }

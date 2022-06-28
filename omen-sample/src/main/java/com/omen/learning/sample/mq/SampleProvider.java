@@ -16,7 +16,6 @@ import java.util.Collection;
  */
 @RocketProducer(topic = "${rocket-mq.provider.sample-provider.topic}") // TOPIC 支持EL 表达式的形式
 public interface SampleProvider {
-
     /**
      * TAG支持EL表达式的形式, 如何方法参数中有@Tag标记的值, 将覆盖注解中的值
      *

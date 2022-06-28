@@ -3,6 +3,7 @@ package com.omen.learning.sample;
 import com.omen.learning.bean.test.annotattion.EnableBeanRegistry;
 import com.omen.learning.common.annotation.EnableTokenValidate;
 import com.omen.learning.sample.mybatis.mapper.UploadRecordMapper;
+//import com.weweibuy.framework.rocketmq.annotation.EnableRocket;
 import com.weweibuy.framework.rocketmq.annotation.EnableRocket;
 import org.mybatis.spring.annotation.MapperScan;
 import org.redisson.api.RedissonClient;

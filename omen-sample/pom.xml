@@ -167,7 +167,7 @@
         <dependency>
             <groupId>com.weweibuy.framework</groupId>
             <artifactId>rocketmq</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.weweibuy.framework</groupId>
@@ -226,7 +226,7 @@
                             <dependency>
                                 <groupId>com.weweibuy.framework</groupId>
                                 <artifactId>mybatis-plugin</artifactId>
-                                <version>1.1-SNAPSHOT</version>
+                                <version>1.2-SNAPSHOT</version>
                             </dependency>
 
                             <dependency>

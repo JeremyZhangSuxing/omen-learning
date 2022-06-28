@@ -2,7 +2,7 @@
 package com.omen.learning.sample.valve.validator;
 
 
-        import com.omen.learning.sample.valve.Valve;
+import com.omen.learning.sample.valve.Valve;
 
 /**
  * @author : knight
