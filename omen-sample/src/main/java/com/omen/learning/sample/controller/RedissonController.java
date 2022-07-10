@@ -42,7 +42,7 @@ public class RedissonController {
     }
 
     /**
-     * 在分布式所的场景下
+     * 在分布式锁的场景下 如何实现可冲入锁以及使用 获取锁状态来实现一把轻量自旋锁
      * @param key
      */
     @GetMapping("/lockStatus/{key}")
