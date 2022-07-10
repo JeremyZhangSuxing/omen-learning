@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,15 @@ public class RedissonController {
             TimeUnit.SECONDS.sleep(1);
         }
         return "unlock success!!";
+    }
+
+    /**
+     * 在分布式所的场景下
+     * @param key
+     */
+    @GetMapping("/lockStatus/{key}")
+    public void lockStatus(@PathVariable String key) {
+
+        RLock lock = redissonClient.getLock(key);
     }
 }
