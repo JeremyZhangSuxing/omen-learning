@@ -1,6 +1,7 @@
 package com.omen.learning.sample.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,14 @@ import java.util.concurrent.TimeUnit;
  * @author : Knight
  * @date : 2021/10/29 10:43 上午
  */
+@Slf4j
 @RestController
 @RequestMapping("/redisson")
 @RequiredArgsConstructor
 public class RedissonController {
     private final RedissonClient redissonClient;
     private final ExecutorService commonInvokeExecutor;
-
+    private static final int MAX_RETRY_TIMES = 3;
     @GetMapping("/lock")
     public String lock(@RequestParam String lockName, @RequestParam Long leaseTime) throws InterruptedException {
         RLock lock = redissonClient.getLock(lockName);
@@ -46,8 +48,14 @@ public class RedissonController {
      * @param key
      */
     @GetMapping("/lockStatus/{key}")
-    public void lockStatus(@PathVariable String key) {
-
+    public void lockStatus(@PathVariable String key) throws InterruptedException {
         RLock lock = redissonClient.getLock(key);
+        for (int i = 0; i < MAX_RETRY_TIMES; i++) {
+            TimeUnit.MILLISECONDS.sleep(200);
+            if (!lock.isLocked()) {
+                log.info("execute business logic here");
+            }
+        }
+        log.warn("fail to get lock, response error");
     }
 }
