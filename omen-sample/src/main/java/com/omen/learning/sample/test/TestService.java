@@ -6,6 +6,7 @@ import com.omen.learning.sample.mybatis.po.CmOrder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TestService {
     private final CmOrderMapper cmOrderMapper;
-    private final CaffeineCacheManager caffeineCacheManager;
+    private final CacheManager cacheManager;
 
     public CmOrder listOrders(Long id) {
         CmOrderExample example = new CmOrderExample();
@@ -44,11 +45,11 @@ public class TestService {
         CmOrderExample example = new CmOrderExample();
         example.createCriteria().andIdIsNotNull();
         List<CmOrder> cmOrders = cmOrderMapper.selectByExample(example);
-        Cache order = caffeineCacheManager.getCache("order");
-        for (CmOrder cmOrder : cmOrders) {
-            assert order != null;
-            order.put(cmOrder.getId(),cmOrder);
-        }
+//        Cache order = caffeineCacheManager.getCache("order");
+//        for (CmOrder cmOrder : cmOrders) {
+//            assert order != null;
+//            order.put(cmOrder.getId(),cmOrder);
+//        }
     }
 
 }

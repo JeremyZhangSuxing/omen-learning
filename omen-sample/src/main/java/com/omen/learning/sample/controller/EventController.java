@@ -4,6 +4,7 @@ import com.omen.learning.common.entity.BillDTO;
 import com.omen.learning.sample.mybatis.mapper.CmOrderMapper;
 import com.omen.learning.sample.support.OrderCacheRefreshEvent;
 import com.weweibuy.framework.common.core.model.dto.CommonCodeResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author : Knight
@@ -33,14 +38,14 @@ public class EventController {
     }
 
     @PutMapping("async")
-    public CommonCodeResponse pushEventAsync() {
-        applicationEventPublisher.publishEvent(BillDTO.build());
+    public CommonCodeResponse pushEventAsync(HttpServletRequest httpServletRequest) {
+        applicationEventPublisher.publishEvent(BillDTO.buildWithReq("JITX", httpServletRequest));
         return CommonCodeResponse.success();
     }
 
     @PutMapping("/transaction")
-    public CommonCodeResponse transactionEvent(){
-        applicationEventPublisher.publishEvent(BillDTO.buildPro("B2C"));
+    public CommonCodeResponse transactionEvent() {
+        applicationEventPublisher.publishEvent(BillDTO.buildPro("B2C", null));
         return CommonCodeResponse.success();
     }
 }

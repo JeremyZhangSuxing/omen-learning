@@ -1,5 +1,6 @@
 package com.omen.learning.sample.controller;
 
+import com.google.common.collect.Lists;
 import com.omen.learning.common.entity.BillDTO;
 import com.omen.learning.sample.concurrent.PoolTestService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class ConcurrentController {
 
     @GetMapping("/bill")
     public List<String> getString() {
-        return poolTestService.batchGetBillInfo(BillDTO.buildParam());
+        return poolTestService.batchGetBillInfo(Lists.newArrayList());
     }
 
     /**

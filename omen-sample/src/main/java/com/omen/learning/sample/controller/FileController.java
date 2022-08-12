@@ -182,7 +182,7 @@ public class FileController {
 
     @GetMapping("/preview")
     public void commonDownloadFile(HttpServletResponse response, @RequestParam(required = false) String url) throws IOException {
-        //这一行代码永不决定是预览还是下载
+        //这一行代码用于决定是预览还是下载
         //        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + "Name");
         File file = new File("/Users/suxingzhang/Desktop/uploadTest/1A.jpg");
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);

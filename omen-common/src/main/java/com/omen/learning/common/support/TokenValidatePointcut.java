@@ -22,7 +22,7 @@ public class TokenValidatePointcut extends StaticMethodMatcherPointcut {
         TokenValidate annotation = method.getAnnotation(TokenValidate.class);
         boolean flag = annotation != null;
         if (flag) {
-            System.err.println(method.getName() + method);
+            System.err.println("TokenValidatePointcut.matches---"+method.getName() + method);
             annotationMetaDataHolder.putMetaData(method, annotation);
         }
         return flag;

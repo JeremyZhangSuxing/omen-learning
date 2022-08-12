@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CacheConfig(cacheNames = "order", cacheManager = "caffeineCacheManager")
 public class CacheController {
     private final TestService testService;
+    private final StringRedisTemplate stringRedisTemplate;
 
     @GetMapping
     @Cacheable(key = "#id")

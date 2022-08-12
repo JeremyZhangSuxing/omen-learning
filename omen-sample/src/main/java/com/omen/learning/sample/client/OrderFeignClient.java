@@ -9,17 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author suxing.zhang
  * @date 2021/3/8 22:24
  **/
-@FeignClient(value = "orderService", url = "localhost:8080/test/1", configuration = FeignConfig.class)
+@FeignClient(value = "orderService", url = "http://localhost:8085/api/v1", configuration = FeignConfig.class)
 public interface OrderFeignClient {
-    @GetMapping("/test")
-    ResponseEntity<String> getOrder(@RequestParam(value = "id") String id);
+    @GetMapping("/products")
+    String processProduct();
+
+
+    @PostMapping("/test/put")
+    String testPost();
+
 
     @PostMapping("/test1/1")
     ResponseEntity<BillDTO> saveOrder(@RequestBody DemoExcelDTO demoExcelDTO, @RequestHeader(name = "token") String token);
+
+    @GetMapping("/list")
+    List<BillDTO> fetchBills();
 }

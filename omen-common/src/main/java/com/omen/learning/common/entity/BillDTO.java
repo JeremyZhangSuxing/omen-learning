@@ -5,8 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : Knight
@@ -20,24 +23,33 @@ public class BillDTO {
     private String orderNo;
     private Long id;
     private String billType;
+    private Enumeration<String> headerNames;
+    private HttpServletRequest httpServletRequest;
 
-    public static List<BillDTO> buildParam() {
-        return Arrays.asList(new BillDTO(null, 1L, ""), new BillDTO(null, 2L, ""), new BillDTO("jere3", 3L, ""));
-    }
 
     public static BillDTO build(){
         return BillDTO.builder()
-                .billType("JIT")
+                .billType("JITX")
                 .id(1000L)
                 .orderNo("JEREMY-KNIGHT")
                 .build();
     }
 
-    public static BillDTO buildPro(String billType){
+    public static BillDTO buildPro(String billType, Enumeration<String> headerNames){
         return BillDTO.builder()
                 .billType(billType)
                 .id(1000L)
                 .orderNo("JEREMY-KNIGHT")
+                .headerNames(headerNames)
+                .build();
+    }
+
+    public static BillDTO buildWithReq(String billType, HttpServletRequest httpServletRequest){
+        return BillDTO.builder()
+                .billType(billType)
+                .id(1000L)
+                .orderNo("JEREMY-KNIGHT")
+                .httpServletRequest(httpServletRequest)
                 .build();
     }
 }
