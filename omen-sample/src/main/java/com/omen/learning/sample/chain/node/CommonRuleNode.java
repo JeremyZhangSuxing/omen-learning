@@ -20,13 +20,12 @@ public class CommonRuleNode implements OssFileNode {
     private final UploadRuleMapper uploadRuleMapper;
 
     @Override
-    public Object doNode(FileContext fileContext) {
+    public void doNode(FileContext fileContext) {
         UploadRuleExample uploadRuleExample = new UploadRuleExample();
         uploadRuleExample.createCriteria().andBusinessTypeEqualTo(fileContext.getBusinessType());
         UploadRule uploadRule = Optional.ofNullable(uploadRuleMapper.selectOneByExample(uploadRuleExample)).orElseThrow(
                 () -> Exceptions.business("11111", "未配置oss上传规则"));
         fileContext.setUploadRule(uploadRule);
-        return fileContext;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.omen.learning.sample.client.OrderFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -23,7 +24,8 @@ public class BillResourceService {
         if (Objects.nonNull(readCache)) {
             return readCache;
         }
-        List<BillDTO> billDTOS = orderFeignClient.fetchBills();
+        Map<String,String> map = new HashMap<>();
+        List<BillDTO> billDTOS = orderFeignClient.fetchBills(map);
         LocalBillCache.writeCache(billDTOS);
         return LocalBillCache.readCache();
     }

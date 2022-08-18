@@ -14,9 +14,8 @@ import org.springframework.stereotype.Component;
 public class UploadRecordSaveNode implements OssFileNode{
     private final UploadRecordMapper uploadRecordMapper;
     @Override
-    public Object doNode(FileContext fileContext) {
+    public void doNode(FileContext fileContext) {
         uploadRecordMapper.insertSelective(fileContext.getUploadRecord());
-        return fileContext;
     }
 
     @Override

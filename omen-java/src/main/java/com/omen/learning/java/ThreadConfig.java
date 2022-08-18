@@ -25,7 +25,7 @@ public class ThreadConfig {
                 1, TimeUnit.MINUTES,
                 new SynchronousQueue<>(),
                 new LocalThreadFactory("common_invoker_thread_"),
-                new ThreadPoolExecutor.CallerRunsPolicy());
+                new ThreadPoolExecutor.AbortPolicy());
 
     }
 }

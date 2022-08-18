@@ -10,10 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UploadPrivateNode implements OssFileNode{
     @Override
-    public Object doNode(FileContext fileContext) {
+    public void doNode(FileContext fileContext) {
 
 
-        return null;
     }
 
     @Override

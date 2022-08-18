@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/cache")
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "order", cacheManager = "caffeineCacheManager")
+@CacheConfig(cacheNames = "/order", cacheManager = "caffeineCacheManager")
 public class CacheController {
     private final TestService testService;
     private final StringRedisTemplate stringRedisTemplate;

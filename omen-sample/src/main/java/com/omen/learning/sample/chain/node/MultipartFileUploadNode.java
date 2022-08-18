@@ -17,12 +17,11 @@ public class MultipartFileUploadNode implements OssFileNode{
     }
 
     @Override
-    public Object doNode(FileContext fileContext) {
+    public void doNode(FileContext fileContext) {
         //上传完成后会记录此文件的地址
         String urlStr = "https://img.alicdn.com/bao/uploaded/i3/83436916/O1CN01vO4FrV20xZl3MrqXv_!!83436916.jpg_210x210Q50s50.jpg_.webp";
         UploadRecord record = fileContext.getUploadRecord();
         record.setOssUrl(urlStr);
-        return fileContext;
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.omen.learning.sample.chain.FileContext;
  * @date 2021/1/23 10:55
  **/
 public interface OssFileNode {
-    Object doNode(FileContext fileContext);
+    void doNode(FileContext fileContext);
 
     boolean match(FileContext fileContext);
 

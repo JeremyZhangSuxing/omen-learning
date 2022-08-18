@@ -18,7 +18,7 @@ public class MultipartFileNameNode implements OssFileNode {
 
 
     @Override
-    public Object doNode(FileContext fileContext) {
+    public void doNode(FileContext fileContext) {
         UploadRecord record = new UploadRecord();
         String originalFilename = fileContext.getMultipartFile().getOriginalFilename();
         record.setFileName(originalFilename);
@@ -32,7 +32,6 @@ public class MultipartFileNameNode implements OssFileNode {
         record.setBusinessType(fileContext.getBusinessType());
         //todo  处理 context
         fileContext.setContentType("");
-        return fileContext;
     }
 
     @Override

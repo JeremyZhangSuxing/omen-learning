@@ -2,12 +2,13 @@ package com.omen.learning.sample.pipeline;
 
 import com.weweibuy.framework.common.core.model.dto.CommonDataResponse;
 import lombok.Data;
+
 /**
  * @author suxing.zhang
  * @date 2021/7/18 15:39
  **/
 @Data
-public abstract class BaseContext {
+public abstract class BaseContext<T> {
     /**
      * 唯一请求id
      */
@@ -19,6 +20,6 @@ public abstract class BaseContext {
     /**
      * 请求响应
      */
-    protected CommonDataResponse resp;
+    protected CommonDataResponse<T> resp;
 
 }

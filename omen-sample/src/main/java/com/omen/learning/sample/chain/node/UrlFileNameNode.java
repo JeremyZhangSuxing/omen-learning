@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UrlFileNameNode implements OssFileNode {
     @Override
-    public Object doNode(FileContext fileContext) {
-        return null;
+    public void doNode(FileContext fileContext) {
     }
 
     @Override
